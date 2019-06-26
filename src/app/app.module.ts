@@ -19,6 +19,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PagesComponent } from './pages/pages.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { Ng2OdometerModule } from 'ng2-odometer'; 
+import { AgmCoreModule } from '@agm/core';
+
 
 @NgModule({
   declarations: [
@@ -34,9 +37,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAkD_3L9QdqBtkq_aICKOyhwSsD98TDWrc&callback'
+    }),
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    Ng2OdometerModule.forRoot()
+    
   ],
   bootstrap: [AppComponent],
   providers: [

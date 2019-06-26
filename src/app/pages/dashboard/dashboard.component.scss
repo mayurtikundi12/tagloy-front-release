@@ -20,3 +20,47 @@
     }
   }
 }
+
+.father-flex{
+  display: flex ;
+  flex-direction: row ;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.child-flex{
+  height: 10rem;
+  // width: 10rem;
+  // background: red;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px ;
+  justify-content: baselines;
+  padding: 3px;
+}
+
+.history-text{
+  font-size: 1.125rem;
+  font-family: Open Sans,sans-serif;
+  font-weight: 800;
+  line-height: 1.5rem;
+  overflow-y: visible;
+}
+ .center{
+  margin-left: 50% ;
+  transform: translateX(-50%);
+} 
+.logo{
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50% ;
+  margin: 1rem;
+  margin-left: 50% ;
+  transform: translateX(-50%);
+}
+
+.map{
+  height: 300px;
+  width:300px;
+}

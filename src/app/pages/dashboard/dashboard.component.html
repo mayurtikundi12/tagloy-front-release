@@ -1,1 +1,24 @@
-<h1>dashboard works</h1>
+<nb-card>
+    <nb-card-body class="father-flex">
+        <div  class="child-flex" *ngFor="let history of historyData" >
+                <div class="history-text" >{{history.topic}}</div>
+                <img  class="logo" src={{history.icon}} alt="logo not available">
+                <ng2-odometer class="center history-text" [number]="history.value" [config]="counterConfig"></ng2-odometer>
+        </div>
+    </nb-card-body>
+  </nb-card>
+
+<nb-card>
+    <nb-card-body>
+            <agm-map class="map" [latitude]="lat" [longitude]="lng" >
+                    <agm-marker (mouseOver)="onMouseOver(infoWindow)" (markerClick)="show(cord.label, i)"  [label]="labelOptions"  *ngFor="let cord of cordinates;let i = index" [latitude]="cord.lat" [longitude]="cord.lng">
+                    <agm-info-window #infoWindow >
+                    <img src="../../../assets/images/alan.png" alt="logo not available">
+                  </agm-info-window>
+                  </agm-marker>
+            </agm-map>
+            <!-- <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [styles]="styles" [mapTypeId]='mapType' #AgmMap></agm-map> -->
+
+    </nb-card-body>
+</nb-card>
+  
