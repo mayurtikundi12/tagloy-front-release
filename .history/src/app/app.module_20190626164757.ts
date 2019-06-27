@@ -9,10 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { NgxEchartsModule } from 'ngx-echarts';
-import { ChartModule } from 'angular2-chartjs';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,14 +22,17 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ECommerceVisitorsAnalyticsChartComponent } from './visitors-analytics/visitors-analytics-chart/visitors-analytics-chart.component';
 import { ECommerceVisitorsAnalyticsComponent } from './visitors-analytics/visitors-analytics.component';
 import { ECommerceVisitorsStatisticsComponent } from './visitors-analytics/visitors-statistics/visitors-statistics.component';
-import { ECommerceLegendChartComponent } from './legend-chart/legend-chart.component';
-import { SlideOutComponent } from './slide-out/slide-out.component';
-import { PeriodsService } from './@core/mock/periods.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    PagesComponent,
+    DashboardComponent,
     LoginComponent,
+    NotFoundComponent,
+    ECommerceVisitorsAnalyticsChartComponent,
+    ECommerceVisitorsAnalyticsComponent,
+    ECommerceVisitorsStatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +47,6 @@ import { PeriodsService } from './@core/mock/periods.service';
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-    PeriodsService
   ],
 })
 export class AppModule {

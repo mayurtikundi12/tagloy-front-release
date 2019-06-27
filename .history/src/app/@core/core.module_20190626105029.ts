@@ -11,12 +11,8 @@ import {
   PlayerService,
   StateService,
 } from './utils';
-import { VisitorsAnalyticsService } from './mock/visitors-analytics.service';
-import { VisitorsAnalyticsData } from './data/visitors-analytics';
 
-const DATA_SERVICES = [
-  { provide: VisitorsAnalyticsData, useClass: VisitorsAnalyticsService },
-]
+
 const socialLinks = [
   {
     url: 'https://github.com/akveo/nebular',
@@ -45,8 +41,6 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 }
 
 export const NB_CORE_PROVIDERS = [
-  ...DATA_SERVICES,
-
   NbSecurityModule.forRoot({
     accessControl: {
       guest: {

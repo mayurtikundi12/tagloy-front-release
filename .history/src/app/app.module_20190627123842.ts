@@ -47,6 +47,7 @@ import { PeriodsService } from './@core/mock/periods.service';
   ],
   bootstrap: [AppComponent],
   providers: [
+
     { provide: APP_BASE_HREF, useValue: '/' },
     PeriodsService
   ],

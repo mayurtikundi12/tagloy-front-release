@@ -33,7 +33,14 @@ import { PeriodsService } from './@core/mock/periods.service';
 @NgModule({
   declarations: [
     AppComponent,
+    ECommerceVisitorsAnalyticsChartComponent,
+    ECommerceVisitorsAnalyticsComponent,
+    ECommerceVisitorsStatisticsComponent,
+    ECommerceLegendChartComponent,
+    SlideOutComponent,
     LoginComponent,
+    NotFoundComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -44,9 +51,14 @@ import { PeriodsService } from './@core/mock/periods.service';
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    NgxChartsModule,
+    NgxEchartsModule,
+    ChartModule,
+    LeafletModule,
   ],
   bootstrap: [AppComponent],
   providers: [
+
     { provide: APP_BASE_HREF, useValue: '/' },
     PeriodsService
   ],

@@ -27,13 +27,18 @@ import { ECommerceVisitorsAnalyticsChartComponent } from './visitors-analytics/v
 import { ECommerceVisitorsAnalyticsComponent } from './visitors-analytics/visitors-analytics.component';
 import { ECommerceVisitorsStatisticsComponent } from './visitors-analytics/visitors-statistics/visitors-statistics.component';
 import { ECommerceLegendChartComponent } from './legend-chart/legend-chart.component';
-import { SlideOutComponent } from './slide-out/slide-out.component';
-import { PeriodsService } from './@core/mock/periods.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    PagesComponent,
+    DashboardComponent,
     LoginComponent,
+    NotFoundComponent,
+    ECommerceVisitorsAnalyticsChartComponent,
+    ECommerceVisitorsAnalyticsComponent,
+    ECommerceVisitorsStatisticsComponent,
+    ECommerceLegendChartComponent
   ],
   imports: [
     BrowserModule,
@@ -44,11 +49,14 @@ import { PeriodsService } from './@core/mock/periods.service';
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    NgxChartsModule,
+    NgxEchartsModule,
+    ChartModule,
+    LeafletModule,
   ],
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-    PeriodsService
   ],
 })
 export class AppModule {

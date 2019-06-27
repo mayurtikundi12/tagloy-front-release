@@ -18,9 +18,6 @@ const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'prefix'},
   {path: '', loadChildren: './pages/pages.module#PagesModule'},
   {path: 'login', component: LoginComponent},
-  {path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule'},
-  { path: '**', redirectTo: 'not-found'}
-  // { path: '**', component:  NotFoundComponent}
   // {
   //   path: 'pages', component: PagesComponent,
   //   children: [
@@ -32,7 +29,7 @@ const routes: Routes = [
   //   path: 'login',
   //   component: LoginComponent,
   // },
-  // ,
+  // { path: '**', component:  NotFoundComponent},
 ];
 
 const config: ExtraOptions = {

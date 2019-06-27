@@ -14,25 +14,22 @@ import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
-
-  {path: '', redirectTo: 'login', pathMatch: 'prefix'},
-  {path: '', loadChildren: './pages/pages.module#PagesModule'},
-  {path: 'login', component: LoginComponent},
-  {path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule'},
-  { path: '**', redirectTo: 'not-found'}
-  // { path: '**', component:  NotFoundComponent}
-  // {
-  //   path: 'pages', component: PagesComponent,
-  //   children: [
-  //     { path: 'dashboard', component: DashboardComponent },
-  //     { path: '', redirectTo: 'dashboard', pathMatch: 'full'}
-  //   ]
-  // },
-  // {
-  //   path: 'login',
-  //   component: LoginComponent,
-  // },
-  // ,
+  {
+    path: '',
+    component: LoginComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'pages', component: PagesComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full'}
+    ]
+  },
+  { path: '**', component:  NotFoundComponent},
 ];
 
 const config: ExtraOptions = {

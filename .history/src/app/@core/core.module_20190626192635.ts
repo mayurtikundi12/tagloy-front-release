@@ -45,7 +45,25 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 }
 
 export const NB_CORE_PROVIDERS = [
+  ...MockDataModule.forRoot().providers,
   ...DATA_SERVICES,
+  ...NbAuthModule.forRoot({
+
+    strategies: [
+      NbDummyAuthStrategy.setup({
+        name: 'email',
+        delay: 3000,
+      }),
+    ],
+    forms: {
+      login: {
+        socialLinks: socialLinks,
+      },
+      register: {
+        socialLinks: socialLinks,
+      },
+    },
+  }).providers,
 
   NbSecurityModule.forRoot({
     accessControl: {
