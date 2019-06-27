@@ -137,5 +137,5 @@ ngAfterViewInit(): void {
  interface HistoryData{
   topic:string,
   value:number,
-  icon:string
+  icon:string 
 }

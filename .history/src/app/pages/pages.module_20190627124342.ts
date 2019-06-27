@@ -39,7 +39,7 @@ import { AgmCoreModule } from '@agm/core';
     LeafletModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
-    Ng2OdometerModule.forRoot(),
+    Ng2OdometerModule.forRoot()
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAkD_3L9QdqBtkq_aICKOyhwSsD98TDWrc&callback'
     }),

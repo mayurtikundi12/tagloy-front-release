@@ -14,6 +14,8 @@ import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
+<<<<<<< HEAD
+
   {path: '', redirectTo: 'login', pathMatch: 'prefix'},
   {path: '', loadChildren: './pages/pages.module#PagesModule'},
   {path: 'login', component: LoginComponent},
