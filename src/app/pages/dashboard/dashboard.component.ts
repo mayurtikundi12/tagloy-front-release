@@ -15,7 +15,7 @@ interface CardSettings {
   styleUrls: ['./dashboard.component.scss'],
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnDestroy,AfterViewInit {
+export class DashboardComponent implements OnDestroy {
 
   private alive = true;
 
@@ -97,37 +97,6 @@ historyData:Array<HistoryData> = [{topic:"Lifetime Hours",value:2500,icon:"../..
 {topic:"Total Impressions",value:300050,icon:"../../../assets/images/neelk.png"},
 {topic:"Total Campaigns",value:3200,icon:"../../../assets/images/neelk.png"},
 {topic:"Active Campaigns",value:5220,icon:"../../../assets/images/neelk.png"}]
-
-
-cordinates = [
-  {lat:51.67,lng:7.809007},
-  {lat:52.67,lng:7.309007},
-  {lat:52.07,lng:7.709007},
-  {lat:51.87,lng:7.609007},
-  {lat:51.17,lng:7.009007},
-  {lat:51.77,lng:7.409007},
-]
-
-lat = 51.678418;
-lng = 7.809007;
-
-labelOptions = {
-  color: 'blue',
-  fontFamily: 'roboto',
-  fontSize: '14px',
-  fontWeight: 'bold',
-  text: 'some other text'
-}
-
-@ViewChild(AgmMap)
-public agmMap: AgmMap
-
-ngAfterViewInit(): void {
-  setTimeout(() => {
-    console.log('Resizing');
-    this.agmMap.triggerResize();
-  }, 100);
-}
 
 }
 

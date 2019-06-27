@@ -18,6 +18,9 @@ import { ECommerceVisitorsAnalyticsChartComponent } from '../visitors-analytics/
 import { SlideOutComponent } from '../slide-out/slide-out.component';
 import { Ng2OdometerModule } from 'ng2-odometer';
 import { AgmCoreModule } from '@agm/core';
+import { GmapsComponent } from './gmaps/gmaps.component';
+import { CampaignsComponent } from './campaigns/campaigns.component';
+import { ChartsHollowPieComponent } from './slide-out/chart-hollow-pie/charts-hollow-pie.component';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { AgmCoreModule } from '@agm/core';
     ECommerceVisitorsAnalyticsComponent,
     ECommerceVisitorsStatisticsComponent,
     ECommerceLegendChartComponent,
-    SlideOutComponent
+    SlideOutComponent,
+    GmapsComponent,
+    CampaignsComponent,
+    ChartsHollowPieComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +47,7 @@ import { AgmCoreModule } from '@agm/core';
     ThemeModule.forRoot(),
     Ng2OdometerModule.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAkD_3L9QdqBtkq_aICKOyhwSsD98TDWrc&callback'
+      apiKey: 'AIzaSyByMZrm3oE7aJOHK7sqXrJwN3KmRHYjn98'
     }),
   ]
 })
