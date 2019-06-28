@@ -1,0 +1,43 @@
+@import '../../@theme/styles/themes';
+
+@include nb-install-component() {
+
+  nb-card-body {
+    padding: 0;
+  }
+
+  /deep/ agm-map {
+    width: 100%;
+    height: nb-theme(card-height-medium);
+  }
+
+  .outletImg{
+    height: 100px;
+    width: 100px
+  }
+  span{
+    font-size: 14px ;
+    font-weight: bold ;
+  }
+
+  .badge{
+    background: orange ;
+    padding: 3px ;
+  }
+
+  .outlet-info{
+    float: right;
+    display: flex ;
+    flex-direction: column ; 
+    justify-content: space-evenly;
+  }
+
+  img{
+    padding: 3px ;
+  }
+  .marker{
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+}
