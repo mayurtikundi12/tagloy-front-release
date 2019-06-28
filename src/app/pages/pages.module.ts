@@ -21,8 +21,13 @@ import { AgmCoreModule } from '@agm/core';
 import { OutletDetailsComponent } from './outlet-details/outlet-details.component';
 import { NbCardModule, NbProgressBarModule } from '@nebular/theme';
 import { CampaignsComponent } from './campaigns/campaigns.component';
-import { GmapsComponent } from './gmaps/gmaps.component';
 import { ChartsHollowPieComponent } from './slide-out/chart-hollow-pie/charts-hollow-pie.component';
+import { GmapsComponent } from './gmaps/gmaps.component';
+import { RevealCardComponent } from './shared/reveal-card/reveal-card.component';
+import { HistoryCardComponent } from './shared/history-card/history-card.component';
+import { CampaignDetailsComponent } from './campaign-details/campaign-details.component';
+import { SmartTableComponent } from './shared/smart-table/smart-table.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
 @NgModule({
@@ -35,9 +40,13 @@ import { ChartsHollowPieComponent } from './slide-out/chart-hollow-pie/charts-ho
     ECommerceLegendChartComponent,
     SlideOutComponent,
     OutletDetailsComponent,
-    GmapsComponent,
     CampaignsComponent,
-    ChartsHollowPieComponent
+    ChartsHollowPieComponent,
+    GmapsComponent,
+    RevealCardComponent,
+    HistoryCardComponent,
+    CampaignDetailsComponent,
+    SmartTableComponent,
   ],
   imports: [
     CommonModule,
@@ -53,7 +62,9 @@ import { ChartsHollowPieComponent } from './slide-out/chart-hollow-pie/charts-ho
       apiKey: 'AIzaSyByMZrm3oE7aJOHK7sqXrJwN3KmRHYjn98'
     }),
     NbCardModule,
-    NbProgressBarModule
+    NbProgressBarModule,
+    Ng2SmartTableModule
+
   ]
 })
 export class PagesModule { }

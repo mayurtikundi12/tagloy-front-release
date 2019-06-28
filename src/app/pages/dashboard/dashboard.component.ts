@@ -123,10 +123,7 @@ labelOptions = {
 public agmMap: AgmMap
 
 ngAfterViewInit(): void {
-  setTimeout(() => {
-    console.log('Resizing');
-    this.agmMap.triggerResize();
-  }, 100);
+
 }
 }
 

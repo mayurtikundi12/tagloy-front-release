@@ -4,6 +4,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OutletDetailsComponent } from './outlet-details/outlet-details.component';
 import { CampaignsComponent } from './campaigns/campaigns.component';
+import { CampaignDetailsComponent } from './campaign-details/campaign-details.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'prefix'},
       { path: 'dashboard', component: DashboardComponent },
       { path: 'outlet-details', component: OutletDetailsComponent },
-      {path:'active-campaigns',component:CampaignsComponent}
+      {path:'active-campaigns',component:CampaignsComponent},
+      {path:'campaign-details',component:CampaignDetailsComponent}
     ]}
 ];
 
