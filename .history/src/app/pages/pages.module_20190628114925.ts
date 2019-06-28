@@ -21,8 +21,6 @@ import { AgmCoreModule } from '@agm/core';
 import { OutletDetailsComponent } from './outlet-details/outlet-details.component';
 import { NbCardModule, NbProgressBarModule } from '@nebular/theme';
 import { CampaignsComponent } from './campaigns/campaigns.component';
-import { GmapsComponent } from './gmaps/gmaps.component';
-import { ChartsHollowPieComponent } from './slide-out/chart-hollow-pie/charts-hollow-pie.component';
 
 
 @NgModule({
@@ -35,9 +33,7 @@ import { ChartsHollowPieComponent } from './slide-out/chart-hollow-pie/charts-ho
     ECommerceLegendChartComponent,
     SlideOutComponent,
     OutletDetailsComponent,
-    GmapsComponent,
-    CampaignsComponent,
-    ChartsHollowPieComponent
+    CampaignsComponent
   ],
   imports: [
     CommonModule,

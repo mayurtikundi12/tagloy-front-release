@@ -35,6 +35,7 @@ import { ChartsHollowPieComponent } from './slide-out/chart-hollow-pie/charts-ho
     ECommerceLegendChartComponent,
     SlideOutComponent,
     OutletDetailsComponent,
+    CampaignsComponent,
     GmapsComponent,
     CampaignsComponent,
     ChartsHollowPieComponent

@@ -22,7 +22,6 @@ import { OutletDetailsComponent } from './outlet-details/outlet-details.componen
 import { NbCardModule, NbProgressBarModule } from '@nebular/theme';
 import { CampaignsComponent } from './campaigns/campaigns.component';
 import { GmapsComponent } from './gmaps/gmaps.component';
-import { ChartsHollowPieComponent } from './slide-out/chart-hollow-pie/charts-hollow-pie.component';
 
 
 @NgModule({
@@ -35,9 +34,9 @@ import { ChartsHollowPieComponent } from './slide-out/chart-hollow-pie/charts-ho
     ECommerceLegendChartComponent,
     SlideOutComponent,
     OutletDetailsComponent,
-    GmapsComponent,
     CampaignsComponent,
-    ChartsHollowPieComponent
+    GmapsComponent,
+    CampaignsComponent
   ],
   imports: [
     CommonModule,
