@@ -4,13 +4,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
     icon: 'nb-e-commerce',
-    link: '/dashboard',
+    link: '/pages/dashboard',
     home: true,
-  },
-  {
-    title: 'Outlet Details',
-    icon: 'nb-e-commerce',
-    link: '/outlet-details',
-    // home: true,
-  },
+  },  
 ];

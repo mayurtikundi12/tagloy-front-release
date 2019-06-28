@@ -11,6 +11,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Outlet Details',
     icon: 'nb-e-commerce',
     link: '/outlet-details',
-    // home: true,
+    home: true,
   },
 ];

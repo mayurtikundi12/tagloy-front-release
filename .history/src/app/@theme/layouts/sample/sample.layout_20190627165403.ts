@@ -18,7 +18,7 @@ import { StateService } from '../../../@core/utils';
   template: `
     <nb-layout [center]="layout.id === 'center-column'" windowMode>
       <nb-layout-header fixed>
-        <ngx-header [position]= "sidebar.id === 'start' ? 'normal': 'inverse'"></ngx-header>
+        <ngx-header [position]="sidebar.id === 'start' ? 'normal': 'inverse'"></ngx-header>
       </nb-layout-header>
 
       <nb-sidebar class="menu-sidebar"
@@ -33,9 +33,9 @@ import { StateService } from '../../../@core/utils';
         <ng-content select="nb-menu"></ng-content>
       </nb-sidebar>
 
-      <nb-layout-column class="main-content">
-        <ng-content select="router-outlet"></ng-content>
-      </nb-layout-column>
+      // <nb-layout-column class="main-content">
+      //   <ng-content select="router-outlet"></ng-content>
+      // </nb-layout-column>
 
       <nb-layout-column start class="small" *ngIf="layout.id === 'two-column' || layout.id === 'three-column'">
         <nb-menu [items]="subMenu"></nb-menu>

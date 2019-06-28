@@ -9,7 +9,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Outlet Details',
-    icon: 'nb-e-commerce',
+    icon: 'fa fa-trash',
     link: '/outlet-details',
     // home: true,
   },

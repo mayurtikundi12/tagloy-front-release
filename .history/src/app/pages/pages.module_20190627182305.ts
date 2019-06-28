@@ -19,7 +19,7 @@ import { SlideOutComponent } from '../slide-out/slide-out.component';
 import { Ng2OdometerModule } from 'ng2-odometer';
 import { AgmCoreModule } from '@agm/core';
 import { OutletDetailsComponent } from './outlet-details/outlet-details.component';
-import { NbCardModule, NbProgressBarModule } from '@nebular/theme';
+import { NbCardModule } from '@nebular/theme';
 
 
 @NgModule({
