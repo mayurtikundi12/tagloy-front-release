@@ -7,7 +7,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -22,6 +22,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { SlideOutComponent } from './slide-out/slide-out.component';
 import { PeriodsService } from './@core/mock/periods.service';
+import { ApiData } from './commons/data/apis.data';
+import { ApisService } from './commons/apis.service';
+import { AuthGuardService } from './commons/auth-guard.service';
+import { InterceptorService } from './commons/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,9 @@ import { PeriodsService } from './@core/mock/periods.service';
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-    PeriodsService
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+
+    PeriodsService,ApiData,ApisService,AuthGuardService
   ],
 })
 export class AppModule {
