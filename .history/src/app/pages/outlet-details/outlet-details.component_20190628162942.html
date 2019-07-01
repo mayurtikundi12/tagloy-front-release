@@ -118,61 +118,13 @@
         </canvas>
       </div> -->
       <div class="row">
-        <div class="col-lg-4 col-md-4"><h5>Live Offline Status</h5></div>
-        <div class="col-lg-8 col-md-8 text-right">
-          <div>
-            <span class="live_status">NEW</span> <span class="tails"> Live</span>&nbsp;&nbsp;
-            <span class="offline_status">NEW</span><span class="tails"> Offline</span>
-          </div>
+        <div class="col">
+            <span class="badge badge-secondary">New</span>
         </div>
-      </div>
-      <div class="timingwise-status">
-
-        <label>
-          <input name="options" class="form-radio" [(ngModel)]="options" type="radio" [value]="true" [checked]="options" checked/>Screen One
-        </label>&nbsp;
-
-        <label>
-          <input name="options" class="form-radio" [(ngModel)]="options" type="radio" [value]="false" [checked]="!options"/>Screen Two
-        </label>
-
-        <h2 *ngIf="options">
-          <p class="badge badge-success live"><span class="status">11 AM</span></p>
-          <p class="badge badge-success live"><span class="status">12 PM</span></p>
-          <p class="badge badge-danger live"><span class="status">1 PM</span></p>
-          <p class="badge badge-danger live"><span class="status">2 PM</span></p>
-          <p class="badge badge-danger live"><span class="status">3 PM</span></p>
-          <p class="badge badge-danger live"><span class="status">4 PM</span></p>
-          <p class="badge badge-danger live"><span class="status">5 PM</span></p>
-          <p class="badge badge-danger live"><span class="status">6 PM</span></p>
-          <p class="badge badge-success live"><span class="status">7 PM</span></p>
-          <p class="badge badge-success live"><span class="status">8 PM</span></p>
-          <p class="badge badge-success live"><span class="status">9 PM</span></p>
-          <p class="badge badge-success live"><span class="status">10 PM</span></p>
-          <p class="badge badge-success live"><span class="status">11 PM</span></p>
-          <p class="badge badge-success live"><span class="status">12 AM</span></p>
-        </h2>
-        <h2 *ngIf="!options">
-          <p class="badge badge-danger live"><span class="status">11 AM</span></p>
-          <p class="badge badge-danger live"><span class="status">12 PM</span></p>
-          <p class="badge badge-success live"><span class="status">1 PM</span></p>
-          <p class="badge badge-success live"><span class="status">2 PM</span></p>
-          <p class="badge badge-success live"><span class="status">3 PM</span></p>
-          <p class="badge badge-success live"><span class="status">4 PM</span></p>
-          <p class="badge badge-success live"><span class="status">5 PM</span></p>
-          <p class="badge badge-success live"><span class="status">6 PM</span></p>
-          <p class="badge badge-danger live"><span class="status">7 PM</span></p>
-          <p class="badge badge-danger live"><span class="status">8 PM</span></p>
-          <p class="badge badge-danger live"><span class="status">9 PM</span></p>
-          <p class="badge badge-danger live"><span class="status">10 PM</span></p>
-          <p class="badge badge-danger live"><span class="status">11 PM</span></p>
-          <p class="badge badge-danger live"><span class="status">12 AM</span></p>
-        </h2>
       </div>
     </nb-card-body>
   </nb-card>
 </div>
-
 
 
 

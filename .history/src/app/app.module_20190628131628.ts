@@ -33,7 +33,7 @@ import { ChartsModule } from 'ng2-charts';
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
-    // ChartsModule
+    ChartsModule
   ],
   bootstrap: [AppComponent],
   providers: [

@@ -55,6 +55,7 @@ import { ChartsModule } from 'ng2-charts';
     NbCardModule,
     NbProgressBarModule,
     ChartsModule,
+    NbBadgeModule
   ]
 })
 export class PagesModule { }

@@ -19,7 +19,7 @@ import { SlideOutComponent } from '../slide-out/slide-out.component';
 import { Ng2OdometerModule } from 'ng2-odometer';
 import { AgmCoreModule } from '@agm/core';
 import { OutletDetailsComponent } from './outlet-details/outlet-details.component';
-import { NbCardModule, NbProgressBarModule, NbBadgeModule } from '@nebular/theme';
+import { NbCardModule, NbProgressBarModule } from '@nebular/theme';
 import { CampaignsComponent } from './campaigns/campaigns.component';
 import { GmapsComponent } from './gmaps/gmaps.component';
 import { ChartsHollowPieComponent } from './slide-out/chart-hollow-pie/charts-hollow-pie.component';
@@ -54,7 +54,7 @@ import { ChartsModule } from 'ng2-charts';
     }),
     NbCardModule,
     NbProgressBarModule,
-    ChartsModule,
+    // ChartsModule
   ]
 })
 export class PagesModule { }

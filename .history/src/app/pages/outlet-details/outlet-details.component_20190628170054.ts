@@ -8,7 +8,7 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./outlet-details.component.scss']
 })
 export class OutletDetailsComponent implements OnInit {
-  options: boolean = true;
+  options: boolean
 
   public barChartOptions: ChartOptions = {
     responsive: true,
