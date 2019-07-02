@@ -7,7 +7,7 @@
     <div class="additional">
       <div class="user-card">
         <div class="level center">
-          {{camp.completedValue}}% Completed
+          {{camp.type}}
         </div>
         <div class="points center">
           {{camp.impressionCount}} Impressions
@@ -49,9 +49,11 @@
       </div>
     </div>
     <div class="general">
-      <h1>{{camp.campName}}</h1>
-      <p>{{camp.desc}}</p>
-      <span class="more">Mouse over the card for more info</span>
+      <h5 class="text-center">{{camp.campName}}</h5>
+      <img class="card-media" *ngIf="camp.type == 'IMAGE'" [src]="camp.mediaUrl" alt="image not available">
+      <video class="card-media" *ngIf="camp.type == 'VIDEO'" [src]="camp.mediaUrl" alt="video not available"></video>
+      <iframe class="card-media" *ngIf="camp.type == 'LINK'" [src]="sanitizer.bypassSecurityTrustResourceUrl(camp.mediaUrl)" frameborder="0"></iframe>
+      <!-- <span class="more">Mouse over the card for more info</span> -->
     </div>
   </div>
 </div>

@@ -1,12 +1,3 @@
 <history-card></history-card>
-
 <ngx-ecommerce-visitors-analytics></ngx-ecommerce-visitors-analytics>
-     
-     <nb-card>
-        <nb-card-header>Completion Duration</nb-card-header>
-        <nb-card-body >
-            <nb-progress-bar [value]="durationLeft" status="primary" size="giant">{{durationLeft}}% Completed</nb-progress-bar>
-          </nb-card-body>
-        </nb-card>
-
-<smart-table></smart-table>
+<smart-table [outletDetails]="outletDetails"></smart-table>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 
 import { SmartTableData } from '../../../@core/data/smart-table';
@@ -32,7 +32,15 @@ import { SmartTableData } from '../../../@core/data/smart-table';
     }
   `],
 })
-export class SmartTableComponent {
+export class SmartTableComponent implements OnChanges {
+
+
+  @Input() outletDetails:[] ;
+
+  ngOnChanges(changes:SimpleChanges){
+    console.log("these are the smart table data",changes);
+    this.source.load(changes["outletDetails"].currentValue);
+  }
 
   settings = {
     actions:false,
@@ -53,11 +61,11 @@ export class SmartTableComponent {
         type: 'number',
         width: "70px"
       },
-      outletName: {
+      name: {
         title: 'Outlet Name',
         type: 'string',
       },
-      hashtag: {
+      hash_tag: {
         title: 'Hashtag',
         type: 'string',
       },
@@ -73,11 +81,11 @@ export class SmartTableComponent {
         title: 'Screens',
         type: 'number',
       },
-      impressions: {
+      Total_impression: {
         title: 'Impressions',
         type: 'number',
       },
-      playDuration: {
+      Total_play_hours: {
         title: 'Play Duration',
         type: 'number',
       },
@@ -85,30 +93,10 @@ export class SmartTableComponent {
   };
 
   source: LocalDataSource = new LocalDataSource();
-  data = [{ 
-      index:1 , outletName:"funky kona",hashtag:"funkykona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky dona",hashtag:"funkydona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky mona",hashtag:"funkymona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky sona",hashtag:"funkykona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky hona",hashtag:"funkykona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky jona",hashtag:"funkykona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky dona",hashtag:"funkydona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky mona",hashtag:"funkymona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky sona",hashtag:"funkykona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky hona",hashtag:"funkykona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky jona",hashtag:"funkykona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky dona",hashtag:"funkydona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky mona",hashtag:"funkymona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky sona",hashtag:"funkykona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky hona",hashtag:"funkykona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-      {index:1 , outletName:"funky jona",hashtag:"funkykona" ,rating:4, Screens:2, impressions:455 , playDuration:3},
-    ]
-
+ 
     onUserRowSelect(event){
       console.log("this is the row event",event)
     }
   constructor() {
-    
-    this.source.load(this.data);
   }
 }

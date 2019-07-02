@@ -10,7 +10,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Active Campaigns',
     icon: 'nb-e-commerce',
-    link: '/active-campaigns',
+    link: '/campaigns/active',
+    home: true,
+  },
+  {
+    title: 'Completed Campaigns',
+    icon: 'nb-e-commerce',
+    link: '/campaigns/completed',
     home: true,
   },
   {

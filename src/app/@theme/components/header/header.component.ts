@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { AnalyticsService } from '../../../@core/utils';
 import { LayoutService } from '../../../@core/utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -19,10 +20,11 @@ export class HeaderComponent implements OnInit {
 
   userMenu = [{ title: 'Log out' }];
 
-  logout() { console.log("clicked") }
+
   onMenuItemClick() { console.log("menu") }
 
   constructor(
+    private _router:Router ,
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     // private userService: UserData,
@@ -37,6 +39,10 @@ export class HeaderComponent implements OnInit {
 
   onContecxtItemSelection(title) {
     console.log('click', title);
+    if(title == 'Log out'){
+      localStorage.clear() ; 
+      this._router.navigate(['/login'])
+    }
   }
 
   ngOnInit() {

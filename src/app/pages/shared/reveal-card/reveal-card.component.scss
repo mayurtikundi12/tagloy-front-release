@@ -186,3 +186,12 @@ html, body {
 .card{
   cursor: pointer;
 }
+
+.card-media{
+  height: 200px !important; 
+  margin-left: 50%;
+  transform: translateX(-50%) ;
+}
+h5{
+  margin-top:1%;
+}
