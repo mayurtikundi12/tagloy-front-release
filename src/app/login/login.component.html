@@ -6,13 +6,13 @@
           Login
         </span>
 
-
-        <div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required">
-          <input formControlName="email" class="input100" type="text" name="username" placeholder="Username">
+        <span *ngIf="loginForm.controls.Email.pristine?false : !loginForm.controls.Email.dirty || loginForm.controls.Email.invalid" class="error" >please enter the email</span>
+        <div class="wrap-input100 validate-input m-b-16" data-validate = "Email is required">
+          <input formControlName="Email" class="input100" type="text"  placeholder="Email">
           <span class="focus-input100"></span>
         </div>
 
-
+        <span *ngIf="loginForm.controls.password.pristine?false : !loginForm.controls.password.dirty || loginForm.controls.password.invalid" class="error" >please enter the password</span>
         <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
           <input formControlName="password" class="input100" type="password" name="pass" placeholder="Password">
           <span class="focus-input100"></span>
@@ -27,14 +27,14 @@
           </div>
 
           <div>
-            <a href="#" class="txt1">
+            <a  class="txt1">
               Forgot?
             </a>
           </div>
         </div>
 
         <div class="container-login100-form-btn m-t-17">
-          <button (click)="login()" class="login100-form-btn" [routerLink]="['/dashboard']">
+          <button *ngIf="loginForm.valid" (click)="login()" class="login100-form-btn" [routerLink]="['/dashboard']">
             Login
           </button>
         </div>

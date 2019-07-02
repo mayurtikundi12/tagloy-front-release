@@ -5,8 +5,10 @@ import { Router } from '@angular/router';
   selector: 'ngx-gmaps',
   styleUrls: ['./gmaps.component.scss'],
   template: `
-    <nb-card >
-      <nb-card-header>Partner Outlets</nb-card-header>
+    <nb-card status="success">
+    <nb-card-header >Partner Outlets
+    <nb-badge text="207 active outlets" status="danger" position="top left"></nb-badge>
+      </nb-card-header>
       <nb-card-body>
         <agm-map #gm [latitude]="lat" [longitude]="lng" >
           <agm-marker class="marker" [iconUrl]="cord.live?greenMarker:redMarker"  (mouseOut)="onMouseOut(infoWindow, gm)"  (mouseOver)="onMouseOver(infoWindow,gm)" (markerClick)="gotoOutletDetailsPage(cord.id)" [label]="{'text':cord.name,'color':'black','fontFamily':'roboto','fontSize': '14px','fontWeight': 'bold'}"  [label]="labelOptions"  *ngFor="let cord of cordinates;let i = index" [latitude]="cord.lat" [longitude]="cord.lng">

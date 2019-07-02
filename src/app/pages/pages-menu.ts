@@ -8,6 +8,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
+    title: 'Active Campaigns',
+    icon: 'nb-e-commerce',
+    link: '/active-campaigns',
+    home: true,
+  },
+  {
     title: 'Outlet Details',
     icon: 'nb-e-commerce',
     link: '/outlet-details',

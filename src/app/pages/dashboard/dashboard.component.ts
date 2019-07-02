@@ -1,7 +1,9 @@
-import {Component, OnDestroy, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, OnDestroy, ViewChild, AfterViewInit, OnInit} from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators' ;
 import { AgmMap } from '@agm/core';
+import { ApisService } from '../../commons/apis.service';
+import { ApiData } from '../../commons/data/apis.data';
 
 
 interface CardSettings {
@@ -15,7 +17,7 @@ interface CardSettings {
   styleUrls: ['./dashboard.component.scss'],
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnDestroy,OnInit {
 
   private alive = true;
 
@@ -77,13 +79,32 @@ export class DashboardComponent implements OnDestroy {
       },
     ],
   };
-  constructor(private themeService: NbThemeService) {
+  constructor(private themeService: NbThemeService , 
+    private apiSrv:ApisService , private apiData:ApiData
+    ) {
 this.themeService.getJsTheme()
 .pipe(takeWhile(() => this.alive))
 .subscribe(theme => {
 this.statusCards = this.statusCardsByThemes[theme.name];
 });
 
+}
+
+ngOnInit(){
+  // getting the needed data on initialization
+  let body = {
+    id:localStorage.getItem('id')
+  }
+  console.log("this is the dashboard url",this.apiData.URL_DASHBOARD);
+  
+  this.apiSrv.postApi(this.apiData.URL_DASHBOARD,body).subscribe(data=>{
+    if(data ){
+      this.historyData = data["result"] ;
+    }
+    console.log("this is the dashboard data",data);
+  },error=>{
+    throw new Error("error in retrieving dashboard data")
+  })
 }
 
 
@@ -93,11 +114,7 @@ ngOnDestroy() {
   this.alive = false;
 }
 
-historyData:Array<HistoryData> = [{topic:"Lifetime Hours",value:2500,icon:"../../../assets/images/neelk.png"},
-{topic:"Total Impressions",value:300050,icon:"../../../assets/images/neelk.png"},
-{topic:"Total Campaigns",value:3200,icon:"../../../assets/images/neelk.png"},
-{topic:"Active Campaigns",value:5220,icon:"../../../assets/images/neelk.png"}]
-
+historyData:any = {}
 
 cordinates = [
   {lat:51.67,lng:7.809007},
@@ -123,15 +140,7 @@ labelOptions = {
 public agmMap: AgmMap
 
 ngAfterViewInit(): void {
-  setTimeout(() => {
-    console.log('Resizing');
-    this.agmMap.triggerResize();
-  }, 100);
+
 }
 }
 
- interface HistoryData{
-  topic:string,
-  value:number,
-  icon:string
-}

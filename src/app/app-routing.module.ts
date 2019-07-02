@@ -10,10 +10,11 @@ import {
 } from '@nebular/auth';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AuthGuardService } from './commons/auth-guard.service';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'prefix'},
-  {path: '', loadChildren: './pages/pages.module#PagesModule'},
+  {path: '', canActivate:[AuthGuardService], loadChildren: './pages/pages.module#PagesModule'},
   {path: 'login', component: LoginComponent},
   {path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule'},
   { path: '**', redirectTo: 'not-found'}

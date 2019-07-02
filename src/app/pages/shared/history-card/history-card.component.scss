@@ -1,0 +1,116 @@
+// @import '../../../@theme/styles/themes';
+// @import '~bootstrap/scss/mixins/breakpoints';
+// @import '~@nebular/theme/styles/global/breakpoints';
+
+// @include nb-install-component() {
+//   .solar-card nb-card-header {
+//     border: none;
+//     padding-bottom: 0;
+//   }
+
+//   @include media-breakpoint-down(sm) {
+//     ngx-traffic {
+//       display: none;
+//     }
+//   }
+
+//   @include media-breakpoint-down(is) {
+//     /deep/ nb-card.large-card {
+//       height: nb-theme(card-height-medium);
+//     }
+//   }
+// }
+
+// .father-flex{
+//   display: flex ;
+//   flex-direction: row ;
+//   justify-content: space-evenly;
+//   flex-wrap: wrap;
+// }
+
+// .child-flex{
+//   height: 10rem;
+//   // width: 10rem;
+//   // background: red;
+//   margin: 5px;
+//   display: flex;
+//   flex-direction: column;
+//   border-radius: 5px ;
+//   justify-content: baselines;
+//   padding: 3px;
+// }
+
+// .history-text{
+//   font-size: 1.125rem;
+//   font-family: Open Sans,sans-serif;
+//   font-weight: 800;
+//   line-height: 1.5rem;
+//   overflow-y: visible;
+// }
+//  .center{
+//   margin-left: 50% ;
+//   transform: translateX(-50%);
+// } 
+// .logo{
+//   height: 4rem;
+//   width: 4rem;
+//   border-radius: 50% ;
+//   margin: 1rem;
+//   margin-left: 50% ;
+//   transform: translateX(-50%);
+// }
+
+
+// ********************
+body{
+  margin-top:20px;
+  background:#FAFAFA;
+}
+.order-card {
+  color: #fff;
+}
+
+.bg-c-blue {
+  background: linear-gradient(45deg,#4099ff,#73b4ff);
+}
+
+.bg-c-green {
+  background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+}
+
+.bg-c-yellow {
+  background: linear-gradient(45deg,#FFB64D,#ffcb80);
+}
+
+.bg-c-pink {
+  background: linear-gradient(45deg,#FF5370,#ff869a);
+}
+
+
+.card {
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+  box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+  border: none;
+  margin-bottom: 30px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.card .card-block {
+  padding: 25px;
+}
+
+.order-card i {
+  font-size: 26px;
+}
+
+.f-left {
+  float: left;
+}
+
+.f-right {
+  float: right;
+}
+          
+
