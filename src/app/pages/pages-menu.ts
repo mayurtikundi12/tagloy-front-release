@@ -22,7 +22,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Outlet Details',
     icon: 'nb-e-commerce',
-    link: '/outlet-details',
+    link: '/outlet-details/1',
     // home: true,
   },
 ];

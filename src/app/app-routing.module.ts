@@ -1,4 +1,4 @@
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { NgModule } from '@angular/core';
 import {
   NbAuthComponent,
@@ -22,6 +22,7 @@ const routes: Routes = [
 
 const config: ExtraOptions = {
   useHash: true,
+  preloadingStrategy: PreloadAllModules
 };
 
 @NgModule({

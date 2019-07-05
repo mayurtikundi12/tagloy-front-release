@@ -44,13 +44,7 @@ import { NbSecurityModule } from '@nebular/security';
 import {
   // FooterComponent,
   HeaderComponent,
-  SearchInputComponent,
-  ThemeSettingsComponent,
-  SwitcherComponent,
-  LayoutDirectionSwitcherComponent,
-  ThemeSwitcherComponent,
-  TinyMCEComponent,
-  ThemeSwitcherListComponent,
+
   // ToggleSettingsButtonComponent,
 } from './components';
 import {
@@ -111,15 +105,8 @@ const NB_MODULES = [
 ];
 
 const COMPONENTS = [
-  SwitcherComponent,
-  LayoutDirectionSwitcherComponent,
-  ThemeSwitcherComponent,
-  ThemeSwitcherListComponent,
+
   HeaderComponent,
-  // FooterComponent,
-  SearchInputComponent,
-  ThemeSettingsComponent,
-  TinyMCEComponent,
   OneColumnLayoutComponent,
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
@@ -128,7 +115,6 @@ const COMPONENTS = [
 ];
 
 const ENTRY_COMPONENTS = [
-  ThemeSwitcherListComponent,
 ];
 
 const PIPES = [
