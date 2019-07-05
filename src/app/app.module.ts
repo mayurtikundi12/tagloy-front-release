@@ -17,7 +17,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { PeriodsService } from './@core/mock/periods.service';
-import { ChartsModule } from 'ng2-charts';
 
 import { ApiData } from './commons/data/apis.data';
 import { ApisService } from './commons/apis.service';

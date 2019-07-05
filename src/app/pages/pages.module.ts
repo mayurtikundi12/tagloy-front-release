@@ -21,8 +21,8 @@ import { AgmCoreModule } from '@agm/core';
 import { OutletDetailsComponent } from './outlet-details/outlet-details.component';
 import { NbCardModule, NbProgressBarModule, NbBadgeModule } from '@nebular/theme';
 import { CampaignsComponent } from './campaigns/campaigns.component';
-import { ChartsHollowPieComponent } from './slide-out/chart-hollow-pie/charts-hollow-pie.component';
 import { ChartsModule } from 'ng2-charts';
+
 
 import { GmapsComponent } from './gmaps/gmaps.component';
 import { RevealCardComponent } from './shared/reveal-card/reveal-card.component';
@@ -43,7 +43,6 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     SlideOutComponent,
     OutletDetailsComponent,
     CampaignsComponent,
-    ChartsHollowPieComponent,
     GmapsComponent,
     RevealCardComponent,
     HistoryCardComponent,
