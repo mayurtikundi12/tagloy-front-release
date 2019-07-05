@@ -73,5 +73,13 @@
   nb-card {
       margin: 5px ;
   }
+  
+  .center{
+    margin-left:50% ;
+    transform: translateX(-50%) ;
+  }
 
+  .btn{
+    cursor: pointer;
+  }
 

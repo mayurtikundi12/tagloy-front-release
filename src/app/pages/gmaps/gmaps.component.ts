@@ -57,7 +57,7 @@ constructor(private router:Router){
 }
 
 gotoOutletDetailsPage(outletId){
-  this.router.navigate(['/active-campaigns'])
+  this.router.navigate(['/outlet-details/outletId'])
 }
 
 onMouseOver(infoWindow,gm){

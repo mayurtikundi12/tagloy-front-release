@@ -13,9 +13,9 @@ const routes: Routes = [
     children:[
       { path: '', redirectTo: 'dashboard', pathMatch: 'prefix'},
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'outlet-details', component: OutletDetailsComponent },
-      {path:'active-campaigns',component:CampaignsComponent},
-      {path:'campaign-details',component:CampaignDetailsComponent}
+      { path: 'outlet-details/:outletId', component: OutletDetailsComponent },
+      {path:'campaigns/:state',component:CampaignsComponent},
+      {path:'campaign-details/:campaignId',component:CampaignDetailsComponent}
     ]}
 ];
 

@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class HistoryCardComponent implements OnInit {
 
   constructor() { }
-  @Input() cardData:any;
+  @Input() cardData:any = {};
   
   historyData = {
     lifeTimeViews:"",
@@ -23,11 +23,15 @@ export class HistoryCardComponent implements OnInit {
   ngOnInit() {
     
     setTimeout(()=>{
-      console.log("this is the card data in history cards component ",this.cardData)
-      this.historyData.lifeTimeImpressions = this.cardData["Total_impression"];
+
+      if(Object.keys(this.cardData).length>0){
+        this.historyData.lifeTimeImpressions = this.cardData["Total_impression"];
       this.historyData.lifeTimeHours = this.cardData["Total_play_hours"];
       this.historyData.activeCampaigns = this.cardData["active_campaign"];
       this.historyData.lifeTimeCampaigns = this.cardData["completed_campaign"] + this.cardData["active_campaign"]  ;
+   
+      }else console.log("data not arrived ");
+      
     },2000)    
   }
 

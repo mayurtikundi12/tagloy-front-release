@@ -1,10 +1,16 @@
-<history-card></history-card>
+<div *ngIf="hasCampaignData">
+    <history-card></history-card>
 <ngx-ecommerce-visitors-analytics></ngx-ecommerce-visitors-analytics>
-<nb-card   accent="primary" status="warning" >
-    <nb-card-header>Active Campaigns
+<nb-card>
+    <nb-card-header>{{campaignsState}} Campaigns
     </nb-card-header>
     <nb-card-body>
-        <reveal-card></reveal-card>
+        <reveal-card [campaignDetails]='campaignDetails' ></reveal-card>
+        <button *ngIf="hasNextCampaignData" (click)="getMoreCampData()" class="btn btn-success center">See More</button>
     </nb-card-body>
   </nb-card>
   
+</div>
+<div *ngIf="!hasCampaignData">
+    <h2>there are no campaigns running</h2>
+</div>
