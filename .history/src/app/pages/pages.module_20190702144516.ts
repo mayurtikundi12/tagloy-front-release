@@ -65,8 +65,12 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     }),
     NbCardModule,
     NbProgressBarModule,
+<<<<<<< HEAD
     ChartsModule,
+=======
     Ng2SmartTableModule
+
+>>>>>>> 07054c913f404f9f7a10d468d158dc8e17d32a03
   ]
 })
 export class PagesModule { }

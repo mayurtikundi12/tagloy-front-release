@@ -6,23 +6,13 @@
           Login
         </span>
 
-        <span
-          *ngIf="(loginForm.controls.Email.invalid && loginForm.controls.Email.touched) || (loginForm.controls.Email.pristine?false : !loginForm.controls.Email.dirty || loginForm.controls.Email.invalid)"
-          class="error common" >
-          please enter the email
-        </span>
-        <div
-          class="wrap-input100 validate-input m-b-16 common"
-          data-validate = "Email is required">
+        <span *ngIf="(loginForm.controls.Email.invalid && loginForm.controls.Email.touched) || (loginForm.controls.Email.pristine?false : !loginForm.controls.Email.dirty || loginForm.controls.Email.invalid)" class="error common" >please enter the email</span>
+        <div class="wrap-input100 validate-input m-b-16 common" data-validate = "Email is required">
           <input formControlName="Email" class="input100" type="text"  placeholder="Email">
           <span class="focus-input100"></span>
         </div>
 
-        <span
-          *ngIf="(loginForm.controls.password.touched && loginForm.controls.password.invalid) || (loginForm.controls.password.pristine?false : !loginForm.controls.password.dirty || loginForm.controls.password.invalid)"
-          class="error common" >
-          please enter the password
-        </span>
+        <span *ngIf="loginForm.controls.password.pristine?false : !loginForm.controls.password.dirty || loginForm.controls.password.invalid" class="error common" >please enter the password</span>
         <div class="wrap-input100 validate-input m-b-16 common" data-validate = "Password is required">
           <input formControlName="password" class="input100" type="password" name="pass" placeholder="Password">
           <span class="focus-input100"></span>
