@@ -7,6 +7,7 @@ import {ApiData} from './data/apis.data' ;
 export class ApisService {
 
    BASE_URL: string = 'https://preprod.tagloy.com/v1/';
+   BASE_LOCAL_URL:string = "http://localhost:3000/"
   //  BASE_URL: string = 'https://biz.tagloy.com/v1/';
 
   constructor(private http:HttpClient) { }
@@ -21,6 +22,10 @@ export class ApisService {
 
   postApi(endPoint,body){
     return this.http.post(this.BASE_URL+endPoint,body) ; 
+  }
+
+  postLocalApi(endPoint,body){
+    return this.http.post(this.BASE_LOCAL_URL+endPoint,body) ; 
   }
 
 }

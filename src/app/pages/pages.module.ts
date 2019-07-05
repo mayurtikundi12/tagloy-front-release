@@ -30,6 +30,7 @@ import { HistoryCardComponent } from './shared/history-card/history-card.compone
 import { CampaignDetailsComponent } from './campaign-details/campaign-details.component';
 import { SmartTableComponent } from './shared/smart-table/smart-table.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { DataBootstrapService } from './shared/services/data-bootstrap.service';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbProgressBarModule,
     ChartsModule,
     Ng2SmartTableModule
-  ]
+  ],
+  providers:[DataBootstrapService]
 })
 export class PagesModule { }

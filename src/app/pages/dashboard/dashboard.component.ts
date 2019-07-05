@@ -4,6 +4,7 @@ import { takeWhile } from 'rxjs/operators' ;
 import { AgmMap } from '@agm/core';
 import { ApisService } from '../../commons/apis.service';
 import { ApiData } from '../../commons/data/apis.data';
+import { DataBootstrapService } from '../shared/services/data-bootstrap.service';
 
 
 interface CardSettings {
@@ -79,8 +80,12 @@ export class DashboardComponent implements OnDestroy,OnInit {
       },
     ],
   };
+
+coordinates:[any] ;
+
   constructor(private themeService: NbThemeService , 
-    private apiSrv:ApisService , private apiData:ApiData
+    private apiSrv:ApisService , private apiData:ApiData,
+    private databootSrv:DataBootstrapService,
     ) {
 this.themeService.getJsTheme()
 .pipe(takeWhile(() => this.alive))
@@ -91,17 +96,28 @@ this.statusCards = this.statusCardsByThemes[theme.name];
 }
 
 ngOnInit(){
+
+ this.databootSrv.getDataAtInit()
+
+ this.databootSrv.subscribableVenues.subscribe(venueData=>{
+   if (venueData.length > 0) {
+     console.log("venue data arriving at dashboard ",venueData);
+     
+     this.coordinates = venueData ;
+   }
+ })
+
   // getting the needed data on initialization
   let body = {
     id:localStorage.getItem('id')
   }
-  console.log("this is the dashboard url",this.apiData.URL_DASHBOARD);
+  // console.log("this is the dashboard url",this.apiData.URL_DASHBOARD);
   
   this.apiSrv.postApi(this.apiData.URL_DASHBOARD,body).subscribe(data=>{
     if(data ){
       this.historyData = data["result"] ;
     }
-    console.log("this is the dashboard data",data);
+    // console.log("this is the dashboard data",data);
   },error=>{
     throw new Error("error in retrieving dashboard data")
   })
