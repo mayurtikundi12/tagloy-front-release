@@ -1,12 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-gmaps',
   styleUrls: ['./gmaps.component.scss'],
   template: `
-    <nb-card status="success">
-    <nb-card-header >Partner Outlets
+    <nb-card>
+    <nb-card-header >Partner Outlets   <span class="right">Total Screens <span class="green">{{totalScreenCount}}</span></span>
     <nb-badge text="207 active outlets" status="danger" position="top left"></nb-badge>
       </nb-card-header>
       <nb-card-body>
@@ -16,8 +16,9 @@ import { Router } from '@angular/router';
          <div>
          <img class="outletImg" [src]="'//' + cord.logo" alt="Flowers in Chania">
         <div class="outlet-info">
-        <span>outlet name : {{cord.name}}</span><br>
-        <span>screens : {{cord.tvCount}}</span><br>
+        <span>Outlet Name : {{cord.name}}</span><br>
+        <span>Screens : {{cord.tvCount}}</span><br>
+        <span>Campaigns : {{cord.activeCampaignsCount}} active, {{cord.completedCampaignsCount}} completed</span><br>
         <span class="badge" >rating : {{cord.rating}}/5</span>
         </div>
          </div>
@@ -28,10 +29,11 @@ import { Router } from '@angular/router';
     </nb-card>
   `,
 })
-export class GmapsComponent {
+export class GmapsComponent implements OnInit {
   
   @Input() coordinates ;
 
+  totalScreenCount:number ;
 
   greenMarker = {url: '../../../../assets/images/green-marker.svg', scaledSize: {width: 40,height: 60}} 
   redMarker = {url: '../../../../assets/images/red-marker.svg', scaledSize: {width: 40,height: 60}} 
@@ -53,8 +55,13 @@ export class GmapsComponent {
 }
 
 constructor(private router:Router){
+    this.totalScreenCount = Number(sessionStorage.getItem("totalScreenCount"));
+}
+
+ngOnInit(){
 
 }
+
 
 gotoOutletDetailsPage(outletId){
   this.router.navigate(['/outlet-details/outletId'])
@@ -76,5 +83,7 @@ onMouseOut(infoWindow, gm) {
     gm.lastOpen.close();
 }
 }
+
+
 
 }

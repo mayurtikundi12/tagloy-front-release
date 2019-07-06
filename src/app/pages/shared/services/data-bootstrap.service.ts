@@ -47,54 +47,74 @@ export class DataBootstrapService {
     let bootData = JSON.parse(sessionStorage.getItem('bootData') );
     let venues = new Map() ;
     let totalTvCount = 0 ;
+    let activeScreenCount = 0 ;
     let activeCampaignsMap = new Map();
     let completedCampaignMap = new Map()
     for (let boot of bootData["data"]) {
 
-      // getting the active or completed campaign and segregating it in respective maps
-      if(boot["campaign"]["active"]){
-        activeCampaignsMap.set(boot["campaign"]["id"],boot)
-      }else{
-        completedCampaignMap.set(boot["campaign"]["id"],boot)
-      }
+                // getting the active or completed campaign and segregating it in respective maps
+                if(boot["campaign"]["active"]){
+                  activeCampaignsMap.set(boot["campaign"]["id"],boot)
+                }else{
+                  completedCampaignMap.set(boot["campaign"]["id"],boot)
+                }
+
 
       for (let venue of boot["venues"]) {
+        
         // for getting the screen counts
         // isThere = [isActive,isPresent]
         let isThere = this.checkIfVenueActive(venues,venue)
-      console.log("isacrive ",isThere[0]," is present ",isThere[1]);
+      // console.log("isacrive ",isThere[0]," is present ",isThere[1]);
+      let venueTvCount = 0 ;
+      venueTvCount = this.countScreens( Object.values(venue["tvCount"]));
           if (!isThere[1]) {
-                    let venueTvCount = 0 ;
-                    for (let box of Object.values(venue["tvCount"])) {
-                        venueTvCount += Number(box);
-                      }
-                      if(isThere[0]){
+                      if(boot["campaign"]["active"]){
                         venue["live"] = true ;
+                        activeScreenCount=activeScreenCount+venueTvCount;
+                        venue["activeCampaignsCount"]=1;
+                        venue["completedCampaignsCount"]=0;
                       }else{
                         venue["live"] = false ;
+                        venue["completedCampaignsCount"]=1;
+                        venue["activeCampaignsCount"]=0;
                       }
-
                       venue["tvCount"] = venueTvCount ;
                       venues.set(venue["venue_id"],venue);
                       totalTvCount = totalTvCount+ venueTvCount;
-                      // console.log("venue-id",venue["venue_id"]," tvCount-process ",totalTvCount );
-                      
+          }else{
+            let newVenue = venues.get(venue["venue_id"]);
+            if(boot["campaign"]["active"]){
+              newVenue["activeCampaignsCount"]? newVenue["activeCampaignsCount"] = newVenue["activeCampaignsCount"] + 1:newVenue["activeCampaignsCount"]=1 ;
+            }
+            else{
+              newVenue["completedCampaignsCount"]? newVenue["completedCampaignsCount"] = newVenue["completedCampaignsCount"] + 1:newVenue["completedCampaignsCount"] =1 ;
+            }
+            venues.set(venue["venue_id"],newVenue);
           }
 
           if(isThere[1] && !isThere[0]){
-              venue = venues.get(venue["venue_id"])
-              boot["campaign"]["active"]?venue["live"] = true :venue["live"] = false ;
-              venues.set(venue["venue_id"],venue)
+             let newVenue = venues.get(venue["venue_id"]);
+              if(boot["campaign"]["active"]){
+                activeScreenCount = activeScreenCount+venueTvCount;
+                newVenue["live"] = true;
+              }
+              else{
+                newVenue["live"] = false ;
+              }
+              venues.set(venue["venue_id"],newVenue);
           }
-          //  for checking if the venue is active by checking if any campaign is running here or not
-      }
+          
+
+        }
     }
-    sessionStorage.setItem("totalScreenCount",String(totalTvCount))
-    console.log("this is total tv count ",totalTvCount);
-    
+    sessionStorage.setItem("totalScreenCount",String(totalTvCount));
+    sessionStorage.setItem("totalActiveScreenCount",String(activeScreenCount))
     this.activeCampSrc.next(Array.from(activeCampaignsMap.values()))
     this.completedCampSrc.next(Array.from(completedCampaignMap.values()))
-    this.venueDataSrc.next(Array.from(venues.values()))
+    this.venueDataSrc.next(Array.from(venues.values()));
+    console.log("all venues ",Array.from(venues.values()));
+    
   }
 
 
@@ -102,8 +122,7 @@ export class DataBootstrapService {
 
   checkIfVenueActive(mapObject:Map<any,any>,currentObj):[boolean,boolean]{
       let isPresent = mapObject.has(currentObj["venue_id"])
-      console.log(isPresent,"log==> id ",currentObj);
-      
+      // console.log(isPresent,"log==> id ",currentObj);
        let isActive:boolean ;
        
        if (isPresent) {
@@ -114,6 +133,14 @@ export class DataBootstrapService {
        }
 
       return [isActive,isPresent]
+  }
+
+  countScreens(tvData):number{
+    let venueTvCount = 0 ;
+    for (let box of Object.values(tvData)) {
+      venueTvCount += Number(box);
+    }
+    return venueTvCount ;
   }
 
 
