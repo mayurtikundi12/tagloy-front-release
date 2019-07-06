@@ -5,6 +5,7 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { AnalyticsService } from './@core/utils/analytics.service';
+import { DataBootstrapService } from './pages/shared/services/data-bootstrap.service';
 
 @Component({
   selector: 'ngx-app',
@@ -13,12 +14,13 @@ import { AnalyticsService } from './@core/utils/analytics.service';
 export class AppComponent implements OnInit {
 
   constructor(
-    private analytics: AnalyticsService
-    
+    private analytics: AnalyticsService,
+    private dataBootSrv:DataBootstrapService
     ) {
   }
 
   ngOnInit(): void {
     this.analytics.trackPageViews();
+    this.dataBootSrv.getDataAtInit();
   }
 }

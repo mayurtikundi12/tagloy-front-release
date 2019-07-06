@@ -5,6 +5,7 @@ import { AgmMap } from '@agm/core';
 import { ApisService } from '../../commons/apis.service';
 import { ApiData } from '../../commons/data/apis.data';
 import { DataBootstrapService } from '../shared/services/data-bootstrap.service';
+import { Subscription } from 'rxjs';
 
 
 interface CardSettings {
@@ -21,7 +22,8 @@ interface CardSettings {
 export class DashboardComponent implements OnDestroy,OnInit {
 
   private alive = true;
-
+  subscriptions:Subscription[] = [];
+  
   lightCard: CardSettings = {
     title: 'Light',
     iconClass: 'nb-lightbulb',
@@ -99,13 +101,16 @@ ngOnInit(){
 
  this.databootSrv.getDataAtInit()
 
- this.databootSrv.subscribableVenues.subscribe(venueData=>{
+ let venueSubscription = this.databootSrv.subscribableVenues.subscribe(venueData=>{
    if (venueData.length > 0) {
      console.log("venue data arriving at dashboard ",venueData);
      
      this.coordinates = venueData ;
    }
- })
+ });
+
+ this.subscriptions.push(venueSubscription);
+ 
 
   // getting the needed data on initialization
   let body = {
@@ -113,14 +118,20 @@ ngOnInit(){
   }
   // console.log("this is the dashboard url",this.apiData.URL_DASHBOARD);
   
-  this.apiSrv.postApi(this.apiData.URL_DASHBOARD,body).subscribe(data=>{
-    if(data ){
-      this.historyData = data["result"] ;
-    }
-    // console.log("this is the dashboard data",data);
-  },error=>{
-    throw new Error("error in retrieving dashboard data")
+  this.databootSrv.subscrDashbHistData.subscribe(data=>{
+      this.historyData =data ;
+      console.log("getting history data in dashboard ",data);
+      
   })
+
+  // this.apiSrv.postApi(this.apiData.URL_DASHBOARD,body).subscribe(data=>{
+  //   if(data ){
+  //     this.historyData = data["result"] ;
+  //   }
+  //   // console.log("this is the dashboard data",data);
+  // },error=>{
+  //   throw new Error("error in retrieving dashboard data")
+  // })
 }
 
 
@@ -128,6 +139,9 @@ counterConfig ={auto:true,value:0,theme:'minima'}
 
 ngOnDestroy() {
   this.alive = false;
+  this.subscriptions.forEach(s=>s.unsubscribe);
+  console.log("all subscriptions undone");
+  
 }
 
 historyData:any = {}

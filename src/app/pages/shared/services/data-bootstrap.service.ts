@@ -11,12 +11,9 @@ export class DataBootstrapService {
   private venueDataSrc = new BehaviorSubject<any>([]) ;
   subscribableVenues = this.venueDataSrc.asObservable();
 
-  private activeCampSrc = new BehaviorSubject<any>([]) ;
-  subscribableActiveCamps = this.activeCampSrc.asObservable();
-
-  private completedCampSrc = new BehaviorSubject<any>([]) ;
-  subscribableCompletedCamps = this.completedCampSrc.asObservable();
   
+  private dashboardHistorySrc= new BehaviorSubject<any>({}) ;
+  subscrDashbHistData = this.dashboardHistorySrc.asObservable();
 
   constructor(private apiSrv:ApisService,private apiData:ApiData) {}
 
@@ -49,16 +46,23 @@ export class DataBootstrapService {
     let totalTvCount = 0 ;
     let activeScreenCount = 0 ;
     let activeCampaignsMap = new Map();
-    let completedCampaignMap = new Map()
+    let completedCampaignMap = new Map();
+    let totalImpressionCount = 0 ;
+    let totalWatchTime:any = 0 ;
+    let totalActiveImpressions:number = 0;
+    let totalActiveWatchTime:any = 0
+    let tempCampMap= new Map();
+
     for (let boot of bootData["data"]) {
+
+      let campaignId = Number(boot["campaign"]["id"]);
 
                 // getting the active or completed campaign and segregating it in respective maps
                 if(boot["campaign"]["active"]){
-                  activeCampaignsMap.set(boot["campaign"]["id"],boot)
+                  activeCampaignsMap.set(boot["campaign"]["id"],boot);
                 }else{
                   completedCampaignMap.set(boot["campaign"]["id"],boot)
                 }
-
 
       for (let venue of boot["venues"]) {
         
@@ -68,6 +72,38 @@ export class DataBootstrapService {
       // console.log("isacrive ",isThere[0]," is present ",isThere[1]);
       let venueTvCount = 0 ;
       venueTvCount = this.countScreens( Object.values(venue["tvCount"]));
+      // getting the total impressions and watch hours
+     
+      if (!tempCampMap.has(campaignId)) {
+        
+        let currentCampImpression = ( Number(boot["campaign"]["slot"].split(".")[1])*venueTvCount);
+        totalImpressionCount = totalImpressionCount+currentCampImpression ;
+        let  currentCampLength =Number(boot["campaign"]["duration"]) ; 
+        let currentCampWatchTime = currentCampLength*currentCampImpression ;
+        totalWatchTime += currentCampWatchTime;
+        tempCampMap.set(campaignId,[venue["venue_id"]]);
+        if (boot["campaign"]["active"]) {
+          totalActiveImpressions = totalActiveImpressions+currentCampImpression ;
+          totalActiveWatchTime+= currentCampWatchTime;
+        }
+
+      }else{
+        if (!tempCampMap.get(campaignId).includes(venue["venue_id"])) {
+          // console.log("campid=> ",campaignId," venueId==>",venue["venue_id"]);
+          let currentCampImpression = ( Number(boot["campaign"]["slot"].split(".")[1])*venueTvCount);
+          totalImpressionCount = totalImpressionCount+currentCampImpression ;
+          let  currentCampLength =Number(boot["campaign"]["duration"]) ; 
+          let currentCampWatchTime = currentCampLength*currentCampImpression ;
+          totalWatchTime += currentCampWatchTime;
+          tempCampMap.set(campaignId,tempCampMap.get(campaignId).push(venue["venue_id"]));
+          if (boot["campaign"]["active"]) {
+            totalActiveImpressions = totalActiveImpressions+currentCampImpression ;
+            totalActiveWatchTime+= currentCampWatchTime;
+          }
+        }
+      }
+           
+      // *****
           if (!isThere[1]) {
                       if(boot["campaign"]["active"]){
                         venue["live"] = true ;
@@ -109,12 +145,29 @@ export class DataBootstrapService {
         }
     }
     sessionStorage.setItem("totalScreenCount",String(totalTvCount));
-    sessionStorage.setItem("totalActiveScreenCount",String(activeScreenCount))
-    this.activeCampSrc.next(Array.from(activeCampaignsMap.values()))
-    this.completedCampSrc.next(Array.from(completedCampaignMap.values()))
-    this.venueDataSrc.next(Array.from(venues.values()));
-    console.log("all venues ",Array.from(venues.values()));
+    sessionStorage.setItem("totalActiveScreenCount",String(activeScreenCount));
+    sessionStorage.setItem("activeCamps",JSON.stringify(Array.from(activeCampaignsMap.values())));
+    sessionStorage.setItem("completedCamps",JSON.stringify(Array.from(completedCampaignMap.values())));
     
+    this.venueDataSrc.next(Array.from(venues.values()));
+    
+    totalWatchTime= Math.round((totalWatchTime/3600)*10)/10+" hrs";
+    totalActiveWatchTime =  Math.round((totalActiveWatchTime/3600)*10)/10+" hrs"
+   
+        // ****sending the main dashboard history data
+        let dashboardHistoryObj = {
+              lifeTimeViews : Math.round(totalImpressionCount*2.5),
+              activeCampaignViews  :  Math.round(totalActiveImpressions*2.5),
+              lifeTimeHours  :  totalWatchTime,
+              activeCampaignHours  :  totalActiveWatchTime,
+              lifeTimeCampaigns  :  Array.from(activeCampaignsMap.values()).length+Array.from(completedCampaignMap.values()).length,
+              activeCampaigns  :  Array.from(activeCampaignsMap.values()).length,
+              lifeTimeImpressions  :  totalImpressionCount,
+              activeCampaignImpressions  :  totalActiveImpressions
+        }
+        this.dashboardHistorySrc.next(dashboardHistoryObj);
+        // ******
+
   }
 
 
