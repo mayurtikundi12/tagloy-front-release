@@ -26,7 +26,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
       .pipe(
         takeWhile(() => this.alive),
       )
-      .subscribe(() => this.resizeChart());
+      .subscribe(() => {this.resizeChart(); });
   }
 
   ngAfterViewInit() {
@@ -38,8 +38,6 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
       .subscribe(config => {
         const variables: any = config.variables;
         const visitorsPieLegend: any = config.variables.visitorsPieLegend;
-
-        console.log("variables", variables);
 
         this.setOptions(variables);
         this.setLegendItems(visitorsPieLegend);

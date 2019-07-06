@@ -39,8 +39,6 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
         const variables: any = config.variables;
         const visitorsPieLegend: any = config.variables.visitorsPieLegend;
 
-        console.log("variables", variables);
-
         this.setOptions(variables);
         this.setLegendItems(visitorsPieLegend);
     });
@@ -78,7 +76,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
           radius: visitorsPie.firstPieRadius,
           data: [
             {
-              value: this.value,
+              value: 80,
               name: ' ',
               label: {
                 normal: {
@@ -209,7 +207,6 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
 
   resizeChart() {
     if (this.echartsIntance) {
-      console.log("clicked")
       this.echartsIntance.resize();
     }
   }

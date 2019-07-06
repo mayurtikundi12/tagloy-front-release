@@ -39,8 +39,6 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
         const variables: any = config.variables;
         const visitorsPieLegend: any = config.variables.visitorsPieLegend;
 
-        console.log("variables", variables);
-
         this.setOptions(variables);
         this.setLegendItems(visitorsPieLegend);
     });
@@ -85,7 +83,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
                   position: 'center',
                   formatter: '',
                   textStyle: {
-                    fontSize: '22',
+                    fontSize: '80',
                     fontFamily: variables.fontSecondary,
                     fontWeight: '600',
                     color: variables.fgHeading,
@@ -209,7 +207,6 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
 
   resizeChart() {
     if (this.echartsIntance) {
-      console.log("clicked")
       this.echartsIntance.resize();
     }
   }

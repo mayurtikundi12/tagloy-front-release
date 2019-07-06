@@ -16,8 +16,7 @@ export class ECommerceVisitorsAnalyticsComponent implements OnDestroy {
 
   pieChartValue: number;
   chartLegend: {iconColor: string; title: string}[];
-  // innerLine: number[];  can be used in visitorsAnalyticsData
-  visitorsAnalyticsData: { outerLine: OutlineData[]; };
+  visitorsAnalyticsData: { innerLine: number[]; outerLine: OutlineData[]; };
 
   constructor(private themeService: NbThemeService,
               private visitorsAnalyticsChartService: VisitorsAnalyticsData) {
@@ -34,11 +33,8 @@ export class ECommerceVisitorsAnalyticsComponent implements OnDestroy {
     )
       .pipe(takeWhile(() => this.alive))
       .subscribe(([innerLine, outerLine, pieChartValue]: [number[], OutlineData[], number]) => {
-        console.log("pichartvalue", pieChartValue)
-        // console.log("innerLine", innerLine)
-        console.log("outerLine", outerLine)
         this.visitorsAnalyticsData = {
-          // innerLine: innerLine,
+          innerLine: innerLine,
           outerLine: outerLine,
         };
 

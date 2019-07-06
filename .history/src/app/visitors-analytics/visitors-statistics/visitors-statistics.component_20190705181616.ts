@@ -39,8 +39,6 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
         const variables: any = config.variables;
         const visitorsPieLegend: any = config.variables.visitorsPieLegend;
 
-        console.log("variables", variables);
-
         this.setOptions(variables);
         this.setLegendItems(visitorsPieLegend);
     });
@@ -162,7 +160,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
               },
               itemStyle: {
                 normal: {
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1),
+                  color: new echarts.graphic.LinearGradient(1, 1, 1, 0),
                 },
               },
               hoverAnimation: false,
@@ -209,7 +207,6 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
 
   resizeChart() {
     if (this.echartsIntance) {
-      console.log("clicked")
       this.echartsIntance.resize();
     }
   }

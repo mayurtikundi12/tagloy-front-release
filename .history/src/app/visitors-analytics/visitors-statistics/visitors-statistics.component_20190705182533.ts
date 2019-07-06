@@ -30,20 +30,18 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
   }
 
   ngAfterViewInit() {
-    this.theme.getJsTheme()
-      .pipe(
-        takeWhile(() => this.alive),
-        delay(1),
-      )
-      .subscribe(config => {
-        const variables: any = config.variables;
-        const visitorsPieLegend: any = config.variables.visitorsPieLegend;
+    // this.theme.getJsTheme()
+    //   .pipe(
+    //     takeWhile(() => this.alive),
+    //     delay(1),
+    //   )
+    //   .subscribe(config => {
+    //     const variables: any = config.variables;
+    //     const visitorsPieLegend: any = config.variables.visitorsPieLegend;
 
-        console.log("variables", variables);
-
-        this.setOptions(variables);
-        this.setLegendItems(visitorsPieLegend);
-    });
+    //     this.setOptions(variables);
+    //     this.setLegendItems(visitorsPieLegend);
+    // });
   }
 
   // sets icon color and its text

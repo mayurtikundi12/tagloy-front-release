@@ -39,14 +39,11 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
         const variables: any = config.variables;
         const visitorsPieLegend: any = config.variables.visitorsPieLegend;
 
-        console.log("variables", variables);
-
         this.setOptions(variables);
         this.setLegendItems(visitorsPieLegend);
     });
   }
 
-  // sets icon color and its text
   setLegendItems(visitorsPieLegend) {
     this.chartLegend = [
       {
@@ -209,7 +206,6 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
 
   resizeChart() {
     if (this.echartsIntance) {
-      console.log("clicked")
       this.echartsIntance.resize();
     }
   }

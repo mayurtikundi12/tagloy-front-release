@@ -39,8 +39,6 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
         const variables: any = config.variables;
         const visitorsPieLegend: any = config.variables.visitorsPieLegend;
 
-        console.log("variables", variables);
-
         this.setOptions(variables);
         this.setLegendItems(visitorsPieLegend);
     });
@@ -72,7 +70,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
         {
           name: ' ',
           clockWise: true,
-          hoverAnimation: false,
+          hoverAnimation: true,
           type: 'pie',
           center: ['50%', '50%'],
           radius: visitorsPie.firstPieRadius,
@@ -209,7 +207,6 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
 
   resizeChart() {
     if (this.echartsIntance) {
-      console.log("clicked")
       this.echartsIntance.resize();
     }
   }

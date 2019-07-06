@@ -33,8 +33,8 @@ export class GmapsComponent {
 
   lat = 51.678418;
   lng = 7.809007;
-  greenMarker = {url: '../../../../assets/images/green-marker.svg', scaledSize: {width: 40,height: 60}}
-  redMarker = {url: '../../../../assets/images/red-marker.svg', scaledSize: {width: 40,height: 60}}
+  greenMarker = {url: '../../../../assets/images/green-marker.svg', scaledSize: {width: 40,height: 60}} 
+  redMarker = {url: '../../../../assets/images/red-marker.svg', scaledSize: {width: 40,height: 60}} 
   cordinates = [
     { id:1  , lat:51.67,lng:7.809007 ,live:true , name:"hyderabad house",screens:"2" , rating:3.5 },
     { id: 2  , lat:52.67,lng:7.309007 ,live:false , name:"banglore house",screens:"3" , rating:4 },
@@ -61,7 +61,7 @@ gotoOutletDetailsPage(outletId){
 }
 
 onMouseOver(infoWindow,gm){
-
+ 
   if (gm.lastOpen != null) {
     gm.lastOpen.close();
 }

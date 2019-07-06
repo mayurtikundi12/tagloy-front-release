@@ -16,8 +16,7 @@ export class ECommerceVisitorsAnalyticsComponent implements OnDestroy {
 
   pieChartValue: number;
   chartLegend: {iconColor: string; title: string}[];
-  // innerLine: number[];  can be used in visitorsAnalyticsData
-  visitorsAnalyticsData: { outerLine: OutlineData[]; };
+  visitorsAnalyticsData: { innerLine: number[]; outerLine: OutlineData[]; };
 
   constructor(private themeService: NbThemeService,
               private visitorsAnalyticsChartService: VisitorsAnalyticsData) {

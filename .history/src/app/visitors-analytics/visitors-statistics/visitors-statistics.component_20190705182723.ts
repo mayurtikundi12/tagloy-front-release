@@ -39,7 +39,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
         const variables: any = config.variables;
         const visitorsPieLegend: any = config.variables.visitorsPieLegend;
 
-        console.log("variables", variables);
+        console.log("variables", variables)
 
         this.setOptions(variables);
         this.setLegendItems(visitorsPieLegend);

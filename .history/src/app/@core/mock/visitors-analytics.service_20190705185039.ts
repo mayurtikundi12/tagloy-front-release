@@ -10,7 +10,7 @@ export class VisitorsAnalyticsService extends VisitorsAnalyticsData {
     super();
   }
 
-  private pieChartValue = 50;
+  private pieChartValue = 25;
   private innerLinePoints: number[] = [
     94, 188, 225, 244, 253, 254, 249, 235, 208,
     173, 141, 118, 105, 97, 94, 96, 104, 121, 147,

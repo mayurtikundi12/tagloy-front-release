@@ -100,7 +100,6 @@ ngOnInit(){
   this.apiSrv.postApi(this.apiData.URL_DASHBOARD,body).subscribe(data=>{
     if(data ){
       this.historyData = data["result"];
-      console.log("data", data)
     }
     console.log("this is the dashboard data",data);
   },error=>{
