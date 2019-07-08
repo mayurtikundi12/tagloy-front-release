@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
       </nb-card-header>
       <nb-card-body>
         <agm-map #gm [latitude]="coordinates?coordinates[0]['latitude']:0" [longitude]="coordinates?coordinates[0]['longitude']:0" >
-          <agm-marker class="marker" [iconUrl]="cord.live?greenMarker:redMarker"  (mouseOut)="onMouseOut(infoWindow, gm)"  (mouseOver)="onMouseOver(infoWindow,gm)" (markerClick)="gotoOutletDetailsPage(cord.id)" [label]="{'text':cord.name,'color':'black','fontFamily':'roboto','fontSize': '14px','fontWeight': 'bold'}"  [label]="labelOptions"  *ngFor="let cord of coordinates;let i = index" [latitude]="cord.latitude" [longitude]="cord.longitude">
+          <agm-marker class="marker" [iconUrl]="cord.live?greenMarker:redMarker"  (mouseOut)="onMouseOut(infoWindow, gm)"  (mouseOver)="onMouseOver(infoWindow,gm)" (markerClick)="gotoOutletDetailsPage(cord.venue_id)" [label]="{'text':cord.name,'color':'black','fontFamily':'roboto','fontSize': '14px','fontWeight': 'bold'}"  [label]="labelOptions"  *ngFor="let cord of coordinates;let i = index" [latitude]="cord.latitude" [longitude]="cord.longitude">
           <agm-info-window #infoWindow >
          <div>
          <img class="outletImg" [src]="'//' + cord.logo" alt="Flowers in Chania">
@@ -37,14 +37,6 @@ export class GmapsComponent implements OnInit {
 
   greenMarker = {url: '../../../../assets/images/green-marker.svg', scaledSize: {width: 40,height: 60}} 
   redMarker = {url: '../../../../assets/images/red-marker.svg', scaledSize: {width: 40,height: 60}} 
-  // cordinates = [
-  //   { id:1  , lat:51.67,lng:7.809007 ,live:true , name:"hyderabad house",screens:"2" , rating:3.5 },
-  //   { id: 2  , lat:52.67,lng:7.309007 ,live:false , name:"banglore house",screens:"3" , rating:4 },
-  //   { id:  3 , lat:52.07,lng:7.709007 , live:true, name:"russia house",screens:"1" , rating:4.5 },
-  //   { id:  4 , lat:51.87,lng:7.609007 , live:false, name:"india house",screens:"4" , rating:3 },
-  //   { id: 5  , lat:51.17,lng:7.009007 , live:true, name:"autrallia house",screens:"2" , rating:3.5 },
-  //   { id: 6  , lat:51.77,lng:7.409007 , live:true, name:"uganda house",screens:"3" , rating:2.5 }
-  // ]
 
   labelOptions = {
     color: 'white',
@@ -59,12 +51,15 @@ constructor(private router:Router){
 }
 
 ngOnInit(){
+setTimeout(()=>{
+  console.log(this.coordinates);
+},2000)
 
 }
 
 
 gotoOutletDetailsPage(outletId){
-  this.router.navigate(['/outlet-details/outletId'])
+  this.router.navigate(['/outlet-details/'+outletId])
 }
 
 onMouseOver(infoWindow,gm){

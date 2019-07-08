@@ -17,6 +17,7 @@ export class CampaignsComponent implements OnInit,OnDestroy {
   hasCampaignData:boolean = false ;
   hasNextCampaignData:boolean = true;
   campaignsState:string ;
+  historyCardData:Object ;
 
   constructor(private apiSrv:ApisService,private apidata:ApiData,
       private dataBootSrv:DataBootstrapService
@@ -32,22 +33,11 @@ export class CampaignsComponent implements OnInit,OnDestroy {
 
   ngOnInit() {
    this._activeRouter.url.subscribe(params=>{
-     this.campaignsState = params[1]["path"]
-    // this.getCampaignData(params[1]["path"]) ;
-    if(this.campaignsState == 'active'){
-      this.campaignQueryObj.f = "A";
-      console.log("active camps from session ",JSON.parse(sessionStorage.getItem("activeCamps")));
-      
-  
-    }else{
-      this.campaignQueryObj.f = "C" ;
-      console.log("completed camps from session ",JSON.parse(sessionStorage.getItem("completedCamps")));
-      
-    } 
+     let  state = params[1]["path"]
+     this.campaignsState  = state ;
+      this.getCampaignDataAtInit(state);
+
   }) ;
-
-
-
 
   }
 
@@ -92,6 +82,32 @@ export class CampaignsComponent implements OnInit,OnDestroy {
     
   } 
 
+  getCampaignDataAtInit(state){
+    if(state == 'active'){
+      let activeCampaignData = JSON.parse(sessionStorage.getItem("activeCamps"));
+      if (activeCampaignData) {
+        this.hasCampaignData = true ;
+        console.log("active camps from session ",JSON.parse(sessionStorage.getItem("activeCamps")));
+        this.generateHistoryCardData(activeCampaignData);
+      }else{
+        console.log("do not have the active campaign data getting again ");
+        this.dataBootSrv.getDataAtInit();
+        this.getCampaignDataAtInit(this.campaignsState);
+      }
+    }else{
+      let completedCampaignData = JSON.parse(sessionStorage.getItem("completedCamps"));
+      if (completedCampaignData) {
+        this.hasCampaignData =true ;
+        console.log("completed camps from session ",completedCampaignData);
+        this.generateHistoryCardData(completedCampaignData);
+      }else{
+        console.log("do not have the completed campaign data getting again ");
+        this.dataBootSrv.getDataAtInit();
+        this.getCampaignDataAtInit(this.campaignsState);
+      }
+    } 
+  }
+
   getMoreCampData(){
     this.campaignQueryObj["page"]+=1 ;
     this.getCampaignData(this.campaignsState) ;
@@ -99,6 +115,34 @@ export class CampaignsComponent implements OnInit,OnDestroy {
 
 
   ngOnDestroy(){
+    this.hasCampaignData = false ;
+  }
+
+  generateHistoryCardData(campaigns){
+    let activeCampaignImpressions = 0 ;
+    let activeCampaignHours:any = 0
+    this.campaignDetails = campaigns ;
+      for (let camp of campaigns) {
+        let rawImpressions = Number(camp["campaign"]["slot"].split(".")[1]) ;
+        let rawWatchTime = Number(camp["campaign"]["duration"]) ;
+        
+
+        let campTvCount = 0
+        for (const venue of camp["venues"]) {
+          campTvCount+= venue["tvCount"];
+        }
+        activeCampaignImpressions += rawImpressions*campTvCount ;
+        activeCampaignHours += (rawWatchTime * rawImpressions) ;
+      }
+
+      activeCampaignHours = Math.round((activeCampaignHours/3600)*10)/10 + "hrs";
+      this.historyCardData= {
+        lifeTimeViews:activeCampaignImpressions*2.5,
+        lifeTimeHours:activeCampaignHours,
+        lifeTimeCampaigns:campaigns.length,
+        lifeTimeImpressions:activeCampaignImpressions,
+        mainDashboard :false 
+      }
   }
 
 }

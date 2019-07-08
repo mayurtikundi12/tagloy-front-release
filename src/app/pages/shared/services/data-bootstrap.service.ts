@@ -15,6 +15,13 @@ export class DataBootstrapService {
   private dashboardHistorySrc= new BehaviorSubject<any>({}) ;
   subscrDashbHistData = this.dashboardHistorySrc.asObservable();
 
+  private campaignDetailSrc= new BehaviorSubject<any>({}) ;
+  campaignDetailData = this.campaignDetailSrc.asObservable();
+
+  passCampaignDetailData(data){
+    this.campaignDetailSrc.next(data);
+  }
+
   constructor(private apiSrv:ApisService,private apiData:ApiData) {}
 
   getDataAtInit(){
@@ -57,15 +64,7 @@ export class DataBootstrapService {
 
       let campaignId = Number(boot["campaign"]["id"]);
 
-                // getting the active or completed campaign and segregating it in respective maps
-                if(boot["campaign"]["active"]){
-                  activeCampaignsMap.set(boot["campaign"]["id"],boot);
-                }else{
-                  completedCampaignMap.set(boot["campaign"]["id"],boot)
-                }
-
       for (let venue of boot["venues"]) {
-        
         // for getting the screen counts
         // isThere = [isActive,isPresent]
         let isThere = this.checkIfVenueActive(venues,venue)
@@ -73,15 +72,17 @@ export class DataBootstrapService {
       let venueTvCount = 0 ;
       venueTvCount = this.countScreens( Object.values(venue["tvCount"]));
       // getting the total impressions and watch hours
-     
+      let currentCampImpression = ( Number(boot["campaign"]["slot"].split(".")[1])*venueTvCount);
+      let  currentCampLength =Number(boot["campaign"]["duration"]) ; 
+
+          venue["tvCount"] = venueTvCount ;
+          venues.set(venue["venue_id"],venue);
+          
       if (!tempCampMap.has(campaignId)) {
-        
-        let currentCampImpression = ( Number(boot["campaign"]["slot"].split(".")[1])*venueTvCount);
-        totalImpressionCount = totalImpressionCount+currentCampImpression ;
-        let  currentCampLength =Number(boot["campaign"]["duration"]) ; 
+        tempCampMap.set(campaignId,[venue["venue_id"]]);
+        totalImpressionCount +=currentCampImpression ;
         let currentCampWatchTime = currentCampLength*currentCampImpression ;
         totalWatchTime += currentCampWatchTime;
-        tempCampMap.set(campaignId,[venue["venue_id"]]);
         if (boot["campaign"]["active"]) {
           totalActiveImpressions = totalActiveImpressions+currentCampImpression ;
           totalActiveWatchTime+= currentCampWatchTime;
@@ -90,9 +91,7 @@ export class DataBootstrapService {
       }else{
         if (!tempCampMap.get(campaignId).includes(venue["venue_id"])) {
           // console.log("campid=> ",campaignId," venueId==>",venue["venue_id"]);
-          let currentCampImpression = ( Number(boot["campaign"]["slot"].split(".")[1])*venueTvCount);
-          totalImpressionCount = totalImpressionCount+currentCampImpression ;
-          let  currentCampLength =Number(boot["campaign"]["duration"]) ; 
+          totalImpressionCount +=currentCampImpression ;
           let currentCampWatchTime = currentCampLength*currentCampImpression ;
           totalWatchTime += currentCampWatchTime;
           tempCampMap.set(campaignId,tempCampMap.get(campaignId).push(venue["venue_id"]));
@@ -141,6 +140,13 @@ export class DataBootstrapService {
               venues.set(venue["venue_id"],newVenue);
           }
           
+   // getting the active or completed campaign and segregating it in respective maps
+   if(boot["campaign"]["active"] && !activeCampaignsMap.has(boot["campaign"]["id"])){
+    activeCampaignsMap.set(boot["campaign"]["id"],boot);
+    
+  }else if(!completedCampaignMap.has(boot["campaign"]["id"])){
+    completedCampaignMap.set(boot["campaign"]["id"],boot);
+  }
 
         }
     }
@@ -163,7 +169,8 @@ export class DataBootstrapService {
               lifeTimeCampaigns  :  Array.from(activeCampaignsMap.values()).length+Array.from(completedCampaignMap.values()).length,
               activeCampaigns  :  Array.from(activeCampaignsMap.values()).length,
               lifeTimeImpressions  :  totalImpressionCount,
-              activeCampaignImpressions  :  totalActiveImpressions
+              activeCampaignImpressions  :  totalActiveImpressions,
+              mainDashboard:true
         }
         this.dashboardHistorySrc.next(dashboardHistoryObj);
         // ******
