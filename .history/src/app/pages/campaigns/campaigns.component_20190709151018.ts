@@ -41,9 +41,9 @@ export class CampaignsComponent implements OnInit,OnDestroy {
 
   }
 
+ 
 
-
-
+ 
 
   getCampaignData(state){
       // if(state == 'active'){
@@ -52,24 +52,24 @@ export class CampaignsComponent implements OnInit,OnDestroy {
       //   this.dataBootSrv.subscribableActiveCamps.subscribe(data=>{
       //     console.log("active data campaign ",data);
       //   })
-
+  
       // }else{
       //   this.campaignQueryObj.f = "C" ;
       //   this.campaignsState = state ;
       //   this.dataBootSrv.subscribableCompletedCamps.subscribe(data=>{
       //     console.log("completed data campaign ",data);
       //   })
-      // }
+      // } 
 
       // depending on A=active and C=completed we are getting the data
-
+  
 
 
 
       // this.apiSrv.postApi(this.apidata.URL_ACTIVE_CAMPAIGNS,this.campaignQueryObj).subscribe(data=>{
       //   if(data['result'].length > 0 ){
       //     this.hasCampaignData = true ;
-      //     data['result'].length == 4?this.hasNextCampaignData = true:this.hasNextCampaignData=false ;
+      //     data['result'].length == 4?this.hasNextCampaignData = true:this.hasNextCampaignData=false ;   
       //   }else{
       //     this.hasCampaignData = false ;
       //     this.hasNextCampaignData = false ;
@@ -79,8 +79,8 @@ export class CampaignsComponent implements OnInit,OnDestroy {
       // },error=>{
       //   throw new Error("failed to fetch campaigns data")
       // })
-
-  }
+    
+  } 
 
   getCampaignDataAtInit(state){
     if(state == 'active'){
@@ -105,7 +105,7 @@ export class CampaignsComponent implements OnInit,OnDestroy {
         this.dataBootSrv.getDataAtInit();
         this.getCampaignDataAtInit(this.campaignsState);
       }
-    }
+    } 
   }
 
   getMoreCampData(){
@@ -125,7 +125,7 @@ export class CampaignsComponent implements OnInit,OnDestroy {
       for (let camp of campaigns) {
         let rawImpressions = Number(camp["campaign"]["slot"].split(".")[1]) ;
         let rawWatchTime = Number(camp["campaign"]["duration"]) ;
-
+        
 
         let campTvCount = 0
         for (const venue of camp["venues"]) {
@@ -141,7 +141,7 @@ export class CampaignsComponent implements OnInit,OnDestroy {
         lifeTimeHours:activeCampaignHours,
         lifeTimeCampaigns:campaigns.length,
         lifeTimeImpressions:activeCampaignImpressions,
-        mainDashboard :false
+        mainDashboard :false 
       }
   }
 
