@@ -2,13 +2,13 @@
     <history-card  [cardData]="historyCardData" ></history-card>
 <ngx-ecommerce-visitors-analytics></ngx-ecommerce-visitors-analytics>
 <nb-card>
-    <nb-card-header><h3>{{campaignsState}} Campaigns</h3>
+    <nb-card-header>{{campaignsState}} Campaigns
     </nb-card-header>
     <nb-card-body>
         <reveal-card [campaignDetails]='campaignDetails' ></reveal-card>
     </nb-card-body>
   </nb-card>
-
+  
 </div>
 <div *ngIf="!hasCampaignData">
     <h2>there are no campaigns running</h2>

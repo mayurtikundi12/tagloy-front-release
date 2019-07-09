@@ -1,0 +1,60 @@
+
+
+
+
+<div class="row">
+  <div (click)="showCampaignDetails(camp.id,i)" *ngFor="let camp of campaigns;let i = index" class="card green">
+    <div class="additional">
+      <div class="user-card">
+        <div class="level center">
+          {{camp.type}}
+        </div>
+        <div class="points center">
+          {{camp.Total_impression}} Impressions
+        </div>
+        <img class="center capm-img" src="../../../../assets/images/alan.png" alt="campaign thumbnail here">
+      </div>
+      <div class="more-info">
+        <h1>{{camp.title}}</h1>
+
+        <div class="coords">
+          <span>Start Date</span>
+          <span>{{camp.start_datetime}}</span>
+        </div>
+        <div class="coords">
+          <span>End Date</span>
+          <span>{{camp.end_datetime}}</span>
+        </div>
+        <div class="stats">
+          <div>
+            <div class="title">Views</div>
+            <i class="fa fa-trophy"></i>
+            <div class="value">{{camp.views}}</div>
+          </div>
+          <div>
+            <div class="title">Uptime</div>
+            <i class="fa fa-gamepad"></i>
+            <div class="value">{{camp.Total_play_hours}}</div>
+          </div>
+          <div>
+            <div class="title">impressions</div>
+            <i class="fas fa-pen-fancy"></i>
+            <div class="value">{{camp.Total_impression}}</div>
+          </div>
+          <div>
+            <div class="title">screens</div>
+            <i class="fas fa-desktop"></i>
+            <div class="value">{{camp.screenCount}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="general">
+      <h5 class="text-center">{{camp.campName}}</h5>
+      <img class="card-media" *ngIf="camp.type == 'IMAGE'" [src]="camp.media_url" alt="image not available">
+      <video class="card-media" *ngIf="camp.type == 'VIDEO'" [src]="camp.media_url" alt="video not available"></video>
+      <iframe class="card-media" *ngIf="camp.type == 'LINK'" [src]="sanitizer.bypassSecurityTrustResourceUrl(camp.media_url)" frameborder="0"></iframe>
+      <!-- <span class="more">Mouse over the card for more info</span> -->
+    </div>
+  </div>
+</div>

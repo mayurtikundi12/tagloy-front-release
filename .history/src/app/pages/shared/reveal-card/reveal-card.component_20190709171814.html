@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center"  *ngFor="let camp of campaigns;let i = index" >
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"  *ngFor="let camp of campaigns;let i = index" >
           <div (click)="showCampaignDetails(camp.id,i)" class="card green">
               <div class="additional">
                 <div class="user-card">
@@ -13,16 +13,15 @@
                   <img class="center capm-img" src="../../../../assets/images/alan.png" alt="campaign thumbnail here">
                 </div>
                 <div class="more-info">
-                  <h6 class="campTitle">{{camp.title}}</h6>
-                  <div class="parent-coords">
-                    <div class="coords">
-                      <span class="date">Start Date</span>
-                      <span class="date">{{camp.start_datetime}}</span>
-                    </div>
-                    <div class="coords">
-                      <span class="date">End Date</span>
-                      <span class="date">{{camp.end_datetime}}</span>
-                    </div>
+                  <h1>{{camp.title}}</h1>
+
+                  <div class="coords">
+                    <span>Start Date</span>
+                    <span>{{camp.start_datetime}}</span>
+                  </div>
+                  <div class="coords">
+                    <span>End Date</span>
+                    <span>{{camp.end_datetime}}</span>
                   </div>
                   <div class="stats">
                     <div>

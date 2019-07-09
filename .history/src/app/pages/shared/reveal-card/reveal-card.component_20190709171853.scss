@@ -38,13 +38,9 @@ html, body {
   z-index: 2;
 }
 
-.card{
-  margin: 10px auto;
-}
-
 .card.green .additional {
   background: linear-gradient(#92bCa6, #A2CCB6);
-  // margin: 10px auto;
+  margin: 0px;
 }
 
 
@@ -52,7 +48,6 @@ html, body {
   width: 100%;
   border-radius: 0 5px 5px 0;
 }
-
 
 .card .additional .user-card {
   width: 150px;
@@ -151,11 +146,10 @@ html, body {
   font-size: 0.75rem;
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: 2px;
 }
 
 .card .additional .stats div.value {
-  font-size: 1.0rem;
+  font-size: 1.5rem;
   font-weight: bold;
   line-height: 1.5rem;
 }
@@ -205,26 +199,4 @@ h5{
 
 .coords{
   margin-top: 10px !important ;
-}
-
-.campTitle{
-  margin: 10px auto;
-}
-
-.date{
-  font-size: 13px;
-}
-
-.parent-coords{
-  margin: 32px auto;
-}
-
-// .fa{
-//   font-size: 20px;
-//   margin: 2px;
-//   color: yellow;
-// }
-
-.stats{
-  margin-bottom: 10px;
 }
