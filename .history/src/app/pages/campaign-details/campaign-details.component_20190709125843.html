@@ -1,0 +1,35 @@
+<history-card></history-card>
+<ngx-ecommerce-visitors-analytics></ngx-ecommerce-visitors-analytics>
+<smart-table [outletDetails]="outletDetails"></smart-table>
+
+<div  class="example-container" #TABLE>
+
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" #table >
+    <!-- Name Column -->
+    <ng-container matColumnDef="Total_impression">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Branch Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.branch_name}} </td>
+    </ng-container>
+
+    <!-- Code Column -->
+    <ng-container matColumnDef="Total_play_hours">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Branch Code </th>
+      <td mat-cell *matCellDef="let element"> {{element.branch_code}} </td>
+    </ng-container>
+
+    <!-- email Column -->
+    <ng-container matColumnDef="hash_tag">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
+
+    <!-- boxno Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Box No </th>
+      <td mat-cell *matCellDef="let element"> {{element.box_numer}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

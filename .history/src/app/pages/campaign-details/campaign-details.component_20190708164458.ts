@@ -1,0 +1,53 @@
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ApisService } from '../../commons/apis.service';
+import { ApiData } from '../../commons/data/apis.data';
+import {SortableDirective, SortEvent} from '../../commons/sortable.directive';
+import { Observable } from 'rxjs';
+import { CountryService } from '../../commons/country.service';
+import { Country } from '../../commons/countries';
+
+@Component({
+  selector: 'ngx-campaign-details',
+  templateUrl: './campaign-details.component.html',
+  styleUrls: ['./campaign-details.component.scss']
+})
+export class CampaignDetailsComponent implements OnInit {
+
+  constructor(private _activatedRoute:ActivatedRoute,
+    private apiSrv:ApisService,private apiData:ApiData, public service: CountryService) {
+      this.countries$ = service.countries$;
+      this.total$ = service.total$;
+     }
+
+  campaignId:number ;
+  campaignDetails:Object ;
+  outletDetails:[] = []
+
+  ngOnInit() {
+   console.log( "*****",this._activatedRoute.snapshot.paramMap.get('campaignId'));
+   this.campaignId = Number(this._activatedRoute.snapshot.paramMap.get('campaignId')) ;
+   this.apiSrv.postApi(this.apiData.URL_DETAILS_CAMPAIGNS,{id:this.campaignId}).subscribe(data=>{
+     this.campaignDetails = data["result"][0] ;
+     this.outletDetails = this.campaignDetails["Venue_Details"] ;
+   })
+  }
+
+  countries$;
+  total$: Observable<number>;
+
+  @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
+
+  onSort({column, direction}: SortEvent) {
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
+
+    this.service.sortColumn = column;
+    this.service.sortDirection = direction;
+  }
+
+}

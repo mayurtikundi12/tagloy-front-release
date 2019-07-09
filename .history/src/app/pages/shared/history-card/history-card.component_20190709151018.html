@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-4 col-xl-3">
+          <div class="card bg-c-blue order-card">
+              <div class="card-block">
+                  <h6 class="m-b-20">Lifetime Views</h6>
+                  <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span><ng2-odometer [number]="historyData['lifeTimeViews']" [config]="counterConfig"></ng2-odometer></span></h2>
+                  <p *ngIf="historyData.mainDashboard" class="m-b-0">Active Campaign Views<span class="f-right">{{historyData.activeCampaignViews}}</span></p>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3">
+          <div class="card bg-c-green order-card">
+              <div class="card-block">
+                  <h6 class="m-b-20">Lifetime Hours</h6>
+                  <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span><ng2-odometer [number]="historyData['lifeTimeHours']" [config]="counterConfig"></ng2-odometer></span></h2>
+                  <p *ngIf="historyData.mainDashboard"  class="m-b-0">Active Campaign Hours<span class="f-right">{{historyData.activeCampaignHours}}</span></p>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3">
+          <div class="card bg-c-yellow order-card">
+              <div class="card-block">
+                  <h6 class="m-b-20">Lifetime Campaigns</h6>
+                  <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span><ng2-odometer [number]="historyData['lifeTimeCampaigns']" [config]="counterConfig"></ng2-odometer></span></h2>
+                  <p *ngIf="historyData.mainDashboard"  class="m-b-0">Active Campaigns<span class="f-right">{{historyData['activeCampaigns']}}</span></p>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-md-4 col-xl-3">
+          <div class="card bg-c-pink order-card">
+              <div class="card-block">
+                  <h6 class="m-b-20">Lifetime Impressions</h6>
+                  <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span> <ng2-odometer [number]="historyData['lifeTimeImpressions']" [config]="counterConfig"></ng2-odometer></span></h2>
+<<<<<<< HEAD
+                  <p class="m-b-0">Acctive Impressions<span class="f-right">351</span></p>
+=======
+                  <p *ngIf="historyData.mainDashboard"  class="m-b-0">Active Impressions<span class="f-right">{{historyData['activeCampaignImpressions']}}</span></p>
+>>>>>>> 910f87abbca3573e32cb4e0d97859dc3e6262692
+              </div>
+          </div>
+      </div>
+</div>
+</div>
