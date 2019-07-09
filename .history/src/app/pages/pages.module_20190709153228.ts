@@ -72,6 +72,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     Ng2SmartTableModule,
     MatTableModule,MatSortModule,MatPaginatorModule,MatInputModule
   ],
-  providers:[DataBootstrapService]
+  providers:[DataBootstrapService, DataBootstrapService]
 })
 export class PagesModule { }

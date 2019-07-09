@@ -5,7 +5,10 @@ import { AgmMap } from '@agm/core';
 import { ApisService } from '../../commons/apis.service';
 import { ApiData } from '../../commons/data/apis.data';
 import { DataBootstrapService } from '../shared/services/data-bootstrap.service';
+<<<<<<< Updated upstream
 import { Subscription } from 'rxjs';
+=======
+>>>>>>> Stashed changes
 
 
 interface CardSettings {
