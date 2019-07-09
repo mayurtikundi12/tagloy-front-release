@@ -37,8 +37,19 @@ export class ECommerceVisitorsAnalyticsComponent implements OnDestroy {
           innerLine: innerLine,
           outerLine: outerLine,
         };
-
-        this.pieChartValue = pieChartValue;
+        let totalActiveScreens =Number( sessionStorage.getItem("totalActiveScreenCount"));
+        let totalScreens = Number(sessionStorage.getItem("totalScreenCount"));
+        console.log("this is totactiveScreens ",totalActiveScreens);
+        console.log("this is totScreens ",totalScreens);
+        
+        if ((totalActiveScreens || totalActiveScreens==0) && (totalScreens || totalScreens==0)) {
+          let totalActScrnPercent = Math.round((totalActiveScreens/totalScreens)*100)
+        if (totalScreens==0) {
+         this.pieChartValue = 0 ;
+        }else{
+          this.pieChartValue = totalActScrnPercent;
+        }
+        }
       });
   }
 

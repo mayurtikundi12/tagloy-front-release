@@ -15,11 +15,10 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
   private alive = true;
 
   @Input() value: number;
-
   option: any = {};
   chartLegend: { iconColor: string; title: string }[];
   echartsIntance: any;
-
+  totalScreens:number = 0 ;
   constructor(private theme: NbThemeService,
               private layoutService: LayoutService) {
     this.layoutService.onChangeLayoutSize()
@@ -30,6 +29,11 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
   }
 
   ngAfterViewInit() {
+    let totalScreens = Number(sessionStorage.getItem("totalScreenCount"))
+
+    if(totalScreens || totalScreens==0){
+      this.totalScreens = totalScreens ;
+    }
     this.theme.getJsTheme()
       .pipe(
         takeWhile(() => this.alive),
@@ -48,18 +52,19 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
     this.chartLegend = [
       {
         iconColor: visitorsPieLegend.firstSection,
-        title: 'New Visitors',
+        title: 'Active Screens',
       },
       {
         iconColor: visitorsPieLegend.secondSection,
-        title: 'Return Visitors',
+        title: 'Inactive Screens',
       },
     ];
   }
 
   setOptions(variables) {
     const visitorsPie: any = variables.visitorsPie;
-
+    console.log("this is the pies value ",this.value);
+    
     this.option = {
       tooltip: {
         trigger: 'item',
@@ -75,7 +80,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
           radius: visitorsPie.firstPieRadius,
           data: [
             {
-              value: this.value,
+              value: 100- this.value,
               name: ' ',
               label: {
                 normal: {
@@ -113,7 +118,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
               hoverAnimation: false,
             },
             {
-              value: 100 - this.value,
+              value:  this.value,
               name: ' ',
               tooltip: {
                 show: false,
@@ -140,7 +145,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
           radius: visitorsPie.secondPieRadius,
           data: [
             {
-              value: this.value,
+              value:100- this.value,
               name: ' ',
               label: {
                 normal: {
@@ -165,7 +170,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
               hoverAnimation: false,
             },
             {
-              value: 100 - this.value,
+              value: this.value,
               name: ' ',
               tooltip: {
                 show: false,
