@@ -35,8 +35,7 @@ export class CampaignsComponent implements OnInit,OnDestroy {
    this._activeRouter.url.subscribe(params=>{
      let  state = params[1]["path"]
      this.campaignsState  = state ;
-      this.getCampaignDataAtInit(state);
-
+        this.getCampaignDataAtInit(state);
   }) ;
 
   }
@@ -106,11 +105,6 @@ export class CampaignsComponent implements OnInit,OnDestroy {
         this.getCampaignDataAtInit(this.campaignsState);
       }
     }
-  }
-
-  getMoreCampData(){
-    this.campaignQueryObj["page"]+=1 ;
-    this.getCampaignData(this.campaignsState) ;
   }
 
 

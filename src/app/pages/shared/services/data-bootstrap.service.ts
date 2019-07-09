@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApisService } from '../../../commons/apis.service';
 import { ApiData } from '../../../commons/data/apis.data';
 import { BehaviorSubject } from 'rxjs';
-
+import { NbDialogService } from '@nebular/theme';
+import {DialogComponent } from '../dialog/dialog.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +23,7 @@ export class DataBootstrapService {
     this.campaignDetailSrc.next(data);
   }
 
-  constructor(private apiSrv:ApisService,private apiData:ApiData) {}
+  constructor(private apiSrv:ApisService,private apiData:ApiData,private dialogService: NbDialogService) {}
 
   getDataAtInit(){
     // if (this.checkLastSavedtime()) {
@@ -201,6 +202,11 @@ export class DataBootstrapService {
       venueTvCount += Number(box);
     }
     return venueTvCount ;
+  }
+
+
+  showDialog(component,index){
+    this.dialogService.open(DialogComponent, {closeOnEsc: false });
   }
 
 

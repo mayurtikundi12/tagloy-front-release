@@ -63,8 +63,11 @@ export class RevealCardComponent implements OnInit,OnChanges {
 
 
   showCampaignDetails(campId,index){
-    this.bootDataSrv.passCampaignDetailData({"campaign":this.campaignDetails[index],"campId":campId})
-    this.router.navigate(['campaign-details',campId])
+    let data = {"campaign":this.campaignDetails[index],"campId":campId} ;
+    this.bootDataSrv.passCampaignDetailData(data)
+    this.router.navigate(['campaign-details',campId]);
+
+    sessionStorage.setItem("curentCampaignDetail",JSON.stringify(data))
   }
 
 }
