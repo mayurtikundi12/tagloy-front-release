@@ -3,25 +3,25 @@ import { NbMenuItem } from '@nebular/theme';
 export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
-    icon: 'my-dashboard-icon',
+    icon: 'nb-e-commerce',
     link: '/dashboard',
     home: true,
   },
   {
     title: 'Active Campaigns',
-    icon: 'my-active-icon',
+    icon: '../../assets/icons/Active Campaign.png',
     link: '/campaigns/active',
     home: true,
   },
   {
     title: 'Completed Campaigns',
-    icon: 'my-complete-icon',
+    icon: 'nb-e-commerce',
     link: '/campaigns/completed',
     home: true,
   },
   {
     title: 'Outlet Details',
-    icon: 'my-outlet-icon',
+    icon: 'nb-e-commerce',
     link: '/outlet-details/1',
     // home: true,
   },

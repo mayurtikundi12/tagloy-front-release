@@ -1,5 +1,6 @@
 
-<div class="father-flex">
+<div class="container-fluid">
+  <div class="father-flex">
     <!-- <nb-card class="child-flex" *ngFor="let history of historyData">
         <nb-card-body >
             <div>
@@ -9,8 +10,10 @@
             </div>
         </nb-card-body>
       </nb-card> -->
-<history-card [cardData]="historyData" ></history-card>
+  <history-card [cardData]="historyData" ></history-card>
+  </div>
 </div>
+
 <ngx-ecommerce-visitors-analytics></ngx-ecommerce-visitors-analytics>
 <ngx-gmaps [coordinates]="coordinates" class="map"></ngx-gmaps>
 

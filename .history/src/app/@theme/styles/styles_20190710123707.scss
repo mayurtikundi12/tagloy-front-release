@@ -29,22 +29,12 @@
 
 // Sidebar icon css
 
-.my-active-icon,
-.my-complete-icon{
+.my-icon{
   background: url('../../../assets/icons/ActiveCampaign.png');
 }
 
-.my-outlet-icon{
-  background: url('../../../assets/icons/OutletDetails.png')
-}
-
-.my-dashboard-icon{
-  background: url('../../../assets/icons/Dashboard.png');
-}
-
-.my-active-icon, .my-outlet-icon, .my-complete-icon,.my-dashboard-icon{
-  background-size: contain;
-  background-repeat: no-repeat;
-  height: 25px;
+.my-icon{
+  background-size: 100% 100%;
+  height: 30px;
 }
 
