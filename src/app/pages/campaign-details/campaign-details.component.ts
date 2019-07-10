@@ -9,6 +9,9 @@ import { DecimalPipe } from '@angular/common';
 import { OutletDetails } from '../../commons/outlet-details';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import * as XLSX from 'xlsx';
+import { DataSource } from 'ng2-smart-table/lib/data-source/data-source';
+
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'ngx-campaign-details',
@@ -18,23 +21,40 @@ import * as XLSX from 'xlsx';
 export class CampaignDetailsComponent implements OnInit {
 
   constructor(private _activatedRoute:ActivatedRoute,private _router:Router,
-    private apiSrv:ApisService,private apiData:ApiData,private bootDataSrv:DataBootstrapService) { }
-
+    private apiSrv:ApisService,private apiData:ApiData,
+    private bootDataSrv:DataBootstrapService, private sanitizer:DomSanitizer) { }
+    // dataSource ;
 
   campaignId:number ;
   campaignDetails:Object ;
   outletDetails:[] = []
   historyCardData = {}
+
+  displayedColumns: string[] = ['Venue','Name','Hashtag','Screens','Info'];
+  dataSource;
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   ngOnInit() {
+
     this.campaignId = Number(this._activatedRoute.snapshot.paramMap.get('campaignId')) ;
     this.bootDataSrv.campaignDetailData.subscribe(data=>{
+
    if (Object.keys(data).length>0) {
-    console.log("this is the campaign data in details compoennet ",data);
-    this.generateData(data)
+
+    this.generateData(data);
+    this.dataSource = new MatTableDataSource(data["campaign"]["venues"]);
+    this.campaignDetails = data["campaign"]["campaign"] ;
    }else if(sessionStorage.getItem("curentCampaignDetail")){
      let dataFromSession = JSON.parse(sessionStorage.getItem("curentCampaignDetail"))
-     console.log("getting data from the sesion storage",dataFromSession);
+     this.campaignDetails = dataFromSession["campaign"]["campaign"] ;
      this.generateData(dataFromSession) ;
+     console.log("data original ",dataFromSession);
+     this.dataSource = new MatTableDataSource(dataFromSession["campaign"]["venues"]);
+     console.log("datasource value",this.dataSource);
+     
    }else{
      console.log("coming to lasr else");
 
@@ -63,6 +83,12 @@ export class CampaignDetailsComponent implements OnInit {
       mainDashboard :false ,
       campaignDetail:true ,
     }
+  }
+
+  gotoVenueDetail(venueId){
+    console.log("this is the venueid ",venueId);
+    
+      this._router.navigate(['outlet-details',venueId])
   }
 
 }

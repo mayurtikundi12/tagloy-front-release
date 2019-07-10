@@ -3,7 +3,6 @@ import { ApisService } from '../../../commons/apis.service';
 import { ApiData } from '../../../commons/data/apis.data';
 import { BehaviorSubject } from 'rxjs';
 import { NbDialogService } from '@nebular/theme';
-import {DialogComponent } from '../dialog/dialog.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +22,7 @@ export class DataBootstrapService {
     this.campaignDetailSrc.next(data);
   }
 
-  constructor(private apiSrv:ApisService,private apiData:ApiData,private dialogService: NbDialogService) {}
+  constructor(private apiSrv:ApisService , private apiData:ApiData) {}
 
   getDataAtInit(){
     // if (this.checkLastSavedtime()) {
@@ -48,7 +47,6 @@ export class DataBootstrapService {
   }
 
   organiseVenueData(){
-
     let bootData = JSON.parse(sessionStorage.getItem('bootData') );
     let venues = new Map() ;
     let totalTvCount = 0 ;
@@ -103,7 +101,6 @@ export class DataBootstrapService {
         }
       }
            
-      // *****
           if (!isThere[1]) {
                       if(boot["campaign"]["active"]){
                         venue["live"] = true ;
@@ -174,12 +171,7 @@ export class DataBootstrapService {
               mainDashboard:true
         }
         this.dashboardHistorySrc.next(dashboardHistoryObj);
-        // ******
-
   }
-
-
-
 
   checkIfVenueActive(mapObject:Map<any,any>,currentObj):[boolean,boolean]{
       let isPresent = mapObject.has(currentObj["venue_id"])
@@ -203,11 +195,4 @@ export class DataBootstrapService {
     }
     return venueTvCount ;
   }
-
-
-  showDialog(component,index){
-    this.dialogService.open(DialogComponent, {closeOnEsc: false });
-  }
-
-
 }

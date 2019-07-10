@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DataBootstrapService } from '../services/data-bootstrap.service';
-import { NbDialogService } from '@nebular/theme';
-import { DialogComponent } from '../dialog/dialog.component';
+import { DialogueService } from '../services/dialogue.service';
+
 
 @Component({
   selector: 'history-card',
@@ -10,7 +10,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class HistoryCardComponent implements OnInit,OnChanges {
 
-  constructor(private dataBootSrv:DataBootstrapService,private dialogService: NbDialogService) { }
+  constructor(private dataBootSrv:DataBootstrapService,private dialogueSrv:DialogueService) { }
   @Input() cardData:any = {};
 
   historyData = {
@@ -30,22 +30,21 @@ export class HistoryCardComponent implements OnInit,OnChanges {
   ngOnChanges(changes:SimpleChanges){
     this.historyData =changes.cardData.currentValue ;
 
-    setTimeout(()=>{
+    // setTimeout(()=>{
 
-      if(Object.keys(this.cardData).length>0){
-        this.historyData.lifeTimeImpressions = this.cardData["Total_impression"];
-      this.historyData.lifeTimeHours = this.cardData["Total_play_hours"];
-      this.historyData.activeCampaigns = this.cardData["active_campaign"];
-      this.historyData.lifeTimeCampaigns = this.cardData["completed_campaign"] + this.cardData["active_campaign"]  ;
+    //   if(Object.keys(this.cardData).length>0){
+    //     this.historyData.lifeTimeImpressions = this.cardData["Total_impression"];
+    //   this.historyData.lifeTimeHours = this.cardData["Total_play_hours"];
+    //   this.historyData.activeCampaigns = this.cardData["active_campaign"];
+    //   this.historyData.lifeTimeCampaigns = this.cardData["completed_campaign"] + this.cardData["active_campaign"]  ;
 
-      }else console.log("data not arrived ");
+    //   }else console.log("data not arrived ");
 
-    },2000)
+    // },2000)
   }
 
   findInfo(component,index){
-    // this.dataBootSrv.showDialog(component,index);
-    this.dialogService.open(DialogComponent, {closeOnEsc: true });
+    this.dialogueSrv.generateDialogue(component,index);
   }
 
 }

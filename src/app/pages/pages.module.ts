@@ -31,8 +31,8 @@ import { CampaignDetailsComponent } from './campaign-details/campaign-details.co
 import { SmartTableComponent } from './shared/smart-table/smart-table.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DataBootstrapService } from './shared/services/data-bootstrap.service';
-import { DialogComponent } from './shared/dialog/dialog.component';
 import { MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
+import { DialogueService } from './shared/services/dialogue.service';
 
 
 @NgModule({
@@ -51,7 +51,6 @@ import { MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule } fro
     HistoryCardComponent,
     CampaignDetailsComponent,
     SmartTableComponent,
-    DialogComponent,
   ],
   imports: [
     CommonModule,
@@ -72,6 +71,6 @@ import { MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule } fro
     Ng2SmartTableModule,
     MatTableModule,MatSortModule,MatPaginatorModule,MatInputModule
   ],
-  providers:[DataBootstrapService]
+  providers:[DataBootstrapService , DialogueService]
 })
 export class PagesModule { }

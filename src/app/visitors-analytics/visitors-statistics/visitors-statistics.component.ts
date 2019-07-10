@@ -34,6 +34,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
     if(totalScreens || totalScreens==0){
       this.totalScreens = totalScreens ;
     }
+    
     this.theme.getJsTheme()
       .pipe(
         takeWhile(() => this.alive),
@@ -43,7 +44,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
         const variables: any = config.variables;
         const visitorsPieLegend: any = config.variables.visitorsPieLegend;
 
-        console.log("variables", variables);
+        // console.log("variables", variables);
 
         this.setOptions(variables);
         this.setLegendItems(visitorsPieLegend);
@@ -66,7 +67,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
 
   setOptions(variables) {
     const visitorsPie: any = variables.visitorsPie;
-    console.log("this is the pies value ",this.value);
+    // console.log("this is the pies value ",this.value);
     
     this.option = {
       tooltip: {

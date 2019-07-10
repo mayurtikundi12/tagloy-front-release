@@ -14,8 +14,7 @@ import { AuthGuardService } from './commons/auth-guard.service';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'prefix'},
-  {path: '', 
-  // canActivate:[AuthGuardService],
+  {path: '', canActivate:[AuthGuardService],
    loadChildren: './pages/pages.module#PagesModule'},
   {path: 'login', component: LoginComponent},
   {path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule'},

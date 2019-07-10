@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DialogueService } from '../shared/services/dialogue.service';
 
 @Component({
   selector: 'ngx-gmaps',
   styleUrls: ['./gmaps.component.scss'],
   template: `
     <nb-card>
-    <nb-card-header >Partner Outlets   <span class="right">Total Screens <span class="green">{{totalScreenCount}}</span></span>
+    <nb-card-header >Partner Outlets   <span class="right">Total Screens <span class="green">{{totalScreenCount}}</span><i (click)="findInfo('gmap','gmap')" class="fa fa-info-circle infoCircle" aria-hidden="true"></i></span>
     <nb-badge text="207 active outlets" status="danger" position="top left"></nb-badge>
       </nb-card-header>
       <nb-card-body>
@@ -47,7 +48,7 @@ export class GmapsComponent implements OnInit {
     // text: 'some other text'
 }
 
-constructor(private router:Router){
+constructor(private router:Router,private dialogSrv:DialogueService){
     this.totalScreenCount = Number(sessionStorage.getItem("totalScreenCount"));
 }
 
@@ -75,6 +76,10 @@ onMouseOut(infoWindow, gm) {
   if (gm.lastOpen != null) {
     gm.lastOpen.close();
 }
+}
+
+findInfo(component,index){
+  this.dialogSrv.generateDialogue(component,index);
 }
 
 

@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   @Input() position = 'normal';
 
   user: any={
-    name: "Neel",
+    name: localStorage.getItem('name'),
     picture: '../../../../assets/images/neelk.png'
   };
 
@@ -41,6 +41,7 @@ export class HeaderComponent implements OnInit {
     console.log('click', title);
     if(title == 'Log out'){
       localStorage.clear() ; 
+      sessionStorage.clear();
       this._router.navigate(['/login'])
     }
   }
