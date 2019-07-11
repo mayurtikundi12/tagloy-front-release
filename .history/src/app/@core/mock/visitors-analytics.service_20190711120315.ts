@@ -25,10 +25,8 @@ export class VisitorsAnalyticsService extends VisitorsAnalyticsData {
     55, 74, 100 , 131, 159, 180, 193, 199, 200,
     195, 184, 164, 135, 103, 73, 50, 33, 22, 15, 11,
   ];
-
-
   private generateOutlineLineData(): OutlineData[] {
-    const months = this.periodService.getMonths();
+    const months = this.periodService.getWeeks();
     const outerLinePointsLength = this.outerLinePoints.length;
     const monthsLength = months.length;
 

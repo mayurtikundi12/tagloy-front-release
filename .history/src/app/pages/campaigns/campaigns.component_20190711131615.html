@@ -1,4 +1,4 @@
-<div *ngIf="hasCampaignData">
+<div *ngIf="!hasCampaignData">
     <history-card  [cardData]="historyCardData" ></history-card>
 <ngx-ecommerce-visitors-analytics></ngx-ecommerce-visitors-analytics>
 <nb-card>
@@ -10,6 +10,6 @@
   </nb-card>
 
 </div>
-<div *ngIf="!hasCampaignData">
+<div *ngIf="hasCampaignData">
     <h2>There are no campaigns running</h2>
 </div>

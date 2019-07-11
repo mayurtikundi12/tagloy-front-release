@@ -26,14 +26,28 @@ export class VisitorsAnalyticsService extends VisitorsAnalyticsData {
     195, 184, 164, 135, 103, 73, 50, 33, 22, 15, 11,
   ];
 
+  // const months = this.periodService.getMonths();
+  //   const outerLinePointsLength = this.outerLinePoints.length;
+  //   const monthsLength = months.length;
 
+  //   return this.outerLinePoints.map((p, index) => {
+  //     const monthIndex = Math.round(index / 4);
+  //     const label = (index % Math.round(outerLinePointsLength / monthsLength) === 0)
+  //       ? months[monthIndex]
+  //       : '';
+
+  //     return {
+  //       label,
+  //       value: p,
+  //     };
+  //   });
   private generateOutlineLineData(): OutlineData[] {
-    const months = this.periodService.getMonths();
+    const months = this.periodService.getWeeks();
     const outerLinePointsLength = this.outerLinePoints.length;
     const monthsLength = months.length;
 
     return this.outerLinePoints.map((p, index) => {
-      const monthIndex = Math.round(index / 4);
+      const monthIndex = Math.round(index / 2);
       const label = (index % Math.round(outerLinePointsLength / monthsLength) === 0)
         ? months[monthIndex]
         : '';
