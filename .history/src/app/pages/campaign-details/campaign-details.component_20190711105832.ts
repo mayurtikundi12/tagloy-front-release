@@ -50,6 +50,7 @@ export class CampaignDetailsComponent implements OnInit {
     this.generateData(data);
     this.dataSource = new MatTableDataSource(data["campaign"]["venues"]);
     this.campaignDetails = data["campaign"]["campaign"] ;
+    console.log("CAMPAIGN DETAILS",this.campaignDetails);
    }else if(sessionStorage.getItem("curentCampaignDetail")){
      let dataFromSession = JSON.parse(sessionStorage.getItem("curentCampaignDetail"))
      this.campaignDetails = dataFromSession["campaign"]["campaign"] ;

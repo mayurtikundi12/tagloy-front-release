@@ -32,9 +32,6 @@ export class CampaignDetailsComponent implements OnInit {
 
   displayedColumns: string[] = ['Venue','Name','Hashtag','Screens','Info'];
   dataSource;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('TABLE') table: ElementRef;
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

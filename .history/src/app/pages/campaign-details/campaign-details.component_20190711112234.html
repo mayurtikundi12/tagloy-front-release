@@ -15,18 +15,12 @@
           <iframe class="media" *ngIf="campaignDetails.type == 'LINK'" [src]="sanitizer.bypassSecurityTrustResourceUrl(campaignDetails.media_url)" frameborder="0"></iframe>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
-          <h4 class="title">Title: {{campaignDetails.title}}</h4>
-          <div class="campaign-info">
-            <h5>Created at: {{campaignDetails.created_at | date}}</h5>
-            <br>
-            <h5><i class="fa fa-hourglass-start"></i> Start From: {{campaignDetails.start_datetime | date}}</h5>
-            <br>
-            <h5><i class="fa fa-hourglass-end"></i> End at: {{campaignDetails.end_datetime | date}}</h5>
-            <br>
-            <h5><i class="fa fa-eye"></i> Views: {{campaignDetails.views}}</h5>
-            <br>
-            <h5><i class="fa fa-clock"></i> Hours: {{campaignDetails.Total_play_hours}}</h5>
-          </div>
+          <h4>Title: {{campaignDetails.title}}</h4>
+          <h5>Created at: {{campaignDetails.created_at | date}}</h5>
+          <h5>Start From: {{campaignDetails.start_datetime | date}}</h5>
+          <h5>End at: {{campaignDetails.end_datetime | date}}</h5>
+          <h5><i class="fa fa-clock"></i> Hours: {{campaignDetails.Total_play_hours}}</h5>
+          <h5><i class="fa fa-eye"></i> Views: {{campaignDetails.views}}</h5>
         </div>
     </div>
   </div>

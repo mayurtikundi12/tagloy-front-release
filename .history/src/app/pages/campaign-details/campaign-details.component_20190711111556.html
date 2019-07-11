@@ -8,25 +8,19 @@
   </nb-card-header>
   <nb-card-body>
     <div class="container">
-    <div class="row text-center">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
           <img class="media" *ngIf="campaignDetails.type == 'IMAGE'" [src]="campaignDetails.media_url" alt="image not available">
           <video controls class="media" *ngIf="campaignDetails.type == 'VIDEO'" [src]="campaignDetails.media_url" alt="video not available"></video>
           <iframe class="media" *ngIf="campaignDetails.type == 'LINK'" [src]="sanitizer.bypassSecurityTrustResourceUrl(campaignDetails.media_url)" frameborder="0"></iframe>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
-          <h4 class="title">Title: {{campaignDetails.title}}</h4>
-          <div class="campaign-info">
-            <h5>Created at: {{campaignDetails.created_at | date}}</h5>
-            <br>
-            <h5><i class="fa fa-hourglass-start"></i> Start From: {{campaignDetails.start_datetime | date}}</h5>
-            <br>
-            <h5><i class="fa fa-hourglass-end"></i> End at: {{campaignDetails.end_datetime | date}}</h5>
-            <br>
-            <h5><i class="fa fa-eye"></i> Views: {{campaignDetails.views}}</h5>
-            <br>
-            <h5><i class="fa fa-clock"></i> Hours: {{campaignDetails.Total_play_hours}}</h5>
-          </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <h1>{{campaignDetails.title}}</h1>
+          <h2>{{campaignDetails.created_at | date}}</h2>
+          <h2>{{campaignDetails.start_datetime | date}}</h2>
+          <h2>{{campaignDetails.end_datetime | date}}</h2>
+          <h2>{{campaignDetails.Total_play_hours}}</h2>
+          <h2>{{campaignDetails.views}}</h2>
         </div>
     </div>
   </div>
