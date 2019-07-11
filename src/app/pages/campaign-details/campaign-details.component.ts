@@ -46,21 +46,21 @@ export class CampaignDetailsComponent implements OnInit {
     this.bootDataSrv.campaignDetailData.subscribe(data=>{
 
    if (Object.keys(data).length>0) {
-
     this.generateData(data);
+    this.bootDataSrv.generateGraphData([data["campaign"]],false);
     this.dataSource = new MatTableDataSource(data["campaign"]["venues"]);
     this.campaignDetails = data["campaign"]["campaign"] ;
+
    }else if(sessionStorage.getItem("curentCampaignDetail")){
+
      let dataFromSession = JSON.parse(sessionStorage.getItem("curentCampaignDetail"))
      this.campaignDetails = dataFromSession["campaign"]["campaign"] ;
      this.generateData(dataFromSession) ;
-     console.log("data original ",dataFromSession);
+     this.bootDataSrv.generateGraphData([dataFromSession["campaign"]],false) ;
      this.dataSource = new MatTableDataSource(dataFromSession["campaign"]["venues"]);
-     console.log("datasource value",this.dataSource);
 
    }else{
      console.log("coming to lasr else");
-
    }
 
     })
@@ -87,6 +87,8 @@ export class CampaignDetailsComponent implements OnInit {
       campaignDetail:true ,
     }
   }
+
+
 
   gotoVenueDetail(venueId){
     console.log("this is the venueid ",venueId);

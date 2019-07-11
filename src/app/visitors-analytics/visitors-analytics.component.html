@@ -1,7 +1,7 @@
 <nb-card size="medium">
   <nb-card-header>
     <div class="title">Visitors Analytics</div>
-    <div class="sub-title">Consumption</div>
+    <div class="sub-title">Campaign Impressions</div>
   </nb-card-header>
   <nb-card-body>
     <div class="chart-container">
@@ -12,7 +12,7 @@
     </div>
   </nb-card-body>
 
-  <ngx-slide-out [showVisitorsStatistics]="true">
+  <ngx-slide-out *ngIf="isDashboard" [showVisitorsStatistics]="true">
     <ngx-visitors-statistics [value]="pieChartValue"></ngx-visitors-statistics>
   </ngx-slide-out>
 </nb-card>

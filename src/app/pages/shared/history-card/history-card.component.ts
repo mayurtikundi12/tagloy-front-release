@@ -29,18 +29,6 @@ export class HistoryCardComponent implements OnInit,OnChanges {
 
   ngOnChanges(changes:SimpleChanges){
     this.historyData =changes.cardData.currentValue ;
-
-    // setTimeout(()=>{
-
-    //   if(Object.keys(this.cardData).length>0){
-    //     this.historyData.lifeTimeImpressions = this.cardData["Total_impression"];
-    //   this.historyData.lifeTimeHours = this.cardData["Total_play_hours"];
-    //   this.historyData.activeCampaigns = this.cardData["active_campaign"];
-    //   this.historyData.lifeTimeCampaigns = this.cardData["completed_campaign"] + this.cardData["active_campaign"]  ;
-
-    //   }else console.log("data not arrived ");
-
-    // },2000)
   }
 
   findInfo(component,index){

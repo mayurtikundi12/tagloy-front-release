@@ -34,9 +34,8 @@ export class LoginComponent  implements OnInit {
   login(){
    
     if (this.loginForm.valid) {
-      console.log("this is the form data ",this.loginForm.value);
       this.apiSrv.postApi(this.apiData.URL_LOGIN,this.loginForm.value).subscribe((data)=>{
-        console.log("this is the auth data",data);
+        // console.log("this is the auth data",data);
         localStorage.setItem('token',data["result"]["token"])
         localStorage.setItem('username',data["result"]["username"])
         localStorage.setItem('name',data["result"]["Name"])
@@ -51,7 +50,7 @@ export class LoginComponent  implements OnInit {
         }, 300);
       },error=>{
               if(error.status == 401){
-                console.log("unauthorized user");
+                // console.log("unauthorized user");
                 Swal.fire({
                   title:'Unautorized User !',
                   text:"please try again with correct credentials",
@@ -62,7 +61,7 @@ export class LoginComponent  implements OnInit {
              
         })
     } else {
-      console.log("form is not valid");
+      // console.log("form is not valid");
     }
   }
 

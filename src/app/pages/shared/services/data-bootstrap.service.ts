@@ -18,6 +18,9 @@ export class DataBootstrapService {
   private campaignDetailSrc= new BehaviorSubject<any>({}) ;
   campaignDetailData = this.campaignDetailSrc.asObservable();
 
+  public graphDetailSrc= new BehaviorSubject<any>({}) ;
+  graphDetailData = this.graphDetailSrc.asObservable();
+
   passCampaignDetailData(data){
     this.campaignDetailSrc.next(data);
   }
@@ -59,7 +62,39 @@ export class DataBootstrapService {
     let totalActiveWatchTime:any = 0
     let tempCampMap= new Map();
 
+    // let yearMonthMap = new Map();
+    
+    this.generateGraphData(bootData["data"],true)
+
+
     for (let boot of bootData["data"]) {
+
+// // logic for graphs
+
+        
+//        if (boot["graphDetails"].length>0) {
+
+//         for (let gObj of boot["graphDetails"]) {
+//           let key = gObj["year"]+"-"+gObj["month"] ;
+//           let imprsn = gObj["impression_count"]
+//           if (yearMonthMap.has(key)){
+//             // if it has the key already then increment its value
+//             yearMonthMap.set(key,( Number(yearMonthMap.get(key))+imprsn))
+//           }else{
+//             yearMonthMap.set(key,Number(imprsn))
+//           }
+//         }
+//         // console.log("this is the yearmonth map",Array.from(yearMonthMap.entries()));
+        
+
+//        }
+
+
+// end of logic for graphs
+
+
+
+
 
       let campaignId = Number(boot["campaign"]["id"]);
 
@@ -171,6 +206,8 @@ export class DataBootstrapService {
               mainDashboard:true
         }
         this.dashboardHistorySrc.next(dashboardHistoryObj);
+        // this.graphDetailSrc.next({"graph":Array.from(yearMonthMap.entries())
+        //   ,"isDashboard":true});
   }
 
   checkIfVenueActive(mapObject:Map<any,any>,currentObj):[boolean,boolean]{
@@ -195,4 +232,29 @@ export class DataBootstrapService {
     }
     return venueTvCount ;
   }
+
+  generateGraphData(campaigns,isDashboard:boolean){
+    let yearMonthMap = new Map();
+    for (const boot of campaigns) {
+      if (boot["graphDetails"].length>0) {
+
+        for (let gObj of boot["graphDetails"]) {
+          let key = gObj["year"]+"-"+gObj["month"] ;
+          let imprsn = gObj["impression_count"]
+          if (yearMonthMap.has(key)){
+            // if it has the key already then increment its value
+            yearMonthMap.set(key,( Number(yearMonthMap.get(key))+imprsn))
+          }else{
+            yearMonthMap.set(key,Number(imprsn))
+          }
+        }
+        // console.log("this is the yearmonth map",Array.from(yearMonthMap.entries()));
+       }
+    }
+
+    this.graphDetailSrc.next({"graph":Array.from(yearMonthMap.entries())
+    ,"isDashboard":isDashboard});
+  }
+
+
 }

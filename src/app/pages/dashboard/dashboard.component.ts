@@ -142,14 +142,6 @@ ngOnDestroy() {
 
 historyData:any = {}
 
-cordinates = [
-  {lat:51.67,lng:7.809007},
-  {lat:52.67,lng:7.309007},
-  {lat:52.07,lng:7.709007},
-  {lat:51.87,lng:7.609007},
-  {lat:51.17,lng:7.009007},
-  {lat:51.77,lng:7.409007},
-]
 
 lat = 51.678418;
 lng = 7.809007;

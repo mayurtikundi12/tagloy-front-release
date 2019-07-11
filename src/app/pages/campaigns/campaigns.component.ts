@@ -16,7 +16,7 @@ export class CampaignsComponent implements OnInit,OnDestroy {
   campaignDetails:any = {}
   hasCampaignData:boolean = false ;
   hasNextCampaignData:boolean = true;
-  campaignsState:string ;
+  campaignsState:string ; // it can be "active" or "completed" depending on the params in url
   historyCardData:Object ;
 
   constructor(private apiSrv:ApisService,private apidata:ApiData,
@@ -41,46 +41,6 @@ export class CampaignsComponent implements OnInit,OnDestroy {
   }
 
 
-
-
-
-  getCampaignData(state){
-      // if(state == 'active'){
-      //   this.campaignQueryObj.f = "A";
-      //   this.campaignsState = state;
-      //   this.dataBootSrv.subscribableActiveCamps.subscribe(data=>{
-      //     console.log("active data campaign ",data);
-      //   })
-
-      // }else{
-      //   this.campaignQueryObj.f = "C" ;
-      //   this.campaignsState = state ;
-      //   this.dataBootSrv.subscribableCompletedCamps.subscribe(data=>{
-      //     console.log("completed data campaign ",data);
-      //   })
-      // }
-
-      // depending on A=active and C=completed we are getting the data
-
-
-
-
-      // this.apiSrv.postApi(this.apidata.URL_ACTIVE_CAMPAIGNS,this.campaignQueryObj).subscribe(data=>{
-      //   if(data['result'].length > 0 ){
-      //     this.hasCampaignData = true ;
-      //     data['result'].length == 4?this.hasNextCampaignData = true:this.hasNextCampaignData=false ;
-      //   }else{
-      //     this.hasCampaignData = false ;
-      //     this.hasNextCampaignData = false ;
-      //   }
-      //   console.log("this is the data for active campaigns ",data);
-      //   this.campaignDetails = data["result"]
-      // },error=>{
-      //   throw new Error("failed to fetch campaigns data")
-      // })
-
-  }
-
   getCampaignDataAtInit(state){
     if(state == 'active'){
       let activeCampaignData = JSON.parse(sessionStorage.getItem("activeCamps"));
@@ -88,6 +48,8 @@ export class CampaignsComponent implements OnInit,OnDestroy {
         this.hasCampaignData = true ;
         console.log("active camps from session ",JSON.parse(sessionStorage.getItem("activeCamps")));
         this.generateHistoryCardData(activeCampaignData);
+        this.dataBootSrv.generateGraphData(activeCampaignData,false)
+
       }else{
         console.log("do not have the active campaign data getting again ");
         this.dataBootSrv.getDataAtInit();
@@ -99,13 +61,18 @@ export class CampaignsComponent implements OnInit,OnDestroy {
         this.hasCampaignData =true ;
         console.log("completed camps from session ",completedCampaignData);
         this.generateHistoryCardData(completedCampaignData);
+        this.dataBootSrv.generateGraphData(completedCampaignData,false)
       }else{
         console.log("do not have the completed campaign data getting again ");
         this.dataBootSrv.getDataAtInit();
         this.getCampaignDataAtInit(this.campaignsState);
+        
       }
     }
   }
+
+
+  
 
 
   ngOnDestroy(){

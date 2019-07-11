@@ -1,5 +1,5 @@
 import { delay, takeWhile } from 'rxjs/operators';
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { LayoutService } from '../../@core/utils';
 import { OutlineData } from '../../@core/data/visitors-analytics';
@@ -15,10 +15,10 @@ import { OutlineData } from '../../@core/data/visitors-analytics';
     </div>
   `,
 })
-export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit, OnDestroy {
+export class ECommerceVisitorsAnalyticsChartComponent implements OnChanges, AfterViewInit, OnDestroy {
 //      [options] = "option"
   private alive = true;
-
+  private eTheme ;
   @Input() chartData: {
     innerLine: number[];
     outerLine: OutlineData[];
@@ -44,10 +44,17 @@ export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit, 
         takeWhile(() => this.alive),
       )
       .subscribe(config => {
-        const eTheme: any = config.variables.visitors;
+        this.eTheme = config.variables.visitors;
+        this.setOptions(this.eTheme);
+    });    
+  }
 
-        this.setOptions(eTheme);
-    });
+  ngOnChanges(changes:SimpleChanges){
+    if(changes.chartData.currentValue){
+      console.log("new changed value of analytics ",changes.chartData.currentValue);    
+      this.setOptions(this.eTheme)
+    }
+    
   }
 
   setOptions(eTheme) {
