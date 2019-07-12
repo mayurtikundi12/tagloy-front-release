@@ -2,8 +2,6 @@ import {Component, OnDestroy, ViewChild, AfterViewInit, OnInit} from '@angular/c
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators' ;
 import { AgmMap } from '@agm/core';
-import { ApisService } from '../../commons/apis.service';
-import { ApiData } from '../../commons/data/apis.data';
 import { DataBootstrapService } from '../shared/services/data-bootstrap.service';
 import { Subscription } from 'rxjs';
 
@@ -85,8 +83,7 @@ export class DashboardComponent implements OnDestroy,OnInit {
 
 coordinates:[any];
 
-  constructor(private themeService: NbThemeService ,
-    private apiSrv:ApisService , private apiData:ApiData, private databootSrv: DataBootstrapService
+  constructor(private themeService: NbThemeService , private databootSrv: DataBootstrapService
 
     ) {
 this.themeService.getJsTheme()
@@ -108,26 +105,12 @@ ngOnInit(){
    }
  })
 
-  // getting the needed data on initialization
-  let body = {
-    id:localStorage.getItem('id')
-  }
-  // console.log("this is the dashboard url",this.apiData.URL_DASHBOARD);
-
   this.databootSrv.subscrDashbHistData.subscribe(data=>{
       this.historyData =data ;
       console.log("getting history data in dashboard ",data);
 
   })
 
-  // this.apiSrv.postApi(this.apiData.URL_DASHBOARD,body).subscribe(data=>{
-  //   if(data ){
-  //     this.historyData = data["result"] ;
-  //   }
-  //   // console.log("this is the dashboard data",data);
-  // },error=>{
-  //   throw new Error("error in retrieving dashboard data")
-  // })
 }
 
 
@@ -141,18 +124,6 @@ ngOnDestroy() {
 }
 
 historyData:any = {}
-
-cordinates = [
-  {lat:51.67,lng:7.809007},
-  {lat:52.67,lng:7.309007},
-  {lat:52.07,lng:7.709007},
-  {lat:51.87,lng:7.609007},
-  {lat:51.17,lng:7.009007},
-  {lat:51.77,lng:7.409007},
-]
-
-lat = 51.678418;
-lng = 7.809007;
 
 labelOptions = {
   color: 'blue',

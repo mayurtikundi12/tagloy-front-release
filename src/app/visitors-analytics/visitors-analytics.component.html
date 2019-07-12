@@ -12,7 +12,7 @@
     </div>
   </nb-card-body>
 
-  <ngx-slide-out [showVisitorsStatistics]="true">
+  <ngx-slide-out *ngIf="isDashboard" [showVisitorsStatistics]="true">
     <ngx-visitors-statistics [value]="pieChartValue"></ngx-visitors-statistics>
   </ngx-slide-out>
 </nb-card>

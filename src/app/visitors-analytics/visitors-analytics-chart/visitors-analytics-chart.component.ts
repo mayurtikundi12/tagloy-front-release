@@ -1,8 +1,7 @@
-import { delay, takeWhile } from 'rxjs/operators';
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
+import { takeWhile } from 'rxjs/operators';
+import { AfterViewInit, Component, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { LayoutService } from '../../@core/utils';
-import { OutlineData } from '../../@core/data/visitors-analytics';
 
 @Component({
   selector: 'ngx-visitors-analytics-chart',
@@ -15,13 +14,13 @@ import { OutlineData } from '../../@core/data/visitors-analytics';
     </div>
   `,
 })
-export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit, OnDestroy {
+export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit,OnChanges, OnDestroy {
 //      [options] = "option"
   private alive = true;
-
+  private eTheme = null;
   @Input() chartData: {
     innerLine: number[];
-    outerLine: OutlineData[];
+    outerLine: any;
   };
 
   option: any;
@@ -40,14 +39,21 @@ export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit, 
   ngAfterViewInit(): void {
     this.theme.getJsTheme()
       .pipe(
-        delay(1),
         takeWhile(() => this.alive),
       )
       .subscribe(config => {
-        const eTheme: any = config.variables.visitors;
-
-        this.setOptions(eTheme);
+        this.eTheme =config.variables.visitors;
+        if (this.chartData) {
+          this.setOptions(this.eTheme);
+        }
     });
+  }
+
+  ngOnChanges(changes:SimpleChanges){
+    if (changes.chartData.currentValue && this.eTheme) {
+      this.chartData = changes.chartData.currentValue ;
+      this.setOptions(this.eTheme);
+    }
   }
 
   setOptions(eTheme) {

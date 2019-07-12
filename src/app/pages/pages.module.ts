@@ -10,7 +10,6 @@ import { ChartModule } from 'angular2-chartjs';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ThemeModule } from '../@theme/theme.module';
-import { CoreModule } from '../@core/core.module';
 import { ECommerceLegendChartComponent } from '../legend-chart/legend-chart.component';
 import { ECommerceVisitorsStatisticsComponent } from '../visitors-analytics/visitors-statistics/visitors-statistics.component';
 import { ECommerceVisitorsAnalyticsComponent } from '../visitors-analytics/visitors-analytics.component';
@@ -19,7 +18,7 @@ import { SlideOutComponent } from '../slide-out/slide-out.component';
 import { Ng2OdometerModule } from 'ng2-odometer';
 import { AgmCoreModule } from '@agm/core';
 import { OutletDetailsComponent } from './outlet-details/outlet-details.component';
-import { NbCardModule, NbProgressBarModule, NbBadgeModule } from '@nebular/theme';
+import { NbCardModule, NbProgressBarModule } from '@nebular/theme';
 import { CampaignsComponent } from './campaigns/campaigns.component';
 import { ChartsModule } from 'ng2-charts';
 
@@ -28,7 +27,6 @@ import { GmapsComponent } from './gmaps/gmaps.component';
 import { RevealCardComponent } from './shared/reveal-card/reveal-card.component';
 import { HistoryCardComponent } from './shared/history-card/history-card.component';
 import { CampaignDetailsComponent } from './campaign-details/campaign-details.component';
-import { SmartTableComponent } from './shared/smart-table/smart-table.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DataBootstrapService } from './shared/services/data-bootstrap.service';
 import { MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
@@ -50,7 +48,6 @@ import { DialogueService } from './shared/services/dialogue.service';
     RevealCardComponent,
     HistoryCardComponent,
     CampaignDetailsComponent,
-    SmartTableComponent,
   ],
   imports: [
     CommonModule,

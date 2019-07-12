@@ -4,13 +4,8 @@ import { Component, OnInit, QueryList, ViewChildren, PipeTransform, ViewChild, E
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApisService } from '../../commons/apis.service';
 import { ApiData } from '../../commons/data/apis.data';
-import { Observable } from 'rxjs';
-import { DecimalPipe } from '@angular/common';
-import { OutletDetails } from '../../commons/outlet-details';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import * as XLSX from 'xlsx';
-import { DataSource } from 'ng2-smart-table/lib/data-source/data-source';
-
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -46,28 +41,18 @@ export class CampaignDetailsComponent implements OnInit {
     this.bootDataSrv.campaignDetailData.subscribe(data=>{
 
    if (Object.keys(data).length>0) {
-
     this.generateData(data);
+    this.bootDataSrv.generateGraphData([data["campaign"]],false) ;
     this.dataSource = new MatTableDataSource(data["campaign"]["venues"]);
     this.campaignDetails = data["campaign"]["campaign"] ;
    }else if(sessionStorage.getItem("curentCampaignDetail")){
      let dataFromSession = JSON.parse(sessionStorage.getItem("curentCampaignDetail"))
      this.campaignDetails = dataFromSession["campaign"]["campaign"] ;
      this.generateData(dataFromSession) ;
-     console.log("data original ",dataFromSession);
+     this.bootDataSrv.generateGraphData([dataFromSession["campaign"]],false) ;  
      this.dataSource = new MatTableDataSource(dataFromSession["campaign"]["venues"]);
-
-   }else{
-     console.log("coming to lasr else");
-
    }
-
     })
-
-  //  this.apiSrv.postApi(this.apiData.URL_DETAILS_CAMPAIGNS,{id:this.campaignId}).subscribe(data=>{
-  //    this.campaignDetails = data["result"][0] ;
-  //    this.outletDetails = this.campaignDetails["Venue_Details"] ;
-  //  })
   }
 
   generateData(data){
