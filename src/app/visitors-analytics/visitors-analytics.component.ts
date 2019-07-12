@@ -1,7 +1,9 @@
 import {
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 import {
   takeWhile
@@ -18,6 +20,7 @@ import {
   selector: 'ngx-ecommerce-visitors-analytics',
   styleUrls: ['./visitors-analytics.component.scss'],
   templateUrl: './visitors-analytics.component.html',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ECommerceVisitorsAnalyticsComponent implements OnInit, OnDestroy {
   private alive = true;
@@ -33,17 +36,19 @@ export class ECommerceVisitorsAnalyticsComponent implements OnInit, OnDestroy {
   };
 
   constructor(private themeService: NbThemeService,
-    private bootDataSrv: DataBootstrapService) {
+    private bootDataSrv: DataBootstrapService,private cd:ChangeDetectorRef) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
         this.setLegendItems(theme.variables.visitorsLegend);
+        this.cd.detectChanges();
       })
   };
 
  
 
   ngOnInit() {
+    this.cd.detach();
     this.bootDataSrv.graphDetailData
       .pipe(takeWhile(() => this.alive))
       .subscribe(data => {
@@ -58,6 +63,8 @@ export class ECommerceVisitorsAnalyticsComponent implements OnInit, OnDestroy {
           } else {
             this.pieChartValue = totalActScrnPercent;
           }
+          this.cd.detectChanges();
+          this.cd.reattach();
         }
         // end of logic for pie chart data
 

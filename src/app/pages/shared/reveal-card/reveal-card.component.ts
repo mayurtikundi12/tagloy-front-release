@@ -70,4 +70,8 @@ export class RevealCardComponent implements OnInit,OnChanges {
     sessionStorage.setItem("curentCampaignDetail",JSON.stringify(data))
   }
 
+  trackByFn(index,item){
+    return item["id"]
+  }
+
 }

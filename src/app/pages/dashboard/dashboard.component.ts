@@ -1,4 +1,4 @@
-import {Component, OnDestroy, ViewChild, AfterViewInit, OnInit} from '@angular/core';
+import {Component, OnDestroy, ViewChild, OnInit, ChangeDetectionStrategy,ChangeDetectorRef} from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators' ;
 import { AgmMap } from '@agm/core';
@@ -16,6 +16,7 @@ interface CardSettings {
   selector: 'ngx-dashboard',
   styleUrls: ['./dashboard.component.scss'],
   templateUrl: './dashboard.component.html',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnDestroy,OnInit {
 
@@ -83,33 +84,35 @@ export class DashboardComponent implements OnDestroy,OnInit {
 
 coordinates:[any];
 
-  constructor(private themeService: NbThemeService , private databootSrv: DataBootstrapService
+  constructor(private themeService: NbThemeService , 
+    private databootSrv: DataBootstrapService,private cd:ChangeDetectorRef
 
     ) {
-this.themeService.getJsTheme()
-.pipe(takeWhile(() => this.alive))
-.subscribe(theme => {
-this.statusCards = this.statusCardsByThemes[theme.name];
-});
+    this.subscriptions.push( this.themeService.getJsTheme()
+    .pipe(takeWhile(() => this.alive))
+    .subscribe(theme => {
+    this.statusCards = this.statusCardsByThemes[theme.name];
+    this.cd.detectChanges();
+    }))
 
 }
 
 ngOnInit(){
  this.databootSrv.getDataAtInit()
 
- let venueSubscription = this.databootSrv.subscribableVenues.subscribe(venueData=>{
-   if (venueData.length > 0) {
-     console.log("venue data arriving at dashboard ",venueData);
+ this.subscriptions.push(this.databootSrv.subscribableVenues.subscribe(venueData=>{
+  if (venueData.length > 0) {
+    console.log("venue data arriving at dashboard ",venueData);
+    this.coordinates = venueData ;
+    this.cd.detectChanges();
+  }
+}))
 
-     this.coordinates = venueData ;
-   }
- })
-
-  this.databootSrv.subscrDashbHistData.subscribe(data=>{
+ this.subscriptions.push(this.databootSrv.subscrDashbHistData.subscribe(data=>{
       this.historyData =data ;
-      console.log("getting history data in dashboard ",data);
-
-  })
+        // console.log("getting history data in dashboard ",data);
+        this.cd.detectChanges();
+  }))
 
 }
 
@@ -118,8 +121,9 @@ counterConfig ={auto:true,value:0,theme:'minima'}
 
 ngOnDestroy() {
   this.alive = false;
-  this.subscriptions.forEach(s=>s.unsubscribe);
-  console.log("all subscriptions undone");
+  console.log("these were the subs",this.subscriptions);
+  this.subscriptions.forEach(s=>s.unsubscribe());
+  console.log("these were the subs when destroyes",this.subscriptions);
 
 }
 
@@ -136,8 +140,5 @@ labelOptions = {
 @ViewChild(AgmMap)
 public agmMap: AgmMap
 
-ngAfterViewInit(): void {
-
-}
 }
 

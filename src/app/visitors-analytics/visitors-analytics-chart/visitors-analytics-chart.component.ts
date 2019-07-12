@@ -1,5 +1,5 @@
 import { takeWhile } from 'rxjs/operators';
-import { AfterViewInit, Component, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnChanges, SimpleChanges, ChangeDetectorRef,ChangeDetectionStrategy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { LayoutService } from '../../@core/utils';
 
@@ -13,6 +13,8 @@ import { LayoutService } from '../../@core/utils';
     (chartInit)="onChartInit($event)">
     </div>
   `,
+  changeDetection:ChangeDetectionStrategy.OnPush
+  
 })
 export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit,OnChanges, OnDestroy {
 //      [options] = "option"
@@ -28,7 +30,7 @@ export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit,O
   echartsIntance: any;
 
   constructor(private theme: NbThemeService,
-              private layoutService: LayoutService) {
+              private layoutService: LayoutService,private cd:ChangeDetectorRef) {
     this.layoutService.onChangeLayoutSize()
       .pipe(
         takeWhile(() => this.alive),
@@ -45,6 +47,7 @@ export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit,O
         this.eTheme =config.variables.visitors;
         if (this.chartData) {
           this.setOptions(this.eTheme);
+          this.cd.detectChanges()
         }
     });
   }
@@ -53,6 +56,7 @@ export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit,O
     if (changes.chartData.currentValue && this.eTheme) {
       this.chartData = changes.chartData.currentValue ;
       this.setOptions(this.eTheme);
+      this.cd.detectChanges()
     }
   }
 

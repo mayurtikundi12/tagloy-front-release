@@ -1,15 +1,16 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { DialogueService } from '../services/dialogue.service';
 
 
 @Component({
   selector: 'history-card',
   templateUrl: './history-card.component.html',
-  styleUrls: ['./history-card.component.scss']
+  styleUrls: ['./history-card.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class HistoryCardComponent implements OnInit,OnChanges {
 
-  constructor(private dialogueSrv:DialogueService) { }
+  constructor(private dialogueSrv:DialogueService,private cd:ChangeDetectorRef) { }
   @Input() cardData:any = {};
 
   historyData = {
@@ -20,7 +21,9 @@ export class HistoryCardComponent implements OnInit,OnChanges {
     lifeTimeCampaigns:0,
     activeCampaigns:0,
     lifeTimeImpressions:0,
-    activeCampaignImpressions:0
+    activeCampaignImpressions:0,
+    mainDashboard:false,
+    campaignDetail:false 
   }
   ngOnInit() {
 

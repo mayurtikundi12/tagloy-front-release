@@ -1,9 +1,7 @@
 
 import { DataBootstrapService } from '../shared/services/data-bootstrap.service';
-import { Component, OnInit, QueryList, ViewChildren, PipeTransform, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApisService } from '../../commons/apis.service';
-import { ApiData } from '../../commons/data/apis.data';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import * as XLSX from 'xlsx';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -13,15 +11,15 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './campaign-details.component.html',
   styleUrls: ['./campaign-details.component.scss'],
 })
-export class CampaignDetailsComponent implements OnInit {
+export class CampaignDetailsComponent implements OnInit,OnDestroy {
+
+  subscriptions=[];
 
   constructor(private _activatedRoute:ActivatedRoute,private _router:Router,
-    private apiSrv:ApisService,private apiData:ApiData,
     private bootDataSrv:DataBootstrapService, private sanitizer:DomSanitizer) { }
     // dataSource ;
-
   campaignId:number ;
-  campaignDetails:Object ;
+  campaignDetails:CampaignData;
   outletDetails:[] = []
   historyCardData = {}
 
@@ -38,21 +36,21 @@ export class CampaignDetailsComponent implements OnInit {
   ngOnInit() {
 
     this.campaignId = Number(this._activatedRoute.snapshot.paramMap.get('campaignId')) ;
-    this.bootDataSrv.campaignDetailData.subscribe(data=>{
+    this.subscriptions.push(this.bootDataSrv.campaignDetailData.subscribe(data=>{
 
-   if (Object.keys(data).length>0) {
-    this.generateData(data);
-    this.bootDataSrv.generateGraphData([data["campaign"]],false) ;
-    this.dataSource = new MatTableDataSource(data["campaign"]["venues"]);
-    this.campaignDetails = data["campaign"]["campaign"] ;
-   }else if(sessionStorage.getItem("curentCampaignDetail")){
-     let dataFromSession = JSON.parse(sessionStorage.getItem("curentCampaignDetail"))
-     this.campaignDetails = dataFromSession["campaign"]["campaign"] ;
-     this.generateData(dataFromSession) ;
-     this.bootDataSrv.generateGraphData([dataFromSession["campaign"]],false) ;  
-     this.dataSource = new MatTableDataSource(dataFromSession["campaign"]["venues"]);
-   }
-    })
+      if (Object.keys(data).length>0) {
+       this.generateData(data);
+       this.bootDataSrv.generateGraphData([data["campaign"]],false) ;
+       this.dataSource = new MatTableDataSource(data["campaign"]["venues"]);
+       this.campaignDetails = data["campaign"]["campaign"] ;
+      }else if(sessionStorage.getItem("curentCampaignDetail")){
+        let dataFromSession = JSON.parse(sessionStorage.getItem("curentCampaignDetail"))
+        this.campaignDetails = dataFromSession["campaign"]["campaign"] ;
+        this.generateData(dataFromSession) ;
+        this.bootDataSrv.generateGraphData([dataFromSession["campaign"]],false) ;  
+        this.dataSource = new MatTableDataSource(dataFromSession["campaign"]["venues"]);
+      }
+       }))
   }
 
   generateData(data){
@@ -73,8 +71,7 @@ export class CampaignDetailsComponent implements OnInit {
   }
 
   gotoVenueDetail(venueId){
-    console.log("this is the venueid ",venueId);
-
+    // console.log("this is the venueid ",venueId);
       this._router.navigate(['outlet-details',venueId])
   }
 
@@ -82,9 +79,22 @@ export class CampaignDetailsComponent implements OnInit {
     const ws: XLSX.WorkSheet=XLSX.utils.table_to_sheet(this.table.nativeElement);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    /* save to file */
     XLSX.writeFile(wb, 'SheetJS.xlsx');
-
   }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(s=>s.unsubscribe());
+  }
+}
+
+interface CampaignData {
+  
+    type:any,
+    title:any,
+    created_at:any,
+    start_datetime:any,
+    end_datetime:any,
+    views:any,
+    Total_play_hours:any
+  
 }

@@ -6,8 +6,6 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { ChartModule } from 'angular2-chartjs';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ThemeModule } from '../@theme/theme.module';
 import { ECommerceLegendChartComponent } from '../legend-chart/legend-chart.component';
@@ -20,14 +18,12 @@ import { AgmCoreModule } from '@agm/core';
 import { OutletDetailsComponent } from './outlet-details/outlet-details.component';
 import { NbCardModule, NbProgressBarModule } from '@nebular/theme';
 import { CampaignsComponent } from './campaigns/campaigns.component';
-import { ChartsModule } from 'ng2-charts';
 
 
 import { GmapsComponent } from './gmaps/gmaps.component';
 import { RevealCardComponent } from './shared/reveal-card/reveal-card.component';
 import { HistoryCardComponent } from './shared/history-card/history-card.component';
 import { CampaignDetailsComponent } from './campaign-details/campaign-details.component';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DataBootstrapService } from './shared/services/data-bootstrap.service';
 import { MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
 import { DialogueService } from './shared/services/dialogue.service';
@@ -54,8 +50,6 @@ import { DialogueService } from './shared/services/dialogue.service';
     PagesRoutingModule,
     NgxChartsModule,
     NgxEchartsModule,
-    ChartModule,
-    LeafletModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     Ng2OdometerModule.forRoot(),
@@ -64,8 +58,6 @@ import { DialogueService } from './shared/services/dialogue.service';
     }),
     NbCardModule,
     NbProgressBarModule,
-    ChartsModule,
-    Ng2SmartTableModule,
     MatTableModule,MatSortModule,MatPaginatorModule,MatInputModule
   ],
   providers:[DataBootstrapService , DialogueService]

@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import { delay, takeWhile } from 'rxjs/operators';
+import {takeWhile } from 'rxjs/operators';
 import { LayoutService } from '../../@core/utils/layout.service';
 
 
@@ -8,8 +8,9 @@ import { LayoutService } from '../../@core/utils/layout.service';
   selector: 'ngx-visitors-statistics',
   styleUrls: ['./visitors-statistics.component.scss'],
   templateUrl: './visitors-statistics.component.html',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
-export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDestroy {
+export class ECommerceVisitorsStatisticsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private alive = true;
 
@@ -19,12 +20,19 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
   echartsIntance: any;
   totalScreens:number = 0 ;
   constructor(private theme: NbThemeService,
-              private layoutService: LayoutService) {
+              private layoutService: LayoutService
+              ,private cd:ChangeDetectorRef) {
     this.layoutService.onChangeLayoutSize()
       .pipe(
         takeWhile(() => this.alive),
       )
-      .subscribe(() => this.resizeChart());
+      .subscribe(() => {this.resizeChart()
+        this.cd.detectChanges()        
+      });
+  }
+
+  ngOnInit(){
+    this.cd.detach();
   }
 
   ngAfterViewInit() {
@@ -37,16 +45,14 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
     this.theme.getJsTheme()
       .pipe(
         takeWhile(() => this.alive),
-        delay(1),
       )
       .subscribe(config => {
         const variables: any = config.variables;
         const visitorsPieLegend: any = config.variables.visitorsPieLegend;
-
         // console.log("variables", variables);
-
         this.setOptions(variables);
         this.setLegendItems(visitorsPieLegend);
+        this.cd.detectChanges() 
     });
   }
 
