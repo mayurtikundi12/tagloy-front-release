@@ -174,7 +174,27 @@
   </nb-card>
 </div> -->
 
+<div class="row">
+  
+<div class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card>
+    <nb-card-header><p>Choose the Date for Ad analytics</p>
+        <div>
+            <span> <strong>Chosen Date</strong>  :  {{chosenDate}}</span><br>
+            <span><strong>Impressions: {{impression}}</strong></span>
+            <input nbInput class="datepicker" 
+                   placeholder="Choose Date"
+                   [nbDatepicker]="formpicker">
+            <nb-datepicker (dateChange)="gotDate($event)" #formpicker></nb-datepicker>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+            <ngx-ecommerce-visitors-analytics *ngIf="hourKeys != null ;else noData"></ngx-ecommerce-visitors-analytics>
+            <ng-template  #noData> <p class="warning">No Data Available for given date</p> </ng-template>
+    </nb-card-body>
+</nb-card>
+</div>
 
-
+</div>
 
 

@@ -134,3 +134,36 @@ label
      -moz-osx-font-smoothing: grayscale;
      cursor: pointer;
 }
+
+.datepicker{
+  float: right;
+}
+.box{
+  border: 1px solid grey ;
+  padding: 3px;
+  height: 2rem;
+  width: 2rem;
+  margin-left: 5px ;
+  min-width: 20px;
+}
+.green{
+  background-color: greenyellow ;
+}
+.red{
+  background-color: red ;
+}
+
+.child{
+  margin:2px ;
+  
+}
+.outer_box{
+  margin : 2px ;
+  margin-bottom: 15px ;
+}
+.hr_txt{
+  margin: 2px ;
+}
+.warning{
+  color: red;
+}

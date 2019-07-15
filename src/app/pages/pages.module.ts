@@ -27,6 +27,7 @@ import { CampaignDetailsComponent } from './campaign-details/campaign-details.co
 import { DataBootstrapService } from './shared/services/data-bootstrap.service';
 import { MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule } from '@angular/material';
 import { DialogueService } from './shared/services/dialogue.service';
+import { HourPipe } from './shared/pipes/hour.pipe';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { DialogueService } from './shared/services/dialogue.service';
     RevealCardComponent,
     HistoryCardComponent,
     CampaignDetailsComponent,
+    HourPipe,
   ],
   imports: [
     CommonModule,

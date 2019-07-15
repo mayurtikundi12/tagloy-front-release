@@ -72,7 +72,7 @@ export class ECommerceVisitorsAnalyticsComponent implements OnInit, OnDestroy {
   }
 
   createGraph(data){
-    if (Object.keys(data).length > 0) {
+    if (Object.keys(data).length > 0 && data["graph"]) {
       this.isDashboard = data["isDashboard"]
       let outerLine: any = data["graph"];
       outerLine.sort(this.compare)
@@ -87,8 +87,14 @@ export class ECommerceVisitorsAnalyticsComponent implements OnInit, OnDestroy {
         outerLine: newOuterLine
       };
 
+    }else if(data["venueLog"]){
+      this.visitorsAnalyticsData = {
+        outerLine:data["venueLog"]
+      }
     }
   }
+
+  
 
   compare(a, b) {
     const yearA = Number(a[0].split("-")[0]);

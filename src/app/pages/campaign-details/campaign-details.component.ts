@@ -72,7 +72,7 @@ export class CampaignDetailsComponent implements OnInit,OnDestroy {
 
   gotoVenueDetail(venueId){
     // console.log("this is the venueid ",venueId);
-      this._router.navigate(['outlet-details',venueId])
+      this._router.navigate(['outlet-details',venueId,this.campaignId])
   }
 
   ExportTOExcel(){
