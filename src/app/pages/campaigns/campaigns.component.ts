@@ -14,15 +14,17 @@ export class CampaignsComponent implements OnInit,OnDestroy {
   hasNextCampaignData:boolean = true;
   campaignsState:string ;
   historyCardData:Object ;
-
+  count ;
   constructor(private dataBootSrv:DataBootstrapService,
               private _activeRouter:ActivatedRoute) { }
 
 
   ngOnInit() {
+    this.count=0;
    this._activeRouter.url.subscribe(params=>{
      let  state = params[1]["path"]
      this.campaignsState  = state ;
+     this.hasCampaignData = false ;
         this.getCampaignDataAtInit(state);
   }) ;
 
@@ -30,23 +32,30 @@ export class CampaignsComponent implements OnInit,OnDestroy {
 
 
   getCampaignDataAtInit(state){
+    
     if(state == 'active'){
       let activeCampaignData = JSON.parse(sessionStorage.getItem("activeCamps"));
-      if (activeCampaignData) {
+      if (activeCampaignData.length>0) {
+        console.log("/////////****",activeCampaignData);
         this.hasCampaignData = true ;
         this.generateHistoryCardData(activeCampaignData);
         this.dataBootSrv.generateGraphData(activeCampaignData,false)
-      }else{
+      }else if(this.count<2){
+        this.count++
+        this.hasCampaignData =false ;
+        console.log("/////////",this.hasCampaignData);
         this.dataBootSrv.getDataAtInit();
         this.getCampaignDataAtInit(this.campaignsState);
       }
     }else{
       let completedCampaignData = JSON.parse(sessionStorage.getItem("completedCamps"));
-      if (completedCampaignData) {
+      if (completedCampaignData.length>0) {
         this.hasCampaignData =true ;
         this.generateHistoryCardData(completedCampaignData);
         this.dataBootSrv.generateGraphData(completedCampaignData,false)
-      }else{
+      }else if(this.count<2){
+        this.hasCampaignData =false ;
+        this.count++
         this.dataBootSrv.getDataAtInit();
         this.getCampaignDataAtInit(this.campaignsState);
       }

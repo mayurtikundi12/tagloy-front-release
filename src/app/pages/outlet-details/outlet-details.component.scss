@@ -35,7 +35,7 @@
 }
 
 .content{
-  border-bottom: 1px solid #89959B;
+  // border-bottom: 1px solid #89959B;
 }
 
 .content-second{
@@ -43,9 +43,18 @@
 }
 
 .aa{
-  background-color: #A28947;
+  background-color: rgb(159, 218, 24);
   color: #fff;
-  font-size: 10px;
+  font-size: 13px;
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+
+.bb{
+  background-color: rgb(97, 196, 4);
+  color: #fff;
+  font-size: 13px;
   padding: 2px 5px;
   border-radius: 2px;
 }
@@ -155,7 +164,7 @@ label
 
 .child{
   margin:2px ;
-  
+
 }
 .outer_box{
   margin : 2px ;

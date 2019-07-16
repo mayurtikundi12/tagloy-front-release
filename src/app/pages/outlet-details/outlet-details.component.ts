@@ -18,7 +18,7 @@ export class OutletDetailsComponent implements OnInit {
   hourKeys ;
   impression= 0 ;
   wasCampaignClicked = true ;
-
+  zomatoData ;
 
   constructor(private apiSrv:ApisService,
        private apiData:ApiData ,
@@ -27,7 +27,7 @@ export class OutletDetailsComponent implements OnInit {
 
   }
 
- 
+  
 
   ngOnInit() {
     this.venueId = Number(this._activeRoute.snapshot.paramMap.get('venueId'));
@@ -40,6 +40,7 @@ export class OutletDetailsComponent implements OnInit {
     if (this.venueId) {
       this.apiSrv.getLocalApiWithParam(this.apiData.URL_GET_ZOMATO_DATA,this.venueId).subscribe(data=>{
         console.log("this is the zomato data ",data);
+        this.zomatoData = data ;
       })
     }
 
