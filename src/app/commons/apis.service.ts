@@ -28,4 +28,8 @@ export class ApisService {
     return this.http.post(this.BASE_LOCAL_URL+endPoint,body) ;
   }
 
+  getLocalApiWithParam(endPoint,param){
+    return this.http.get(this.BASE_LOCAL_URL+endPoint+param);
+  }
+
 }

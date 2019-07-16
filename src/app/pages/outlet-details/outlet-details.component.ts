@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { Label } from 'ng2-charts';
 import { ApisService } from '../../commons/apis.service';
 import { ApiData } from '../../commons/data/apis.data';
 import { ActivatedRoute } from '@angular/router';
@@ -26,24 +24,19 @@ export class OutletDetailsComponent implements OnInit {
 
   }
 
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-  };
-  public barChartLabels: Label[] = ['11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM', '12 AM'];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-  public barChartPlugins = [];
-
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40, 55, 40, 55, 40, 55, 40, 55, 40], label: 'Screen A' },
-    { data: [28, 48, 40, 19, 86, 27, 90, 27, 90, 27, 90, 27, 90, 27, 90], label: 'Screen B' }
-  ];
-
+ 
 
   ngOnInit() {
     this.venueId = Number(this._activeRoute.snapshot.paramMap.get('venueId'));
     this.postId = Number(this._activeRoute.snapshot.paramMap.get('postId'));
     console.log("this is the cvenueid ",this.venueId," and the post id is ",this.postId);
+
+    if (this.venueId) {
+      this.apiSrv.getLocalApiWithParam(this.apiData.URL_GET_ZOMATO_DATA,this.venueId).subscribe(data=>{
+        console.log("this is the zomato data ",data);
+      })
+    }
+
     let showtime = new Date(Date.now());
     let body = {
       year : showtime.getFullYear(),

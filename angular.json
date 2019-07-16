@@ -23,7 +23,7 @@
               "src/favicon.png",
               {
                 "glob": "**/*",
-                "input": "node_modules/leaflet/dist/images",
+                "input": "/assets/*",
                 "output": "/assets/img/markers"
               }
             ],
@@ -37,19 +37,12 @@
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "node_modules/angular-tree-component/dist/angular-tree-component.css",
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
-              "node_modules/leaflet/dist/leaflet.css",
               "src/app/@theme/styles/styles.scss"
             ],
             "scripts": [
               "node_modules/pace-js/pace.min.js",
-              "node_modules/tinymce/tinymce.min.js",
-              "node_modules/tinymce/themes/modern/theme.min.js",
-              "node_modules/tinymce/plugins/link/plugin.min.js",
-              "node_modules/tinymce/plugins/paste/plugin.min.js",
-              "node_modules/tinymce/plugins/table/plugin.min.js",
               "node_modules/echarts/dist/echarts.min.js",
-              "node_modules/echarts/dist/extension/bmap.min.js",
-              "node_modules/chart.js/dist/Chart.min.js"
+              "node_modules/echarts/dist/extension/bmap.min.js"
             ]
           },
           "configurations": {
@@ -98,14 +91,8 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
               "node_modules/pace-js/pace.min.js",
-              "node_modules/tinymce/tinymce.min.js",
-              "node_modules/tinymce/themes/modern/theme.min.js",
-              "node_modules/tinymce/plugins/link/plugin.min.js",
-              "node_modules/tinymce/plugins/paste/plugin.min.js",
-              "node_modules/tinymce/plugins/table/plugin.min.js",
               "node_modules/echarts/dist/echarts.min.js",
-              "node_modules/echarts/dist/extension/bmap.min.js",
-              "node_modules/chart.js/dist/Chart.min.js"
+              "node_modules/echarts/dist/extension/bmap.min.js"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
@@ -124,7 +111,7 @@
               "src/favicon.png",
               {
                 "glob": "**/*",
-                "input": "node_modules/leaflet/dist/images",
+                "input": "/assets/*",
                 "output": "/assets/img/markers"
               }
             ]
