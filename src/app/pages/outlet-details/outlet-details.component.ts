@@ -17,6 +17,9 @@ export class OutletDetailsComponent implements OnInit {
   hourData ;
   hourKeys ;
   impression= 0 ;
+  wasCampaignClicked = true ;
+
+
   constructor(private apiSrv:ApisService,
        private apiData:ApiData ,
        private _activeRoute:ActivatedRoute,
@@ -29,6 +32,9 @@ export class OutletDetailsComponent implements OnInit {
   ngOnInit() {
     this.venueId = Number(this._activeRoute.snapshot.paramMap.get('venueId'));
     this.postId = Number(this._activeRoute.snapshot.paramMap.get('postId'));
+
+    if(this.postId==0) this.wasCampaignClicked =false ;
+
     console.log("this is the cvenueid ",this.venueId," and the post id is ",this.postId);
 
     if (this.venueId) {

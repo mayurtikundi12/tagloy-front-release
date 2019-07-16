@@ -58,7 +58,7 @@ ngOnInit(){
 
 
 gotoOutletDetailsPage(outletId){
-  this.router.navigate(['/outlet-details/'+outletId])
+  this.router.navigate(['/outlet-details/',outletId,0]);
 }
 
 onMouseOver(infoWindow,gm){

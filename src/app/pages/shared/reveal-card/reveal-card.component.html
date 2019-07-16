@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center"  *ngFor="let camp of campaigns;let i = index; trackBy:trackByFn"  >
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 text-center"  *ngFor="let camp of campaigns;let i = index; trackBy:trackByFn"  >
           <div (click)="showCampaignDetails(camp.id,i)" class="card green">
               <div class="additional">
                 <div class="user-card">
