@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NbLoginComponent, NbAuthService } from '@nebular/auth';
 import {FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiData } from '../commons/data/apis.data';
@@ -37,7 +36,7 @@ export class LoginComponent  implements OnInit {
    
     if (this.loginForm.valid) {
       console.log("this is the form data ",this.loginForm.value);
-      this.apiSrv.postApi(this.apiData.URL_LOGIN,this.loginForm.value).subscribe((data)=>{
+      this.apiSrv.postOldApi(this.apiData.URL_LOGIN,this.loginForm.value).subscribe((data)=>{
         console.log("this is the auth data",data);
         localStorage.setItem('token',data["result"]["token"])
         localStorage.setItem('username',data["result"]["username"])

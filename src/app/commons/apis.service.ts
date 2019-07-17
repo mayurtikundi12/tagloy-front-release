@@ -7,8 +7,10 @@ import {environment} from '../../environments/environment'
 })
 export class ApisService {
 
-   BASE_URL: string = 'https://preprod.tagloy.com/v1/';
-   BASE_LOCAL_URL:string = 'http://localhost:3000/' ;
+   BASE_URL_OLD: string = 'https://preprod.tagloy.com/v1/';
+   BASE_URL:string = "http://13.126.120.155:3000/"
+   BASE_LOCAL_URL:string = 'http://13.126.120.155:3000/' ;
+  //  BASE_LOCAL_URL:string = 'http://localhost:3000/' ;
 
   constructor(private http:HttpClient) { 
     
@@ -25,6 +27,11 @@ export class ApisService {
   postApi(endPoint,body){
     return this.http.post(this.BASE_URL+endPoint,body) ;
   }
+  postOldApi(endPoint,body){
+    return this.http.post(this.BASE_URL_OLD+endPoint,body) ;
+  }
+
+ 
 
   postLocalApi(endPoint,body){
     return this.http.post(this.BASE_LOCAL_URL+endPoint,body) ;
