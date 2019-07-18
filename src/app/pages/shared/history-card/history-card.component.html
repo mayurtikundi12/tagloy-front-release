@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-      <div class="col-md-3 col-xl-3">
+      <!-- <div class="col-md-3 col-xl-3">
           <div class="card bg-c-blue order-card">
               <div class="card-block">
                   <h6 class="m-b-20">Lifetime Views <i (click)="findInfo('historyCard','viewsCard')" class="fa fa-info-circle infoCircle" aria-hidden="true"></i></h6>
@@ -9,9 +9,9 @@
                   <p *ngIf="historyData.mainDashboard" class="m-b-0">Active Campaign Views<span class="f-right">{{historyData.activeCampaignViews}}</span></p>
               </div>
           </div>
-      </div>
+      </div> -->
 
-      <div class="col-md-3 col-xl-3">
+      <div class="col-md-4 col-xl-4 col-lg-4 col-sm-4">
           <div class="card bg-c-green order-card">
               <div class="card-block">
                   <h6 class="m-b-20">Lifetime Hours<i (click)="findInfo('historyCard','watchTime')" class="fa fa-info-circle infoCircle" aria-hidden="true"></i></h6>
@@ -21,7 +21,7 @@
           </div>
       </div>
 
-      <div *ngIf="!historyData.campaignDetail" class="col-md-3 col-xl-3">
+      <div *ngIf="!historyData.campaignDetail" class="col-md-4 col-xl-4 col-lg-4 col-sm-4">
           <div class="card bg-c-yellow order-card">
               <div class="card-block">
                   <h6 class="m-b-20">Lifetime Campaigns <i (click)="findInfo('historyCard','campaigns')" class="fa fa-info-circle infoCircle" aria-hidden="true"></i></h6>
@@ -31,7 +31,7 @@
           </div>
       </div>
 
-      <div class="col-md-3 col-xl-3">
+      <div class="col-md-4 col-xl-4 col-lg-4 col-sm-4">
           <div class="card bg-c-pink order-card">
               <div class="card-block">
                   <h6 class="m-b-20">Lifetime Impressions <i (click)="findInfo('historyCard','impressions')" class="fa fa-info-circle infoCircle" aria-hidden="true"></i></h6>

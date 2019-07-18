@@ -19,15 +19,14 @@ export class OutletDetailsComponent implements OnInit {
   impression= 0 ;
   wasCampaignClicked = true ;
   zomatoData ;
-
+  datePickerType:string = 'single';
+  months = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]
   constructor(private apiSrv:ApisService,
        private apiData:ApiData ,
        private _activeRoute:ActivatedRoute,
        private bootSrv:DataBootstrapService){
 
   }
-
-  
 
   ngOnInit() {
     this.venueId = Number(this._activeRoute.snapshot.paramMap.get('venueId'));
@@ -82,10 +81,10 @@ export class OutletDetailsComponent implements OnInit {
         "isDashboard": false,
         "venueLog":outlineArray
       });
-      console.log({
-        "isDashboard": false,
-        "venueLog":outlineArray
-      });
+      // console.log({
+      //   "isDashboard": false,
+      //   "venueLog":outlineArray
+      // });
       
     },error=>{
       console.log("error in fetching the file ",error);
@@ -104,10 +103,51 @@ export class OutletDetailsComponent implements OnInit {
     }
     this.getDayLog(body)
     // console.log("year",year," month ",month," day ",day);
-
-
   }
 
+  changeDataPicker(pickertype){
+    this.datePickerType = pickertype;
+  }
+
+  gotDateRange(event){
+    this.hourKeys = null ;
+    console.log("this is range change event ",event);
+    let startDate = new Date(event["start"]) ;
+    let endDate = new Date(event["end"]);
+    if(startDate && endDate){
+      let body = {
+        startYear : startDate.getFullYear(),
+        startMonth : startDate.getMonth()+1,
+        startDay : startDate.getDate(),
+        endYear : endDate.getFullYear(),
+        endMonth : endDate.getMonth()+1,
+        endDay : endDate.getDate(),
+        postId : this.postId ,
+        venueId : this.venueId 
+     }
+        
+        this.apiSrv.postLocalApi(this.apiData.URL_LOG_RANGE,body).subscribe(data=>{
+          if(data["data"].length >0 ){
+                 // console.log("this is the range ",data);
+          let outlineArray = [] ;
+          for (const dayObj of data["data"]) {
+            outlineArray.push({
+              label: this.months[dayObj['month']-1]+"/"+dayObj["day"],
+              value: dayObj["impression_count"]
+            })
+          }
+          console.log("this is the final outline array ",outlineArray);
+          this.hourKeys = 1 ;
+          this.bootSrv.graphDetailSrc.next({
+            "isDashboard": false,
+            "venueLog":outlineArray
+          });
+          }
+        },error=>{
+  
+        })
+    }
+  }
 
 
 

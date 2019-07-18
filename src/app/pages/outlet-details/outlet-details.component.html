@@ -7,53 +7,53 @@
     <nb-card-body>
       <div class="content">
         <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <h5 class="zomato-text">Zomato Details</h5>
-            </div>
-            <div class="col-lg-6 col-md-6">
-              <img class="image float-right" src="../../../assets/images/zomato.png" alt="zomato">
-            </div>
+          <div class="col-lg-6 col-md-6">
+            <h5 class="zomato-text">Zomato Details</h5>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <img class="image float-right" src="../../../assets/images/zomato.png" alt="zomato">
+          </div>
         </div>
 
         <div class="row common">
           <div class="col-lg-6 col-md-6" *ngIf="zomatoData">
-            <h6 class="head" >{{zomatoData.Name}}</h6>
+            <h6 class="head">{{zomatoData.Name}}</h6>
             <p class="para">location, {{zomatoData.Type}}</p>
           </div>
           <div class="col-lg-6 col-md-6"></div>
         </div>
 
         <div class="row common">
-            <div class="col-lg-4 col-md-4">
-              <!-- <div class="first">
+          <div class="col-lg-4 col-md-4">
+            <!-- <div class="first">
                 <h6>Phone Number</h6>
                 <p>+91 8828838825 <br> <span class="tails">Table booking recommended</span></p>
               </div> -->
-              <div class="first">
-                <h6>Cuisines</h6>
-                <p style="color:#cb202d" *ngIf="zomatoData">{{zomatoData.Cuisines}}</p>
-              </div>
-              <!-- aaaaaaaaa -->
+            <div class="first">
+              <h6>Cuisines</h6>
+              <p style="color:#cb202d" *ngIf="zomatoData">{{zomatoData.Cuisines}}</p>
+            </div>
+            <!-- aaaaaaaaa -->
             <div class="second">
               <h6>Average Cost</h6>
-              <p *ngIf="zomatoData">{{zomatoData.Average_Cost}} for two people (approx.)  with alcohol <br>
-              <span class="tails">Exclusive of applicable taxes and charges, if any</span></p>
+              <p *ngIf="zomatoData">{{zomatoData.Average_Cost}} for two people (approx.) with alcohol <br>
+                <span class="tails">Exclusive of applicable taxes and charges, if any</span></p>
             </div>
+          </div>
+          <div class="col-lg-4 col-md-4" *ngIf="zomatoData">
+            <div class="first">
+              <h6>Opening Hours (open now/ closed)</h6>
+              <p>{{zomatoData.Opening_hours}} <br> <span class="tails">Happy Hours 12PM to 7PM</span></p>
             </div>
-            <div class="col-lg-4 col-md-4" *ngIf="zomatoData">
-              <div class="first">
-                <h6>Opening Hours (open now/ closed)</h6>
-                <p>{{zomatoData.Opening_hours}} <br> <span class="tails">Happy Hours 12PM to 7PM</span></p>
-              </div>
-              <div class="second">
-                <h6>Address</h6>
-                <p *ngIf="zomatoData">{{zomatoData.Address}}</p>
-              </div>
+            <div class="second">
+              <h6>Address</h6>
+              <p *ngIf="zomatoData">{{zomatoData.Address}}</p>
             </div>
-            <div class="col-lg-4 col-md-4" *ngIf="zomatoData">
-              <h6>Rating</h6>
-              <p><span class="aa">{{zomatoData.Rating}}</span> / <span class="bb">5.0</span></p>
-              <!-- <p><i class="fa fa-check"></i> Wheelchair Accessible<br>
+          </div>
+          <div class="col-lg-4 col-md-4" *ngIf="zomatoData">
+            <h6>Rating</h6>
+            <p><span class="aa">{{zomatoData.Rating}}</span> / <span class="bb">5.0</span></p>
+            <!-- <p><i class="fa fa-check"></i> Wheelchair Accessible<br>
                   <span><i class="fa fa-check"></i> Full Bar Available<br></span>
                   <span><i class="fa fa-check"></i> Live Sports Screening<br></span>
                   <span><i class="fa fa-check"></i> Valet Parking Available<br></span>
@@ -61,12 +61,12 @@
                   <span><i class="fa fa-check"></i> Smoking Area<br></span>
                   <span><i class="fa fa-check"></i> Nightlife<br></span>
                   <span><i class="fa fa-check"></i> Table booking recommended</span></p> -->
-            </div>
+          </div>
         </div>
 
         <div class="row">
           <div class="col-lg-4 col-md-4">
-              <!-- <p>₹170  for a pint of beer (approx.)<br>
+            <!-- <p>₹170  for a pint of beer (approx.)<br>
               <span class="tails">Cash and Cards accepted</span></p> -->
           </div>
           <div class="col-lg-4 col-md-4">
@@ -77,7 +77,7 @@
           <div class="col-lg-4 col-md-4"></div>
         </div>
       </div>
-<!--
+      <!--
       <div class="content-second">
         <div>
           <h5>What people love here <span class="aa">NEW</span></h5>
@@ -110,25 +110,45 @@
 
 <div *ngIf="wasCampaignClicked" class="row">
 
-<div class="col-md-12 col-lg-12 col-xxxl-12">
-  <nb-card>
-    <nb-card-header><p>Choose the Date for Ad analytics</p>
+  <div class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card>
+      <nb-card-header>
+        <p>Choose the Date for Ad analytics</p>
         <div>
-            <span> <strong>Chosen Date</strong>  :  {{chosenDate}}</span><br>
-            <span><strong>Impressions: {{impression}}</strong></span>
-            <input nbInput class="datepicker"
-                   placeholder="Choose Date"
-                   [nbDatepicker]="formpicker">
+          <span> <strong>Chosen Date</strong> : {{chosenDate}}</span><br>
+          <span><strong>Impressions: {{impression}}</strong></span>
+
+          <div>
+            <nb-radio-group [name]="primary">
+              <nb-radio [checked]="true" (click)="changeDataPicker('single')" [value]="single">
+                single day
+              </nb-radio>
+              <nb-radio (click)="changeDataPicker('multi')" [value]="multi">
+                days range
+              </nb-radio>
+            </nb-radio-group>
+          </div>
+
+          <div *ngIf="datePickerType=='single'">
+            <input nbInput class="datepicker" placeholder="Choose Date" [nbDatepicker]="formpicker">
             <nb-datepicker (dateChange)="gotDate($event)" #formpicker></nb-datepicker>
+          </div>
+          <div *ngIf="datePickerType=='multi'" >
+            <input placeholder="Choose Date Range" nbInput class="datepicker" [nbDatepicker]="rangepicker">
+            <nb-rangepicker  (rangeChange)="gotDateRange($event)" #rangepicker></nb-rangepicker>
+          </div>
         </div>
-    </nb-card-header>
-    <nb-card-body>
-            <ngx-ecommerce-visitors-analytics *ngIf="hourKeys != null ;else noData"></ngx-ecommerce-visitors-analytics>
-            <ng-template  #noData> <p class="warning">No Data Available for given date</p> </ng-template>
-    </nb-card-body>
-</nb-card>
-</div>
+      </nb-card-header>
+
+
+
+      <nb-card-body>
+        <ngx-ecommerce-visitors-analytics *ngIf="hourKeys != null ;else noData"></ngx-ecommerce-visitors-analytics>
+        <ng-template #noData>
+          <p class="warning">No Data Available for given date</p>
+        </ng-template>
+      </nb-card-body>
+    </nb-card>
+  </div>
 
 </div>
-
-

@@ -16,7 +16,7 @@ import { SlideOutComponent } from '../slide-out/slide-out.component';
 import { Ng2OdometerModule } from 'ng2-odometer';
 import { AgmCoreModule } from '@agm/core';
 import { OutletDetailsComponent } from './outlet-details/outlet-details.component';
-import { NbCardModule, NbProgressBarModule } from '@nebular/theme';
+import { NbCardModule, NbProgressBarModule} from '@nebular/theme';
 import { CampaignsComponent } from './campaigns/campaigns.component';
 
 
@@ -60,7 +60,10 @@ import { HourPipe } from './shared/pipes/hour.pipe';
     }),
     NbCardModule,
     NbProgressBarModule,
-    MatTableModule,MatSortModule,MatPaginatorModule,MatInputModule
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatInputModule
   ],
   providers:[DataBootstrapService , DialogueService]
 })
