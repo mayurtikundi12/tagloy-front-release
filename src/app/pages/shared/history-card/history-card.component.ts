@@ -14,8 +14,8 @@ export class HistoryCardComponent implements OnInit,OnChanges {
   @Input() cardData:any = {};
 
   historyData = {
-    lifeTimeViews:0,
-    activeCampaignViews:0,
+    // lifeTimeViews:0,
+    // activeCampaignViews:0,
     lifeTimeHours:0,
     activeCampaignHours:0,
     lifeTimeCampaigns:0,
@@ -23,7 +23,9 @@ export class HistoryCardComponent implements OnInit,OnChanges {
     lifeTimeImpressions:0,
     activeCampaignImpressions:0,
     mainDashboard:false,
-    campaignDetail:false 
+    campaignDetail:false,
+    totalWatchTimeMin:0,
+    totalActiveWatchTimeMin:0, 
   }
   ngOnInit() {
 

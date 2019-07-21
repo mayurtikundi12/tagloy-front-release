@@ -15,7 +15,9 @@
           <div class="card bg-c-green order-card">
               <div class="card-block">
                   <h6 class="m-b-20">Lifetime Hours<i (click)="findInfo('historyCard','watchTime')" class="fa fa-info-circle infoCircle" aria-hidden="true"></i></h6>
-                  <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span><ng2-odometer [number]="historyData['lifeTimeHours']" ></ng2-odometer></span></h2>
+                  <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span><ng2-odometer [number]="historyData['lifeTimeHours']" ></ng2-odometer><span class="time"> hrs </span> 
+                    <ng2-odometer [number]="historyData['totalWatchTimeMin']" ></ng2-odometer><span class="time"> mins</span>
+                </span></h2>
                   <p *ngIf="historyData.mainDashboard"  class="m-b-0">Active Campaign Hours<span class="f-right">{{historyData.activeCampaignHours}}</span></p>
               </div>
           </div>

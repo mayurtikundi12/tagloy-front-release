@@ -23,9 +23,9 @@
             <br>
             <h5><i class="fa fa-hourglass-end"></i> End at: {{campaignDetails.end_datetime | date}}</h5>
             <br>
-            <h5><i class="fa fa-eye"></i> Views: {{campaignDetails.views}}</h5>
+            <h5><i class="fa fa-eye"></i> Impressions: {{campaignDetails.Total_impression}}</h5>
             <br>
-            <h5><i class="fa fa-clock"></i> Hours: {{campaignDetails.Total_play_hours}}</h5>
+            <h5><i class="fa fa-clock"></i> Play Duration: {{campaignDetails.watchHour}} hrs {{campaignDetails.watchMin}} mins</h5>
           </div>
         </div>
     </div>
@@ -50,11 +50,11 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="float-right">
-              <button class="btn btn-primary btn-sm" (click)="ExportTOExcel()">Export as Excel</button>
+              <button class="custom" (click)="ExportTOExcel()"><i class="fas fa-file-pdf"></i> Get PDF</button>
             </div>
           </div>
         </div>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table id="venueTable" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <!-- Position Column -->
         <ng-container matColumnDef="Venue">
@@ -79,6 +79,18 @@
           <th mat-header-cell *matHeaderCellDef> Screens </th>
           <td mat-cell *matCellDef="let element"> {{element.tvCount}} </td>
         </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="Impressions">
+                <th mat-header-cell *matHeaderCellDef> Impressions </th>
+                <td mat-cell *matCellDef="let element"> 2 </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Duration">
+                <th mat-header-cell *matHeaderCellDef> Duration </th>
+                <td mat-cell *matCellDef="let element"> 2 </td>
+              </ng-container>
+              
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="Info">

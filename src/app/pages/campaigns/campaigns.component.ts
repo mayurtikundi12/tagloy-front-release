@@ -85,14 +85,26 @@ export class CampaignsComponent implements OnInit,OnDestroy {
         // console.log("campid",camp["id"]," currImpr==>",rawImpressions," tvC==>",campTvCount," totImpr=>",campaignImpressions);
       }
 
-      activeCampaignHours = Math.floor((activeCampaignHours/3600)) + "hrs";
+      let activeWatchtimeMin = this.createTime(activeCampaignHours)[1]+ "min";
+      activeCampaignHours = this.createTime(activeCampaignHours)[0]+ "hrs";
+      
+      
       this.historyCardData= {
-        lifeTimeViews:campaignImpressions*2.5,
+        // lifeTimeViews:campaignImpressions*2.5,
         lifeTimeHours:activeCampaignHours,
         lifeTimeCampaigns:campaigns.length,
         lifeTimeImpressions:campaignImpressions,
+        totalWatchTimeMin:activeWatchtimeMin,
         mainDashboard :false
       }
+  }
+
+  createTime(time):[Number,Number]{
+    
+    let rawTime =((time/3600)*10)/10 ;
+    let hour = Math.floor(rawTime);
+    let min = Number((rawTime % 1).toFixed(2))*60
+    return [hour,min]
   }
 
 }

@@ -21,7 +21,7 @@ import { DialogueService } from '../shared/services/dialogue.service';
         <span>Outlet Name : {{cord.name}}</span><br>
         <span>Screens : {{cord.tvCount}}</span><br>
         <span>Campaigns : {{cord.activeCampaignsCount}} active, {{cord.completedCampaignsCount}} completed</span><br>
-        <span class="badge" >rating : {{cord.rating}}/5</span>
+        <span class="badge" >click on pin for more info</span>
         </div>
          </div>
         </agm-info-window>

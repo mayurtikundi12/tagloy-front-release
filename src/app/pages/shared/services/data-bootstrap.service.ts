@@ -169,23 +169,35 @@ export class DataBootstrapService {
 
     this.venueDataSrc.next(Array.from(venues.values()));
     
-    totalWatchTime= Math.round((totalWatchTime/3600)*10)/10+" hrs";
-    totalActiveWatchTime =  Math.round((totalActiveWatchTime/3600)*10)/10+" hrs"
+    
+    let totalWatchTimeMin = this.createTime(totalWatchTime)[1]+"min" ;
+    totalWatchTime= this.createTime(totalWatchTime)[0]+"hrs" ;
+    totalActiveWatchTime =  this.createTime(totalActiveWatchTime)[0]+" hrs"
+    let totalActiveWatchTimeMin =  this.createTime(totalActiveWatchTime)[1]+"min"
    
         // ****sending the main dashboard history data
         let dashboardHistoryObj = {
-              lifeTimeViews : Math.round(totalImpressionCount*2.5),
-              activeCampaignViews  :  Math.round(totalActiveImpressions*2.5),
+              // lifeTimeViews : Math.round(totalImpressionCount*2.5),
+              // activeCampaignViews  :  Math.round(totalActiveImpressions*2.5),
               lifeTimeHours  :  totalWatchTime,
               activeCampaignHours  :  totalActiveWatchTime,
               lifeTimeCampaigns  :  Array.from(activeCampaignsMap.values()).length+Array.from(completedCampaignMap.values()).length,
               activeCampaigns  :  Array.from(activeCampaignsMap.values()).length,
               lifeTimeImpressions  :  totalImpressionCount,
               activeCampaignImpressions  :  totalActiveImpressions,
+              totalWatchTimeMin:totalWatchTimeMin,
+              totalActiveWatchTimeMin:totalActiveWatchTimeMin,
               mainDashboard:true
         }
         this.dashboardHistorySrc.next(dashboardHistoryObj);
   }
+
+    createTime(time):[Number,Number]{
+      let rawTime =((time/3600)*10)/10 ;
+      let hour = Math.floor(rawTime);
+      let min = Number((rawTime % 1).toFixed(2))*60
+      return [hour,min]
+    }
 
   checkIfVenueActive(mapObject: Map < any, any > , currentObj): [boolean, boolean] {
     let isPresent = mapObject.has(currentObj["venue_id"])

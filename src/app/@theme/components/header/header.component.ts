@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
   user: any={
     name: localStorage.getItem('name'),
-    picture: '../../../../assets/images/neelk.png'
+    picture: '../../../../assets/images/corporate.jpg'
   };
 
   userMenu = [{ title: 'Log out' }];
