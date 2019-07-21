@@ -32,16 +32,16 @@ export class RevealCardComponent implements OnInit,OnChanges {
        campaignObj = campaign["campaign"] ;
         let screenCount = countScreens(campaign["venues"])
        campaignObj["screenCount"] =screenCount ;
-        let   totalImrpessions = (campaign["campaign"]["slot"].split(".")[1])*screenCount;
+        let   totalImrpessions = 0 ;
+        for (const venue of campaign["venues"]) {
+          totalImrpessions+=venue["impressions"] ;
+        }
+        let rawWatchTime = totalImrpessions*Number(campaign["campaign"]["duration"])
        campaignObj["Total_impression"] = totalImrpessions ;
-       campaignObj["Total_play_hours"] =Math.round( ((totalImrpessions* campaign["campaign"]["duration"])/3600*10))/10 +" hrs"
+       campaignObj["Total_play_hours"] = this.createTime(rawWatchTime)[0]+" hrs "+this.createTime(rawWatchTime)[1]+" mins";
        campaignObj["views"] = totalImrpessions*2.5 ;
        this.campaigns.push(campaignObj)
      }
-
-   
-     console.log("after for loop ",this.campaigns);
-
 
     }else{
       setTimeout(()=>{
@@ -49,17 +49,21 @@ export class RevealCardComponent implements OnInit,OnChanges {
       },500)
     }
 
-
     function countScreens(venues):number{
       let screenCount = 0 ;
         for (let venue of venues) {
           screenCount+=venue["tvCount"]
         }
         return screenCount ;
-    }
+    }    
   }
 
-
+  createTime(time):[Number,Number]{
+    let rawTime =((time/3600)*10)/10 ;
+    let hour = Math.floor(rawTime);
+    let min = Number((rawTime % 1).toFixed(2))*60
+    return [hour,min]
+  }
 
 
   showCampaignDetails(campId,index){

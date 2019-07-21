@@ -35,44 +35,59 @@ export class CampaignDetailsComponent implements OnInit,OnDestroy {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+
+
   ngOnInit() {
 
     this.campaignId = Number(this._activatedRoute.snapshot.paramMap.get('campaignId')) ;
     this.subscriptions.push(this.bootDataSrv.campaignDetailData.subscribe(data=>{
 
       if (Object.keys(data).length>0) {
+
        this.generateData(data);
        this.bootDataSrv.generateGraphData([data["campaign"]],false) ;
+        for (let venue of data["campaign"]["venues"]) {
+          let impressions = venue["impressions"];
+          let duration = this.campaignDetails["duration"];
+          let rawWatchtime = impressions*duration ;
+          venue["watchTime"] = this.createTimeForHistoryCard(rawWatchtime)[0]+" hrs "+this.createTimeForHistoryCard(rawWatchtime)[1]+" mins"
+        }
+        console.log("*****************************************************************",data["campaign"]["venues"]);
+        
+
        this.dataSource = new MatTableDataSource(data["campaign"]["venues"]);
+
        this.campaignDetails = data["campaign"]["campaign"] ;
-        let rawTime = Number( this.campaignDetails["Total_play_hours"].split(" ")[0]);
-        this.campaignDetails["watchHour"] = this.createTime(rawTime)[0] ;
-        this.campaignDetails["watchMin"] = this.createTime(rawTime)[1] ;
       }else if(sessionStorage.getItem("curentCampaignDetail")){
         let dataFromSession = JSON.parse(sessionStorage.getItem("curentCampaignDetail"))
         this.campaignDetails = dataFromSession["campaign"]["campaign"] ;
-        let rawTime = Number( this.campaignDetails["Total_play_hours"].split(" ")[0]);
-        this.campaignDetails["watchHour"] = this.createTime(rawTime)[0]
-        this.campaignDetails["watchMin"] = this.createTime(rawTime)[1]
         this.generateData(dataFromSession) ;
-        this.bootDataSrv.generateGraphData([dataFromSession["campaign"]],false) ;  
+        this.bootDataSrv.generateGraphData([dataFromSession["campaign"]],false) ; 
+        console.log("*****************************************************************",dataFromSession["campaign"]);
+
+        for (let venue of dataFromSession["campaign"]["venues"]) {
+          let impressions = venue["impressions"];
+          let duration = this.campaignDetails["duration"];
+          let rawWatchtime = impressions*duration ;
+          venue["watchTime"] = this.createTimeForHistoryCard(rawWatchtime)[0]+" hrs "+this.createTimeForHistoryCard(rawWatchtime)[1]+" mins"
+        } 
         this.dataSource = new MatTableDataSource(dataFromSession["campaign"]["venues"]);
       }
        }))
   }
 
   generateData(data){
-    let campTvCount = 0
+    let impressions= 0;
+
     for (const venue of data["campaign"]["venues"]) {
-      campTvCount+= venue["tvCount"];
+        impressions+= venue["impressions"] ;
     }
-        let impressions= Number( data["campaign"]["campaign"]["slot"].split(".")[1])*campTvCount;
         let rawTime =Number(data["campaign"]["campaign"]["duration"])*impressions ;
         let watchTimeMin = this.createTimeForHistoryCard(rawTime)[1] ;
         let watchtime = this.createTimeForHistoryCard(rawTime)[0] ;
 
         this.historyCardData= {
-      lifeTimeViews:impressions*2.5,
+      // lifeTimeViews:impressions*2.5,
       lifeTimeHours:watchtime,
       lifeTimeImpressions:impressions,
       totalWatchTimeMin:watchTimeMin,
@@ -87,7 +102,6 @@ export class CampaignDetailsComponent implements OnInit,OnDestroy {
     let hour = Math.floor(rawTime);
     let min = Number((rawTime % 1).toFixed(2))*60 ;
     console.log("hour ",hour," min ",min);
-    
     return [hour,min]
   }
 
@@ -111,7 +125,7 @@ export class CampaignDetailsComponent implements OnInit,OnDestroy {
       doc.setFontSize(10)
       doc.text(15, 20, `Start Date : ${new Date(this.campaignDetails["start_datetime"]).toDateString()}      End Date : ${new Date(this.campaignDetails["end_datetime"]).toDateString()}`);
       doc.text(15, 30, `Total Impressions : ${this.campaignDetails["Total_impression"]}`);
-      doc.text(15, 40, `Total Play Duration : ${this.campaignDetails["watchHour"]} hrs ${this.campaignDetails["watchMin"]} mins`);
+      doc.text(15, 40, `Total Play Duration : ${this.campaignDetails["Total_play_hours"]}`);
     
       doc.autoTable({
           head:[['Name','Hashtag','Screens','Impressions','Duration']],
@@ -122,10 +136,9 @@ export class CampaignDetailsComponent implements OnInit,OnDestroy {
   }
 
   generateTableData(){
-    console.log(this.dataSource.data);
     let finalArray = [] ;
     for (const o of this.dataSource.data) {
-      finalArray.push([o["name"],o["hash_tag"],o["tvCount"],5,5])
+      finalArray.push([o["name"],o["hash_tag"],o["tvCount"],o["impressions"],o["watchTime"]])
     }
     return finalArray;
   }

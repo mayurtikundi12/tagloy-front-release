@@ -72,17 +72,14 @@ export class CampaignsComponent implements OnInit,OnDestroy {
     let activeCampaignHours:any = 0
     this.campaignDetails = campaigns ;
       for (let camp of campaigns) {
-        let rawImpressions = Number(camp["campaign"]["slot"].split(".")[1]) ;
+        let currCampImprsns = 0;
         let rawWatchTime = Number(camp["campaign"]["duration"]) ;
 
-
-        let campTvCount = 0
         for (const venue of camp["venues"]) {
-          campTvCount+= venue["tvCount"];
+          currCampImprsns += venue["impressions"] ;
         }
-        campaignImpressions += rawImpressions*campTvCount ;
-        activeCampaignHours += (rawWatchTime * rawImpressions*campTvCount) ;
-        // console.log("campid",camp["id"]," currImpr==>",rawImpressions," tvC==>",campTvCount," totImpr=>",campaignImpressions);
+        campaignImpressions += currCampImprsns ;
+        activeCampaignHours +=  currCampImprsns*rawWatchTime;
       }
 
       let activeWatchtimeMin = this.createTime(activeCampaignHours)[1]+ "min";

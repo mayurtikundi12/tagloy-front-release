@@ -82,13 +82,10 @@ export class DataBootstrapService {
         // isThere = [isActive,isPresent]
         let isThere = this.checkIfVenueActive(venues, venue)
         // console.log("isacrive ",isThere[0]," is present ",isThere[1]);
-        let venueTvCount = 0;
-        venueTvCount = this.countScreens(Object.values(venue["tvCount"]));
         // getting the total impressions and watch hours
-        let currentCampImpression = (Number(boot["campaign"]["slot"].split(".")[1]) * venueTvCount);
+        let currentCampImpression = venue["impressions"]
         let currentCampLength = Number(boot["campaign"]["duration"]);
 
-        venue["tvCount"] = venueTvCount;
         venues.set(venue["venue_id"], venue);
 
         if (!tempCampMap.has(campaignId)) {
@@ -102,7 +99,6 @@ export class DataBootstrapService {
             totalActiveWatchTime += currentCampWatchTime;
           }
           // console.log("campid not there=> ",campaignId," venueId==>",venue["venue_id"]," current impr==>",currentCampImpression,"tvC=>",venueTvCount," totalImpr=>",totalImpressionCount);
-
         } else {
           if (!tempCampMap.get(campaignId).includes(venue["venue_id"])) {
             totalImpressionCount += currentCampImpression;
@@ -120,7 +116,7 @@ export class DataBootstrapService {
         if (!isThere[1]) {
           if (boot["campaign"]["active"]) {
             venue["live"] = true;
-            activeScreenCount = activeScreenCount + venueTvCount;
+            activeScreenCount = activeScreenCount + venue["tvCount"];
             venue["activeCampaignsCount"] = 1;
             venue["completedCampaignsCount"] = 0;
           } else {
@@ -128,9 +124,8 @@ export class DataBootstrapService {
             venue["completedCampaignsCount"] = 1;
             venue["activeCampaignsCount"] = 0;
           }
-          venue["tvCount"] = venueTvCount;
           venues.set(venue["venue_id"], venue);
-          totalTvCount = totalTvCount + venueTvCount;
+          totalTvCount = totalTvCount + venue["tvCount"];
         } else {
           let newVenue = venues.get(venue["venue_id"]);
           if (boot["campaign"]["active"]) {
@@ -144,7 +139,7 @@ export class DataBootstrapService {
         if (isThere[1] && !isThere[0]) {
           let newVenue = venues.get(venue["venue_id"]);
           if (boot["campaign"]["active"]) {
-            activeScreenCount = activeScreenCount + venueTvCount;
+            activeScreenCount = activeScreenCount + venue["tvCount"];
             newVenue["live"] = true;
           } else {
             newVenue["live"] = false;
@@ -214,13 +209,7 @@ export class DataBootstrapService {
     return [isActive, isPresent]
   }
 
-  countScreens(tvData): number {
-    let venueTvCount = 0;
-    for (let box of Object.values(tvData)) {
-      venueTvCount += Number(box);
-    }
-    return venueTvCount;
-  }
+
 
   generateGraphData(campaigns, isDashboard: boolean) {
     let yearMonthMap = new Map();
