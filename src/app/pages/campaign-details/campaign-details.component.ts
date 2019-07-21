@@ -159,5 +159,5 @@ interface CampaignData {
     Total_play_hours:any,
     watchMin:any,
     watchHour:any
-  
+
 }

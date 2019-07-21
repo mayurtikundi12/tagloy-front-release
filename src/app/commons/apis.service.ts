@@ -9,8 +9,8 @@ export class ApisService {
 
    BASE_URL_OLD: string = 'https://preprod.tagloy.com/v1/';
    BASE_URL:string = "http://13.126.120.155:3000/"
-  //  BASE_LOCAL_URL:string = 'http://13.126.120.155:3000/' ;
-   BASE_LOCAL_URL:string = 'http://localhost:3000/' ;
+   BASE_LOCAL_URL:string = 'http://13.126.120.155:3000/' ;
+  //  BASE_LOCAL_URL:string = 'http://localhost:3000/' ;
 
   constructor(private http:HttpClient) { 
     
