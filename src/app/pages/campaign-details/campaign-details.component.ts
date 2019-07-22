@@ -40,31 +40,26 @@ export class CampaignDetailsComponent implements OnInit,OnDestroy {
   ngOnInit() {
 
     this.campaignId = Number(this._activatedRoute.snapshot.paramMap.get('campaignId')) ;
-    this.subscriptions.push(this.bootDataSrv.campaignDetailData.subscribe(data=>{
+    // this.subscriptions.push(this.bootDataSrv.campaignDetailData.subscribe(data=>{
 
-      if (Object.keys(data).length>0) {
-
-       this.generateData(data);
-       this.bootDataSrv.generateGraphData([data["campaign"]],false) ;
-        for (let venue of data["campaign"]["venues"]) {
-          let impressions = venue["impressions"];
-          let duration = this.campaignDetails["duration"];
-          let rawWatchtime = impressions*duration ;
-          venue["watchTime"] = this.createTimeForHistoryCard(rawWatchtime)[0]+" hrs "+this.createTimeForHistoryCard(rawWatchtime)[1]+" mins"
-        }
-        console.log("*****************************************************************",data["campaign"]["venues"]);
+    //   if (Object.keys(data).length>0) {
+    //     console.log("///////////////////",data);
         
-
-       this.dataSource = new MatTableDataSource(data["campaign"]["venues"]);
-
-       this.campaignDetails = data["campaign"]["campaign"] ;
-      }else if(sessionStorage.getItem("curentCampaignDetail")){
+    //    this.generateData(data);
+    //    this.bootDataSrv.generateGraphData([data["campaign"]],false) ;
+    //     for (let venue of data["campaign"]["venues"]) {
+    //       let impressions = venue["impressions"];
+    //       let duration = this.campaignDetails["duration"];
+    //       let rawWatchtime = impressions*duration ;
+    //       venue["watchTime"] = this.createTimeForHistoryCard(rawWatchtime)[0]+" hrs "+this.createTimeForHistoryCard(rawWatchtime)[1]+" mins"
+    //     }
+    //    this.dataSource = new MatTableDataSource(data["campaign"]["venues"]);
+    //    this.campaignDetails = data["campaign"]["campaign"] ;
+    //   }else if(sessionStorage.getItem("curentCampaignDetail")){
         let dataFromSession = JSON.parse(sessionStorage.getItem("curentCampaignDetail"))
         this.campaignDetails = dataFromSession["campaign"]["campaign"] ;
         this.generateData(dataFromSession) ;
         this.bootDataSrv.generateGraphData([dataFromSession["campaign"]],false) ; 
-        console.log("*****************************************************************",dataFromSession["campaign"]);
-
         for (let venue of dataFromSession["campaign"]["venues"]) {
           let impressions = venue["impressions"];
           let duration = this.campaignDetails["duration"];
@@ -73,8 +68,8 @@ export class CampaignDetailsComponent implements OnInit,OnDestroy {
         } 
         this.dataSource = new MatTableDataSource(dataFromSession["campaign"]["venues"]);
       }
-       }))
-  }
+  //      }))
+  // }
 
   generateData(data){
     let impressions= 0;
