@@ -42,6 +42,7 @@
               "node_modules/pace-js/pace.min.js",
               "node_modules/echarts/dist/echarts.min.js",
               "node_modules/echarts/dist/extension/bmap.min.js",
+              "node_modules/html2canvas/dist/html2canvas.min.js",
               "node_modules/jspdf/dist/jspdf.min.js",
               "node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.min.js"
             ]
@@ -94,6 +95,7 @@
               "node_modules/pace-js/pace.min.js",
               "node_modules/echarts/dist/echarts.min.js",
               "node_modules/echarts/dist/extension/bmap.min.js",
+              "node_modules/html2canvas/dist/html2canvas.min.js",
               "node_modules/jspdf/dist/jspdf.min.js",
               "node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.min.js"
             ],

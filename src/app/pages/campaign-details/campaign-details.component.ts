@@ -4,7 +4,9 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+// import * as jsPDF from 'jspdf'
 import jsPDF from 'jspdf';
+import * as html2canvas from 'html2canvas';
 import 'jspdf-autotable';
 
 
@@ -18,7 +20,7 @@ export class CampaignDetailsComponent implements OnInit,OnDestroy {
   subscriptions=[];
 
   constructor(private _activatedRoute:ActivatedRoute,private _router:Router,
-    private bootDataSrv:DataBootstrapService, private sanitizer:DomSanitizer) { }
+    private bootDataSrv:DataBootstrapService, private sanitizer:DomSanitizer,private el:ElementRef) { }
     // dataSource ;
   campaignId:number ;
   campaignDetails:CampaignData;
@@ -114,20 +116,38 @@ export class CampaignDetailsComponent implements OnInit,OnDestroy {
   }
 
   ExportTOExcel(){
-      const doc = new jsPDF();
-    
-      doc.text(15, 10, 'Ad Analytics Data');
-      doc.setFontSize(10)
-      doc.text(15, 20, `Start Date : ${new Date(this.campaignDetails["start_datetime"]).toDateString()}      End Date : ${new Date(this.campaignDetails["end_datetime"]).toDateString()}`);
-      doc.text(15, 30, `Total Impressions : ${this.campaignDetails["Total_impression"]}`);
-      doc.text(15, 40, `Total Play Duration : ${this.campaignDetails["Total_play_hours"]}`);
-    
-      doc.autoTable({
+      // const doc = new jsPDF();
+      const elementToPrint = document.getElementById('main'); //The html element to become a pdf  
+      let tableData = this.generateTableData() ;
+      let url = this.campaignDetails["media_url"]
+      html2canvas(elementToPrint).then(function(canvas) {
+        var img = canvas.toDataURL("image/png");
+        var doc = new jsPDF();
+        doc.textWithLink("Ad Analytics", 70, 10, {url})
+        doc.addImage(img,'JPEG',10,20,190,290);
+ 
+        doc.addPage();
+        doc.autoTable({
           head:[['Name','Hashtag','Screens','Impressions','Duration']],
-          body:this.generateTableData(),
-          margin: {top: 45},
+          body:tableData,
+          margin: {top: 10},
         });
-        doc.save('table.pdf');
+        doc.save('testCanvas.pdf');
+        });
+      
+     
+      // doc.text(15, 10, 'Ad Analytics Data');
+      // doc.setFontSize(10)
+      // doc.text(15, 20, `Start Date : ${new Date(this.campaignDetails["start_datetime"]).toDateString()}      End Date : ${new Date(this.campaignDetails["end_datetime"]).toDateString()}`);
+      // doc.text(15, 30, `Total Impressions : ${this.campaignDetails["Total_impression"]}`);
+      // doc.text(15, 40, `Total Play Duration : ${this.campaignDetails["Total_play_hours"]}`);
+    
+      // doc.autoTable({
+      //     head:[['Name','Hashtag','Screens','Impressions','Duration']],
+      //     body:this.generateTableData(),
+      //     margin: {top: 45},
+      //   });
+      //    doc.save(this.campaignDetails["title"])
   }
 
   generateTableData(){

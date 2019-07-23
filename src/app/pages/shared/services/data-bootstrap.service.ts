@@ -99,12 +99,14 @@ export class DataBootstrapService {
             totalActiveWatchTime += currentCampWatchTime;
           }
           // console.log("campid not there=> ",campaignId," venueId==>",venue["venue_id"]," current impr==>",currentCampImpression,"tvC=>",venueTvCount," totalImpr=>",totalImpressionCount);
-        } else {
+        } else {          
           if (!tempCampMap.get(campaignId).includes(venue["venue_id"])) {
             totalImpressionCount += currentCampImpression;
             let currentCampWatchTime = currentCampLength * currentCampImpression;
             totalWatchTime += currentCampWatchTime;
-            tempCampMap.set(campaignId, tempCampMap.get(campaignId).push(venue["venue_id"]));
+            let tempArr = tempCampMap.get(campaignId);
+            tempArr.push(venue["venue_id"])
+            tempCampMap.set(campaignId, tempArr);
             if (boot["campaign"]["active"]) {
               totalActiveImpressions = totalActiveImpressions + currentCampImpression;
               totalActiveWatchTime += currentCampWatchTime;

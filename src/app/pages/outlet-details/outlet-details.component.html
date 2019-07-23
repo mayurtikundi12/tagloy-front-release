@@ -114,30 +114,33 @@
     <nb-card>
       <nb-card-header>
         <p>Choose the Date for Ad analytics</p>
-        <div>
-          <span> <strong>Chosen Date</strong> : {{chosenDate}}</span><br>
-          <span><strong>Impressions: {{impression}}</strong></span>
+        <div class="row date">
+          <nb-radio-group  class="col-md-6 col-sm-6 col-lg-6" [name]="primary">
+            <nb-radio class="radio" [checked]="true" (click)="changeDataPicker('single')" [value]="single">
+              single day
+            </nb-radio>
+            <nb-radio class="radio" (click)="changeDataPicker('multi')" [value]="multi">
+              days range
+            </nb-radio>
+          </nb-radio-group>
 
-          <div>
-            <nb-radio-group [name]="primary">
-              <nb-radio [checked]="true" (click)="changeDataPicker('single')" [value]="single">
-                single day
-              </nb-radio>
-              <nb-radio (click)="changeDataPicker('multi')" [value]="multi">
-                days range
-              </nb-radio>
-            </nb-radio-group>
-          </div>
 
-          <div *ngIf="datePickerType=='single'">
+          <div class="col-md-6 col-sm-6 col-lg-6" *ngIf="datePickerType=='single'">
             <input nbInput class="datepicker" placeholder="Choose Date" [nbDatepicker]="formpicker">
             <nb-datepicker (dateChange)="gotDate($event)" #formpicker></nb-datepicker>
           </div>
-          <div *ngIf="datePickerType=='multi'" >
+          <div class="col-md-6 col-sm-6 col-lg-6" *ngIf="datePickerType=='multi'">
             <input placeholder="Choose Date Range" nbInput class="datepicker" [nbDatepicker]="rangepicker">
-            <nb-rangepicker  (rangeChange)="gotDateRange($event)" #rangepicker></nb-rangepicker>
+            <nb-rangepicker (rangeChange)="gotDateRange($event)" #rangepicker></nb-rangepicker>
           </div>
         </div>
+        <br>
+        <div class="center row">
+        <span class="inline-span col-md-6 col-lg-6 col-sm-6"> <strong>Chosen Date</strong> : {{chosenDate}}</span>
+        <span class="inline-span col-md-6 col-lg-6 col-sm-6"><strong>Impressions: {{impression}}</strong></span>
+        </div>
+        
+   
       </nb-card-header>
 
 
